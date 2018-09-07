@@ -9,17 +9,21 @@ class App extends Component {
     super(props);
 
     this.state = {
-      value: 0,
+      prosjekSvihRazreda: 0,
       prosjekPrviRazred: 0,
       prosjekDrugiRazred: 0,
       prosjekTreciRazred: 0,
       prosjekCetvrtiRazred: 0,
       bodoviZaOcjene: 0,
+      bodoviZaHj: 0,
+      bodoviZaMat: 0,
+      bodoviZaEj: 0,
+      bodoviZaIzb: 0,
+      postotakMaturaHj: 0,
+      postotakMaturaMat: 0,
+      postotakMaturaEj: 0,
+      postotakMaturaIzb: 0,
     };
-  }
-
-  handleChangeBodoviZaOcjene = (event) => {
-    this.setState({ bodoviZaOcjene: parseFloat(event.target.value, 10) });
   }
 
   handleChange = (event) => {
@@ -30,98 +34,160 @@ class App extends Component {
   }
 
   handleClick = () => {
-    const { prosjekPrviRazred, prosjekDrugiRazred, prosjekTreciRazred, prosjekCetvrtiRazred } = this.state;
+    const { prosjekPrviRazred, prosjekDrugiRazred, prosjekTreciRazred, prosjekCetvrtiRazred, postotakMaturaHj, bodoviHj, postotakMaturaEj, postotakMaturaMat, bodoviEj, bodoviMat, postotakMaturaIzb, bodoviIzb } = this.state;
 
-    this.setState({ value: prosjekPrviRazred + prosjekDrugiRazred + prosjekTreciRazred + prosjekCetvrtiRazred });
+    this.setState({
+      prosjekSvihRazreda: prosjekPrviRazred + prosjekDrugiRazred + prosjekTreciRazred + prosjekCetvrtiRazred,
+      bodoviZaHj: postotakMaturaHj * bodoviHj * 10 / 100,
+      bodoviZaEj: postotakMaturaEj * bodoviEj * 10 / 100,
+      bodoviZaMat: postotakMaturaMat * bodoviMat * 10 / 100,
+      bodoviZaIzb: postotakMaturaIzb * bodoviIzb * 10 / 100,
+    });
   }
 
   render() {
-    const { value, bodoviZaOcjene } = this.state;
+    const { prosjekSvihRazreda, bodoviZaOcjene, bodoviZaHj, bodoviZaEj, bodoviZaMat, bodoviZaIzb } = this.state;
 
     return (
       <div className="App">
         <h1>Kalkulator bodova za upis na fakultet</h1>
         <FormControl>
           <TextField
-            label="Broj bodova u postocima"
+            name="bodoviZaOcjene"
+            label="Broj bodova u %"
             type="number"
-            helperText="Bodovi za ocjene"
-            onChange={event => this.handleChangeBodoviZaOcjene(event)}
-            required
+            onChange={event => this.handleChange(event)}
           />
           <TextField
-            label="Broj bodova matura HJ"
+            name="bodoviHj"
+            label="Matura HJ u %"
             type="number"
-            helperText="Bodovi za ocjene matura HJ"
-            onChange={event => this.handleChangeBodoviZaOcjene(event)}
-            required
+            onChange={event => this.handleChange(event)}
           />
           <TextField
-            label="Broj bodova matura MAT"
+            name="bodoviMat"
+            label="Matura MAT u %"
             type="number"
-            helperText="Bodovi za ocjene matura MAT"
-            onChange={event => this.handleChangeBodoviZaOcjene(event)}
-            required
+            onChange={event => this.handleChange(event)}
           />
           <TextField
-            label="Broj bodova matura EJ"
+            name="bodoviEj"
+            label="Matura EJ u %"
             type="number"
-            helperText="Bodovi za ocjene matura EJ"
-            onChange={event => this.handleChangeBodoviZaOcjene(event)}
-            required
+            onChange={event => this.handleChange(event)}
+          />
+          <TextField
+            name="bodoviIzb"
+            label="Matura IZB u %"
+            type="number"
+            onChange={event => this.handleChange(event)}
           />
           <br /><br />
           <TextField
             name="prosjekPrviRazred"
-            label="Prvi razred"
+            label="Prosjek Prvi razred"
             type="number"
-            helperText="Prosjek ocjena 1. razreda srednje skole"
             onChange={event => this.handleChange(event)}
-            required
           />
           <TextField
             name="prosjekDrugiRazred"
-            label="Drugi razred"
+            label="Prosjek Drugi razred"
             type="number"
-            helperText="Prosjek ocjena 2. razreda srednje skole"
             onChange={event => this.handleChange(event)}
-            required
           />
           <TextField
             name="prosjekTreciRazred"
-            label="Treci razred"
+            label="Prosjek Treci razred"
             type="number"
-            helperText="Prosjek ocjena 3. razreda srednje skole"
             onChange={event => this.handleChange(event)}
-            required
           />
           <TextField
             name="prosjekCetvrtiRazred"
-            label="Cetvrti razred"
+            label="Prosjek Cetvrti razred"
             type="number"
-            helperText="Prosjek ocjena 4. razreda srednje skole"
             onChange={event => this.handleChange(event)}
-            required
+          />
+          <TextField
+            name="postotakMaturaHj"
+            label="Matura HJ u %"
+            type="number"
+            onChange={event => this.handleChange(event)}
+          />
+          <TextField
+            name="postotakMaturaMat"
+            label="Matura MAT u %"
+            type="number"
+            onChange={event => this.handleChange(event)}
+          />
+          <TextField
+            name="postotakMaturaEj"
+            label="Matura EJ u %"
+            type="number"
+            onChange={event => this.handleChange(event)}
+          />
+          <TextField
+            name="postotakMaturaIzb"
+            label="Matura IZB u %"
+            type="number"
+            onChange={event => this.handleChange(event)}
           />
           <Button variant="outlined" onClick={this.handleClick}>Submit</Button>
-          <br />
+          <br /><br />
           <TextField
             label="Ukupan prosjek"
             type="number"
             InputProps={{
               readOnly: true,
             }}
-            helperText="Ukupan prosjek cetiri razreda"
-            value={(value / 4).toFixed(2)}
+            value={(prosjekSvihRazreda / 4).toFixed(2)}
           />
           <TextField
-            label="Ukupan broj bodova od ocjena"
+            label="Broj bodova od ocjena"
             type="number"
             InputProps={{
               readOnly: true,
             }}
-            helperText="Broj bodova"
-            value={Math.round((value / 4).toFixed(2) / 5 * bodoviZaOcjene * 10)}
+            value={Math.round((prosjekSvihRazreda / 4).toFixed(2) / 5 * bodoviZaOcjene * 10)}
+          />
+          <TextField
+            label="Broj bodova od HJ"
+            type="number"
+            InputProps={{
+              readOnly: true,
+            }}
+            value={Math.round(bodoviZaHj)}
+          />
+          <TextField
+            label="Broj bodova od MAT"
+            type="number"
+            InputProps={{
+              readOnly: true,
+            }}
+            value={Math.round(bodoviZaMat)}
+          />
+          <TextField
+            label="Broj bodova od EJ"
+            type="number"
+            InputProps={{
+              readOnly: true,
+            }}
+            value={Math.round(bodoviZaEj)}
+          />
+          <TextField
+            label="Broj bodova od IZB"
+            type="number"
+            InputProps={{
+              readOnly: true,
+            }}
+            value={Math.round(bodoviZaIzb)}
+          />
+          <TextField
+            label="Ukupan broj bodova"
+            type="number"
+            InputProps={{
+              readOnly: true,
+            }}
+            value={Math.round(bodoviZaIzb + bodoviZaEj + bodoviZaHj + bodoviZaMat + Math.round((prosjekSvihRazreda / 4).toFixed(2) / 5 * bodoviZaOcjene * 10))}
           />
         </FormControl>
       </div>
