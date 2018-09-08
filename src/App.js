@@ -59,6 +59,7 @@ class App extends Component {
         activeStep: activeStep + 1,
         prosjekSvihRazreda: prosjekPrviRazred + prosjekDrugiRazred + prosjekTreciRazred + prosjekCetvrtiRazred,
       });
+      document.forms.prosjeci.reset();
     } else if (activeStep === 2) {
       this.setState({
         activeStep: activeStep + 1,
@@ -100,18 +101,7 @@ class App extends Component {
               <Grid item xs={4}>
                 <TextField
                   name="evaluationHj"
-                  label="Matura Hrvatski jezik"
-                  type="number"
-                  onChange={event => this.handleChange(event)}
-                  InputProps={{
-                    endAdornment: <InputAdornment position="end">%</InputAdornment>,
-                  }}
-                />
-              </Grid>
-              <Grid item xs={4}>
-                <TextField
-                  name="evaluationEj"
-                  label="Matura Engleski jezik"
+                  label="Hrvatski jezik"
                   type="number"
                   onChange={event => this.handleChange(event)}
                   InputProps={{
@@ -122,7 +112,18 @@ class App extends Component {
               <Grid item xs={4}>
                 <TextField
                   name="evaluationMat"
-                  label="Matura Matematika"
+                  label="Matematika"
+                  type="number"
+                  onChange={event => this.handleChange(event)}
+                  InputProps={{
+                    endAdornment: <InputAdornment position="end">%</InputAdornment>,
+                  }}
+                />
+              </Grid>
+              <Grid item xs={4}>
+                <TextField
+                  name="evaluationEj"
+                  label="Engleski jezik"
                   type="number"
                   onChange={event => this.handleChange(event)}
                   InputProps={{
@@ -136,7 +137,7 @@ class App extends Component {
               <Grid item xs={4}>
                 <TextField
                   name="evaluationOpt"
-                  label="Matura IZB"
+                  label="Izborni predmet"
                   type="number"
                   onChange={event => this.handleChange(event)}
                   InputProps={{
@@ -151,37 +152,37 @@ class App extends Component {
     } else if (activeStep === 1) {
       dialogContent = (
         <React.Fragment>
-          <form autoComplete="off" onSubmit={this.handleSend}>
+          <form name="prosjeci" autoComplete="off" onSubmit={this.handleSend}>
             <h3>Prosjeci sva cetiri razreda</h3>
             <Grid container className="container" spacing={16}>
-              <Grid item xs={4}>
+              <Grid item xs={3}>
                 <TextField
                   name="prosjekPrviRazred"
-                  label="Prosjek Prvi razred"
+                  label="1. razred"
                   type="number"
                   onChange={event => this.handleChange(event)}
                 />
               </Grid>
-              <Grid item xs={4}>
+              <Grid item xs={3}>
                 <TextField
                   name="prosjekDrugiRazred"
-                  label="Prosjek Drugi razred"
+                  label="2. razred"
                   type="number"
                   onChange={event => this.handleChange(event)}
                 />
               </Grid>
-              <Grid item xs={4}>
+              <Grid item xs={3}>
                 <TextField
                   name="prosjekTreciRazred"
-                  label="Prosjek Treci razred"
+                  label="3. razred"
                   type="number"
                   onChange={event => this.handleChange(event)}
                 />
               </Grid>
-              <Grid item xs={4}>
+              <Grid item xs={3}>
                 <TextField
                   name="prosjekCetvrtiRazred"
-                  label="Prosjek Cetvrti razred"
+                  label="4. razred"
                   type="number"
                   onChange={event => this.handleChange(event)}
                 />
@@ -199,7 +200,7 @@ class App extends Component {
               <Grid item xs={4}>
                 <TextField
                   name="postotakMaturaHj"
-                  label="Matura HJ"
+                  label="Hrvatski jezik"
                   type="number"
                   onChange={event => this.handleChange(event)}
                   InputProps={{
@@ -210,7 +211,7 @@ class App extends Component {
               <Grid item xs={4}>
                 <TextField
                   name="postotakMaturaMat"
-                  label="Matura MAT"
+                  label="Matematika"
                   type="number"
                   onChange={event => this.handleChange(event)}
                   InputProps={{
@@ -221,7 +222,7 @@ class App extends Component {
               <Grid item xs={4}>
                 <TextField
                   name="postotakMaturaEj"
-                  label="Matura EJ"
+                  label="Engleski jezik"
                   type="number"
                   onChange={event => this.handleChange(event)}
                   InputProps={{
@@ -232,7 +233,7 @@ class App extends Component {
               <Grid item xs={4}>
                 <TextField
                   name="postotakMaturaIzb"
-                  label="Matura IZB"
+                  label="Izborni predmet"
                   type="number"
                   onChange={event => this.handleChange(event)}
                   InputProps={{
@@ -350,7 +351,7 @@ class App extends Component {
           {activeStep !== 3 ? (
             <Grid style={{ display: 'flex', justifyContent: 'flex-end' }} container className="container" spacing={16}>
               <Grid style={{ display: 'flex', justifyContent: 'flex-end' }} item xs={12}>
-                <Button onClick={this.handleClick} style={{ width: '100%' }} size="large" variant="contained" color="primary">Dalje</Button>
+                <Button onClick={this.handleClick} style={{ width: '100%' }} size="large" variant="contained" color="primary">{activeStep === 2 ? 'Završi' : 'Dalje'}</Button>
               </Grid>
             </Grid>
           ) : null}
