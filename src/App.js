@@ -38,8 +38,7 @@ class App extends Component {
   }
 
   handleBack = () => {
-    const { activeStep } = this.state;
-    this.setState({ activeStep: activeStep - 1 });
+    this.setState({ activeStep: 0 });
   }
 
   handleClick = () => {
@@ -82,36 +81,6 @@ class App extends Component {
     const { prosjekSvihRazreda, evaluationGrades, bodoviZaHj, bodoviZaEj, bodoviZaMat, bodoviZaIzb, activeStep, errorText, error } = this.state;
 
     let dialogContent;
-    let buttons;
-
-    if (activeStep === 0) {
-      buttons = (
-        <Grid style={{ display: 'flex', justifyContent: 'flex-end' }} container className="container" spacing={16}>
-          <Grid style={{ display: 'flex', justifyContent: 'flex-end' }} item xs={12}>
-            <Button onClick={this.handleClick} style={{ width: '100%' }} size="large" variant="contained" color="primary">Dalje</Button>
-          </Grid>
-        </Grid>
-      );
-    } else if (activeStep === 1 || activeStep === 2) {
-      buttons = (
-        <Grid style={{ display: 'flex', justifyContent: 'flex-end' }} container className="container" spacing={16}>
-          <Grid style={{ display: 'flex', justifyContent: 'flex-end', paddingRight: '0px' }} item xs={6}>
-            <Button onClick={this.handleBack} style={{ width: '100%' }} size="large" variant="contained" color="default">Natrag</Button>
-          </Grid>
-          <Grid style={{ display: 'flex', justifyContent: 'flex-end', paddingLeft: '0px' }} item xs={6}>
-            <Button onClick={this.handleClick} style={{ width: '100%' }} size="large" variant="contained" color="primary">{activeStep === 2 ? 'Završi' : 'Dalje'}</Button>
-          </Grid>
-        </Grid>
-      );
-    } else if (activeStep === 3) {
-      buttons = (
-        <Grid style={{ display: 'flex', justifyContent: 'flex-end' }} container className="container" spacing={16}>
-          <Grid style={{ display: 'flex', justifyContent: 'flex-end' }} item xs={12}>
-            <Button onClick={this.handleClick} style={{ width: '100%' }} size="large" variant="contained" color="default">Natrag</Button>
-          </Grid>
-        </Grid>
-      );
-    }
 
     if (activeStep === 0) {
       dialogContent = (
@@ -387,7 +356,19 @@ class App extends Component {
               <StepLabel>Ukupan broj bodova</StepLabel>
             </Step>
           </Stepper>
-          {buttons}
+          {activeStep !== 3 ? (
+            <Grid style={{ display: 'flex', justifyContent: 'flex-end' }} container className="container" spacing={16}>
+              <Grid style={{ display: 'flex', justifyContent: 'flex-end' }} item xs={12}>
+                <Button onClick={this.handleClick} style={{ width: '100%' }} size="large" variant="contained" color="primary">{activeStep === 2 ? 'Završi' : 'Dalje'}</Button>
+              </Grid>
+            </Grid>
+          ) : (
+            <Grid style={{ display: 'flex', justifyContent: 'flex-end' }} container className="container" spacing={16}>
+              <Grid style={{ display: 'flex', justifyContent: 'flex-end' }} item xs={12}>
+                <Button onClick={this.handleBack} style={{ width: '100%' }} size="large" variant="contained" color="primary">Na pocetak</Button>
+              </Grid>
+            </Grid>
+          )}
         </Paper>
       </div>
     );
