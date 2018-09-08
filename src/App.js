@@ -1,8 +1,9 @@
+
 import React, { Component } from 'react';
 import './App.css';
 
 import TextField from '@material-ui/core/TextField';
-import { FormControl, Button } from '@material-ui/core';
+import { Button, Paper, Divider, Stepper, Step, StepLabel, InputAdornment, Grid } from '@material-ui/core';
 
 class App extends Component {
   constructor(props) {
@@ -14,7 +15,7 @@ class App extends Component {
       prosjekDrugiRazred: 0,
       prosjekTreciRazred: 0,
       prosjekCetvrtiRazred: 0,
-      bodoviZaOcjene: 0,
+      evaluationGrades: 0,
       bodoviZaHj: 0,
       bodoviZaMat: 0,
       bodoviZaEj: 0,
@@ -23,6 +24,7 @@ class App extends Component {
       postotakMaturaMat: 0,
       postotakMaturaEj: 0,
       postotakMaturaIzb: 0,
+      activeStep: 0,
     };
   }
 
@@ -34,162 +36,325 @@ class App extends Component {
   }
 
   handleClick = () => {
-    const { prosjekPrviRazred, prosjekDrugiRazred, prosjekTreciRazred, prosjekCetvrtiRazred, postotakMaturaHj, bodoviHj, postotakMaturaEj, postotakMaturaMat, bodoviEj, bodoviMat, postotakMaturaIzb, bodoviIzb } = this.state;
+    const {
+      activeStep,
+      prosjekPrviRazred,
+      prosjekDrugiRazred,
+      prosjekTreciRazred,
+      prosjekCetvrtiRazred,
+      postotakMaturaHj,
+      evaluationHj,
+      postotakMaturaEj,
+      postotakMaturaMat,
+      evaluationEj,
+      evaluationMat,
+      postotakMaturaIzb,
+      evaluationOpt,
+    } = this.state;
 
-    this.setState({
-      prosjekSvihRazreda: prosjekPrviRazred + prosjekDrugiRazred + prosjekTreciRazred + prosjekCetvrtiRazred,
-      bodoviZaHj: postotakMaturaHj * bodoviHj * 10 / 100,
-      bodoviZaEj: postotakMaturaEj * bodoviEj * 10 / 100,
-      bodoviZaMat: postotakMaturaMat * bodoviMat * 10 / 100,
-      bodoviZaIzb: postotakMaturaIzb * bodoviIzb * 10 / 100,
-    });
+    if (activeStep === 0) {
+      this.setState({ activeStep: activeStep + 1 });
+    } else if (activeStep === 1) {
+      this.setState({
+        activeStep: activeStep + 1,
+        prosjekSvihRazreda: prosjekPrviRazred + prosjekDrugiRazred + prosjekTreciRazred + prosjekCetvrtiRazred,
+      });
+    } else if (activeStep === 2) {
+      this.setState({
+        activeStep: activeStep + 1,
+        bodoviZaHj: postotakMaturaHj * evaluationHj * 10 / 100,
+        bodoviZaEj: postotakMaturaEj * evaluationEj * 10 / 100,
+        bodoviZaMat: postotakMaturaMat * evaluationMat * 10 / 100,
+        bodoviZaIzb: postotakMaturaIzb * evaluationOpt * 10 / 100,
+      });
+    }
   }
 
   render() {
-    const { prosjekSvihRazreda, bodoviZaOcjene, bodoviZaHj, bodoviZaEj, bodoviZaMat, bodoviZaIzb } = this.state;
+    const { prosjekSvihRazreda, evaluationGrades, bodoviZaHj, bodoviZaEj, bodoviZaMat, bodoviZaIzb, activeStep } = this.state;
+
+    let dialogContent;
+
+    if (activeStep === 0) {
+      dialogContent = (
+        <React.Fragment>
+          <h3>Vrednovanje za vas fakultet</h3>
+          <form autoComplete="off" onSubmit={this.handleSend}>
+            <h3>Ocjene iz srednje škole</h3>
+            <Grid container className="container" spacing={16}>
+              <Grid item xs={4}>
+                <TextField
+                  name="evaluationGrades"
+                  label="Prosjek svih ocjena"
+                  type="number"
+                  required
+                  onChange={event => this.handleChange(event)}
+                  InputProps={{
+                    endAdornment: <InputAdornment position="end">%</InputAdornment>,
+                  }}
+                />
+              </Grid>
+            </Grid>
+            <h3>Obvezni dio državne mature</h3>
+            <Grid container className="container" spacing={16}>
+              <Grid item xs={4}>
+                <TextField
+                  name="evaluationHj"
+                  label="Matura Hrvatski jezik"
+                  type="number"
+                  onChange={event => this.handleChange(event)}
+                  InputProps={{
+                    endAdornment: <InputAdornment position="end">%</InputAdornment>,
+                  }}
+                />
+              </Grid>
+              <Grid item xs={4}>
+                <TextField
+                  name="evaluationEj"
+                  label="Matura Engleski jezik"
+                  type="number"
+                  onChange={event => this.handleChange(event)}
+                  InputProps={{
+                    endAdornment: <InputAdornment position="end">%</InputAdornment>,
+                  }}
+                />
+              </Grid>
+              <Grid item xs={4}>
+                <TextField
+                  name="evaluationMat"
+                  label="Matura Matematika"
+                  type="number"
+                  onChange={event => this.handleChange(event)}
+                  InputProps={{
+                    endAdornment: <InputAdornment position="end">%</InputAdornment>,
+                  }}
+                />
+              </Grid>
+            </Grid>
+            <h3>Izborni dio državne mature</h3>
+            <Grid container className="container" spacing={16}>
+              <Grid item xs={4}>
+                <TextField
+                  name="evaluationOpt"
+                  label="Matura IZB"
+                  type="number"
+                  onChange={event => this.handleChange(event)}
+                  InputProps={{
+                    endAdornment: <InputAdornment position="end">%</InputAdornment>,
+                  }}
+                />
+              </Grid>
+            </Grid>
+          </form>
+        </React.Fragment>
+      );
+    } else if (activeStep === 1) {
+      dialogContent = (
+        <React.Fragment>
+          <form autoComplete="off" onSubmit={this.handleSend}>
+            <h3>Prosjeci sva cetiri razreda</h3>
+            <Grid container className="container" spacing={16}>
+              <Grid item xs={4}>
+                <TextField
+                  name="prosjekPrviRazred"
+                  label="Prosjek Prvi razred"
+                  type="number"
+                  onChange={event => this.handleChange(event)}
+                />
+              </Grid>
+              <Grid item xs={4}>
+                <TextField
+                  name="prosjekDrugiRazred"
+                  label="Prosjek Drugi razred"
+                  type="number"
+                  onChange={event => this.handleChange(event)}
+                />
+              </Grid>
+              <Grid item xs={4}>
+                <TextField
+                  name="prosjekTreciRazred"
+                  label="Prosjek Treci razred"
+                  type="number"
+                  onChange={event => this.handleChange(event)}
+                />
+              </Grid>
+              <Grid item xs={4}>
+                <TextField
+                  name="prosjekCetvrtiRazred"
+                  label="Prosjek Cetvrti razred"
+                  type="number"
+                  onChange={event => this.handleChange(event)}
+                />
+              </Grid>
+            </Grid>
+          </form>
+        </React.Fragment>
+      );
+    } else if (activeStep === 2) {
+      dialogContent = (
+        <React.Fragment>
+          <form autoComplete="off" onSubmit={this.handleSend}>
+            <h3>Prosjeci s drzavne mature</h3>
+            <Grid container className="container" spacing={16}>
+              <Grid item xs={4}>
+                <TextField
+                  name="postotakMaturaHj"
+                  label="Matura HJ"
+                  type="number"
+                  onChange={event => this.handleChange(event)}
+                  InputProps={{
+                    endAdornment: <InputAdornment position="end">%</InputAdornment>,
+                  }}
+                />
+              </Grid>
+              <Grid item xs={4}>
+                <TextField
+                  name="postotakMaturaMat"
+                  label="Matura MAT"
+                  type="number"
+                  onChange={event => this.handleChange(event)}
+                  InputProps={{
+                    endAdornment: <InputAdornment position="end">%</InputAdornment>,
+                  }}
+                />
+              </Grid>
+              <Grid item xs={4}>
+                <TextField
+                  name="postotakMaturaEj"
+                  label="Matura EJ"
+                  type="number"
+                  onChange={event => this.handleChange(event)}
+                  InputProps={{
+                    endAdornment: <InputAdornment position="end">%</InputAdornment>,
+                  }}
+                />
+              </Grid>
+              <Grid item xs={4}>
+                <TextField
+                  name="postotakMaturaIzb"
+                  label="Matura IZB"
+                  type="number"
+                  onChange={event => this.handleChange(event)}
+                  InputProps={{
+                    endAdornment: <InputAdornment position="end">%</InputAdornment>,
+                  }}
+                />
+              </Grid>
+            </Grid>
+          </form>
+        </React.Fragment>
+      );
+    } else if (activeStep === 3) {
+      dialogContent = (
+        <React.Fragment>
+          <form autoComplete="off" onSubmit={this.handleSend}>
+            <h3>Rezultati</h3>
+            <Grid container className="container" spacing={16}>
+              <Grid item xs={4}>
+                <TextField
+                  label="Ukupan prosjek"
+                  type="number"
+                  InputProps={{
+                    readOnly: true,
+                  }}
+                  value={(prosjekSvihRazreda / 4).toFixed(2)}
+                />
+              </Grid>
+              <Grid item xs={4}>
+                <TextField
+                  label="Broj bodova od ocjena"
+                  type="number"
+                  InputProps={{
+                    readOnly: true,
+                  }}
+                  value={Math.round((prosjekSvihRazreda / 4).toFixed(2) / 5 * evaluationGrades * 10)}
+                />
+              </Grid>
+              <Grid item xs={4}>
+                <TextField
+                  label="Broj bodova od HJ"
+                  type="number"
+                  InputProps={{
+                    readOnly: true,
+                  }}
+                  value={Math.round(bodoviZaHj)}
+                />
+              </Grid>
+              <Grid item xs={4}>
+                <TextField
+                  label="Broj bodova od MAT"
+                  type="number"
+                  InputProps={{
+                    readOnly: true,
+                  }}
+                  value={Math.round(bodoviZaMat)}
+                />
+              </Grid>
+              <Grid item xs={4}>
+                <TextField
+                  label="Broj bodova od EJ"
+                  type="number"
+                  InputProps={{
+                    readOnly: true,
+                  }}
+                  value={Math.round(bodoviZaEj)}
+                />
+              </Grid>
+              <Grid item xs={4}>
+                <TextField
+                  label="Broj bodova od IZB"
+                  type="number"
+                  InputProps={{
+                    readOnly: true,
+                  }}
+                  value={Math.round(bodoviZaIzb)}
+                />
+              </Grid>
+              <Grid item xs={4}>
+                <TextField
+                  label="Ukupan broj bodova"
+                  type="number"
+                  InputProps={{
+                    readOnly: true,
+                  }}
+                  value={Math.round(bodoviZaIzb + bodoviZaEj + bodoviZaHj + bodoviZaMat + Math.round((prosjekSvihRazreda / 4).toFixed(2) / 5 * evaluationGrades * 10))}
+                />
+              </Grid>
+            </Grid>
+          </form>
+        </React.Fragment>
+      );
+    }
 
     return (
       <div className="App">
-        <h1>Kalkulator bodova za upis na fakultet</h1>
-        <FormControl>
-          <TextField
-            name="bodoviZaOcjene"
-            label="Broj bodova u %"
-            type="number"
-            onChange={event => this.handleChange(event)}
-          />
-          <TextField
-            name="bodoviHj"
-            label="Matura HJ u %"
-            type="number"
-            onChange={event => this.handleChange(event)}
-          />
-          <TextField
-            name="bodoviMat"
-            label="Matura MAT u %"
-            type="number"
-            onChange={event => this.handleChange(event)}
-          />
-          <TextField
-            name="bodoviEj"
-            label="Matura EJ u %"
-            type="number"
-            onChange={event => this.handleChange(event)}
-          />
-          <TextField
-            name="bodoviIzb"
-            label="Matura IZB u %"
-            type="number"
-            onChange={event => this.handleChange(event)}
-          />
-          <br /><br />
-          <TextField
-            name="prosjekPrviRazred"
-            label="Prosjek Prvi razred"
-            type="number"
-            onChange={event => this.handleChange(event)}
-          />
-          <TextField
-            name="prosjekDrugiRazred"
-            label="Prosjek Drugi razred"
-            type="number"
-            onChange={event => this.handleChange(event)}
-          />
-          <TextField
-            name="prosjekTreciRazred"
-            label="Prosjek Treci razred"
-            type="number"
-            onChange={event => this.handleChange(event)}
-          />
-          <TextField
-            name="prosjekCetvrtiRazred"
-            label="Prosjek Cetvrti razred"
-            type="number"
-            onChange={event => this.handleChange(event)}
-          />
-          <TextField
-            name="postotakMaturaHj"
-            label="Matura HJ u %"
-            type="number"
-            onChange={event => this.handleChange(event)}
-          />
-          <TextField
-            name="postotakMaturaMat"
-            label="Matura MAT u %"
-            type="number"
-            onChange={event => this.handleChange(event)}
-          />
-          <TextField
-            name="postotakMaturaEj"
-            label="Matura EJ u %"
-            type="number"
-            onChange={event => this.handleChange(event)}
-          />
-          <TextField
-            name="postotakMaturaIzb"
-            label="Matura IZB u %"
-            type="number"
-            onChange={event => this.handleChange(event)}
-          />
-          <Button variant="outlined" onClick={this.handleClick}>Submit</Button>
-          <br /><br />
-          <TextField
-            label="Ukupan prosjek"
-            type="number"
-            InputProps={{
-              readOnly: true,
-            }}
-            value={(prosjekSvihRazreda / 4).toFixed(2)}
-          />
-          <TextField
-            label="Broj bodova od ocjena"
-            type="number"
-            InputProps={{
-              readOnly: true,
-            }}
-            value={Math.round((prosjekSvihRazreda / 4).toFixed(2) / 5 * bodoviZaOcjene * 10)}
-          />
-          <TextField
-            label="Broj bodova od HJ"
-            type="number"
-            InputProps={{
-              readOnly: true,
-            }}
-            value={Math.round(bodoviZaHj)}
-          />
-          <TextField
-            label="Broj bodova od MAT"
-            type="number"
-            InputProps={{
-              readOnly: true,
-            }}
-            value={Math.round(bodoviZaMat)}
-          />
-          <TextField
-            label="Broj bodova od EJ"
-            type="number"
-            InputProps={{
-              readOnly: true,
-            }}
-            value={Math.round(bodoviZaEj)}
-          />
-          <TextField
-            label="Broj bodova od IZB"
-            type="number"
-            InputProps={{
-              readOnly: true,
-            }}
-            value={Math.round(bodoviZaIzb)}
-          />
-          <TextField
-            label="Ukupan broj bodova"
-            type="number"
-            InputProps={{
-              readOnly: true,
-            }}
-            value={Math.round(bodoviZaIzb + bodoviZaEj + bodoviZaHj + bodoviZaMat + Math.round((prosjekSvihRazreda / 4).toFixed(2) / 5 * bodoviZaOcjene * 10))}
-          />
-        </FormControl>
+        <Paper className="paper">
+          <h1>Kalkulator bodova za upis na fakultet</h1>
+          <Divider />
+          {dialogContent}
+          <Divider />
+          <Stepper activeStep={activeStep}>
+            <Step key={1}>
+              <StepLabel>Raspodjela bodova za upis</StepLabel>
+            </Step>
+            <Step key={2}>
+              <StepLabel>Prosjek ocjena</StepLabel>
+            </Step>
+            <Step key={3}>
+              <StepLabel>Rezultati mature</StepLabel>
+            </Step>
+            <Step key={3}>
+              <StepLabel>Ukupan broj bodova</StepLabel>
+            </Step>
+          </Stepper>
+          {activeStep !== 3 ? (
+            <Grid style={{ display: 'flex', justifyContent: 'flex-end' }} container className="container" spacing={16}>
+              <Grid style={{ display: 'flex', justifyContent: 'flex-end' }} item xs={12}>
+                <Button onClick={this.handleClick} style={{ width: '100%' }} size="large" variant="contained" color="primary">Dalje</Button>
+              </Grid>
+            </Grid>
+          ) : null}
+        </Paper>
       </div>
     );
   }
