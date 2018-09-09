@@ -4,37 +4,41 @@ import './App.css';
 
 import TextField from '@material-ui/core/TextField';
 import { Button, Paper, Divider, Stepper, Step, StepLabel, InputAdornment, Grid } from '@material-ui/core';
+import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
 
 class App extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      prosjekSvihRazreda: 0,
-      prosjekPrviRazred: 0,
-      prosjekDrugiRazred: 0,
-      prosjekTreciRazred: 0,
-      prosjekCetvrtiRazred: 0,
-      evaluationGrades: 0,
-      bodoviZaHj: 0,
-      bodoviZaMat: 0,
-      bodoviZaEj: 0,
-      bodoviZaIzb: 0,
-      postotakMaturaHj: 0,
-      postotakMaturaMat: 0,
-      postotakMaturaEj: 0,
-      postotakMaturaIzb: 0,
+      prosjekSvihRazreda: '',
+      prosjekPrviRazred: '',
+      prosjekDrugiRazred: '',
+      prosjekTreciRazred: '',
+      prosjekCetvrtiRazred: '',
+      evaluationGrades: '',
+      bodoviZaHj: '',
+      bodoviZaMat: '',
+      bodoviZaEj: '',
+      bodoviZaIzb: '',
+      postotakMaturaHj: '',
+      postotakMaturaMat: '',
+      postotakMaturaEj: '',
+      postotakMaturaIzb: '',
+      evaluationHj: '',
+      evaluationMat: '',
+      evaluationEj: '',
+      evaluationOpt: '',
       activeStep: 0,
-      errorText: 'Error',
-      error: false,
     };
   }
 
-  handleChange = (event) => {
-    const { value } = event.target;
+  handleChange = ({ target: { name, value } }) => {
     const numberValue = parseFloat(value, 10);
 
-    this.setState({ [event.target.name]: numberValue });
+    this.setState({
+      [name]: numberValue,
+    });
   }
 
   handleBack = () => {
@@ -65,7 +69,6 @@ class App extends Component {
         activeStep: activeStep + 1,
         prosjekSvihRazreda: prosjekPrviRazred + prosjekDrugiRazred + prosjekTreciRazred + prosjekCetvrtiRazred,
       });
-      document.forms.prosjeci.reset();
     } else if (activeStep === 2) {
       this.setState({
         activeStep: activeStep + 1,
@@ -78,179 +81,250 @@ class App extends Component {
   }
 
   render() {
-    const { prosjekSvihRazreda, evaluationGrades, bodoviZaHj, bodoviZaEj, bodoviZaMat, bodoviZaIzb, activeStep, errorText, error } = this.state;
+    const {
+      prosjekSvihRazreda,
+      prosjekCetvrtiRazred,
+      prosjekDrugiRazred,
+      prosjekPrviRazred,
+      prosjekTreciRazred,
+      evaluationGrades,
+      postotakMaturaEj,
+      postotakMaturaHj,
+      postotakMaturaIzb,
+      postotakMaturaMat,
+      bodoviZaHj,
+      bodoviZaEj,
+      bodoviZaMat,
+      bodoviZaIzb,
+      activeStep,
+      evaluationHj,
+      evaluationEj,
+      evaluationMat,
+      evaluationOpt,
+    } = this.state;
 
     let dialogContent;
 
     if (activeStep === 0) {
       dialogContent = (
         <React.Fragment>
-          <h3>Vrednovanje za vas fakultet</h3>
-          <form autoComplete="off" onSubmit={this.handleSend}>
+          <ValidatorForm onSubmit={this.handleClick}>
+            <h3>Vrednovanje za vas fakultet</h3>
             <h3>Ocjene iz srednje škole</h3>
             <Grid container className="container" spacing={16}>
               <Grid item xs={4}>
-                <TextField
+                <TextValidator
                   name="evaluationGrades"
                   label="Prosjek svih ocjena"
-                  error={error}
                   type="number"
-                  required
-                  helperText={error ? errorText : null}
-                  onChange={event => this.handleChange(event)}
+                  value={evaluationGrades}
+                  onChange={this.handleChange}
                   InputProps={{
                     endAdornment: <InputAdornment position="end">%</InputAdornment>,
                   }}
+                  validators={['required']}
+                  errorMessages={['Ovo polje je obvezno']}
                 />
               </Grid>
             </Grid>
             <h3>Obvezni dio državne mature</h3>
             <Grid container className="container" spacing={16}>
               <Grid item xs={4}>
-                <TextField
+                <TextValidator
                   name="evaluationHj"
-                  label="Hrvatski jezik"
+                  label="Hrvatski"
                   type="number"
-                  onChange={event => this.handleChange(event)}
+                  value={evaluationHj}
+                  onChange={this.handleChange}
                   InputProps={{
                     endAdornment: <InputAdornment position="end">%</InputAdornment>,
                   }}
+                  validators={['required']}
+                  errorMessages={['Ovo polje je obvezno']}
                 />
               </Grid>
               <Grid item xs={4}>
-                <TextField
+                <TextValidator
                   name="evaluationMat"
                   label="Matematika"
                   type="number"
-                  onChange={event => this.handleChange(event)}
+                  value={evaluationMat}
+                  onChange={this.handleChange}
                   InputProps={{
                     endAdornment: <InputAdornment position="end">%</InputAdornment>,
                   }}
+                  validators={['required']}
+                  errorMessages={['Ovo polje je obvezno']}
                 />
               </Grid>
               <Grid item xs={4}>
-                <TextField
+                <TextValidator
                   name="evaluationEj"
                   label="Engleski jezik"
                   type="number"
-                  onChange={event => this.handleChange(event)}
+                  value={evaluationEj}
+                  onChange={this.handleChange}
                   InputProps={{
                     endAdornment: <InputAdornment position="end">%</InputAdornment>,
                   }}
+                  validators={['required']}
+                  errorMessages={['Ovo polje je obvezno']}
                 />
               </Grid>
             </Grid>
             <h3>Izborni dio državne mature</h3>
             <Grid container className="container" spacing={16}>
               <Grid item xs={4}>
-                <TextField
+                <TextValidator
                   name="evaluationOpt"
                   label="Izborni predmet"
                   type="number"
-                  onChange={event => this.handleChange(event)}
+                  value={evaluationOpt}
+                  onChange={this.handleChange}
                   InputProps={{
                     endAdornment: <InputAdornment position="end">%</InputAdornment>,
                   }}
+                  validators={['required']}
+                  errorMessages={['Ovo polje je obvezno']}
                 />
               </Grid>
             </Grid>
-          </form>
+            <Grid style={{ display: 'flex', justifyContent: 'flex-end' }} container className="container" spacing={16}>
+              <Grid style={{ display: 'flex', justifyContent: 'flex-end' }} item xs={12}>
+                <Button type="submit" style={{ width: '100%' }} size="large" variant="contained" color="primary">{activeStep === 2 ? 'Završi' : 'Dalje'}</Button>
+              </Grid>
+            </Grid>
+          </ValidatorForm>
         </React.Fragment>
       );
     } else if (activeStep === 1) {
       dialogContent = (
         <React.Fragment>
-          <form name="prosjeci" autoComplete="off" onSubmit={this.handleSend}>
+          <ValidatorForm onSubmit={this.handleClick}>
             <h3>Prosjeci sva cetiri razreda</h3>
             <Grid container className="container" spacing={16}>
               <Grid item xs={3}>
-                <TextField
+                <TextValidator
                   name="prosjekPrviRazred"
                   label="1. razred"
+                  value={prosjekPrviRazred}
                   type="number"
-                  onChange={event => this.handleChange(event)}
+                  onChange={this.handleChange}
+                  validators={['required']}
+                  errorMessages={['Ovo polje je obvezno']}
                 />
               </Grid>
               <Grid item xs={3}>
-                <TextField
+                <TextValidator
                   name="prosjekDrugiRazred"
                   label="2. razred"
+                  value={prosjekDrugiRazred}
                   type="number"
-                  onChange={event => this.handleChange(event)}
+                  onChange={this.handleChange}
+                  validators={['required']}
+                  errorMessages={['Ovo polje je obvezno']}
                 />
               </Grid>
               <Grid item xs={3}>
-                <TextField
+                <TextValidator
                   name="prosjekTreciRazred"
                   label="3. razred"
+                  value={prosjekTreciRazred}
                   type="number"
-                  onChange={event => this.handleChange(event)}
+                  onChange={this.handleChange}
+                  validators={['required']}
+                  errorMessages={['Ovo polje je obvezno']}
                 />
               </Grid>
               <Grid item xs={3}>
-                <TextField
+                <TextValidator
                   name="prosjekCetvrtiRazred"
                   label="4. razred"
+                  value={prosjekCetvrtiRazred}
                   type="number"
-                  onChange={event => this.handleChange(event)}
+                  onChange={this.handleChange}
+                  validators={['required']}
+                  errorMessages={['Ovo polje je obvezno']}
                 />
               </Grid>
             </Grid>
-          </form>
+            <Grid style={{ display: 'flex', justifyContent: 'flex-end' }} container className="container" spacing={16}>
+              <Grid style={{ display: 'flex', justifyContent: 'flex-end' }} item xs={12}>
+                <Button type="submit" style={{ width: '100%' }} size="large" variant="contained" color="primary">{activeStep === 2 ? 'Završi' : 'Dalje'}</Button>
+              </Grid>
+            </Grid>
+          </ValidatorForm>
         </React.Fragment>
       );
     } else if (activeStep === 2) {
       dialogContent = (
         <React.Fragment>
-          <form autoComplete="off" onSubmit={this.handleSend}>
+          <ValidatorForm onSubmit={this.handleClick}>
             <h3>Prosjeci s drzavne mature</h3>
             <Grid container className="container" spacing={16}>
               <Grid item xs={4}>
-                <TextField
+                <TextValidator
                   name="postotakMaturaHj"
                   label="Hrvatski jezik"
+                  value={postotakMaturaHj}
                   type="number"
-                  onChange={event => this.handleChange(event)}
+                  onChange={this.handleChange}
                   InputProps={{
                     endAdornment: <InputAdornment position="end">%</InputAdornment>,
                   }}
+                  validators={['required']}
+                  errorMessages={['Ovo polje je obvezno']}
                 />
               </Grid>
               <Grid item xs={4}>
-                <TextField
+                <TextValidator
                   name="postotakMaturaMat"
                   label="Matematika"
+                  value={postotakMaturaMat}
                   type="number"
-                  onChange={event => this.handleChange(event)}
+                  onChange={this.handleChange}
                   InputProps={{
                     endAdornment: <InputAdornment position="end">%</InputAdornment>,
                   }}
+                  validators={['required']}
+                  errorMessages={['Ovo polje je obvezno']}
                 />
               </Grid>
               <Grid item xs={4}>
-                <TextField
+                <TextValidator
                   name="postotakMaturaEj"
                   label="Engleski jezik"
+                  value={postotakMaturaEj}
                   type="number"
-                  onChange={event => this.handleChange(event)}
+                  onChange={this.handleChange}
                   InputProps={{
                     endAdornment: <InputAdornment position="end">%</InputAdornment>,
                   }}
+                  validators={['required']}
+                  errorMessages={['Ovo polje je obvezno']}
                 />
               </Grid>
               <Grid item xs={4}>
-                <TextField
+                <TextValidator
                   name="postotakMaturaIzb"
                   label="Izborni predmet"
+                  value={postotakMaturaIzb}
                   type="number"
-                  onChange={event => this.handleChange(event)}
+                  onChange={this.handleChange}
                   InputProps={{
                     endAdornment: <InputAdornment position="end">%</InputAdornment>,
                   }}
+                  validators={['required']}
+                  errorMessages={['Ovo polje je obvezno']}
                 />
               </Grid>
             </Grid>
-          </form>
+            <Grid style={{ display: 'flex', justifyContent: 'flex-end' }} container className="container" spacing={16}>
+              <Grid style={{ display: 'flex', justifyContent: 'flex-end' }} item xs={12}>
+                <Button type="submit" style={{ width: '100%' }} size="large" variant="contained" color="primary">{activeStep === 2 ? 'Završi' : 'Dalje'}</Button>
+              </Grid>
+            </Grid>
+          </ValidatorForm>
         </React.Fragment>
       );
     } else if (activeStep === 3) {
@@ -356,19 +430,14 @@ class App extends Component {
               <StepLabel>Ukupan broj bodova</StepLabel>
             </Step>
           </Stepper>
-          {activeStep !== 3 ? (
-            <Grid style={{ display: 'flex', justifyContent: 'flex-end' }} container className="container" spacing={16}>
-              <Grid style={{ display: 'flex', justifyContent: 'flex-end' }} item xs={12}>
-                <Button onClick={this.handleClick} style={{ width: '100%' }} size="large" variant="contained" color="primary">{activeStep === 2 ? 'Završi' : 'Dalje'}</Button>
+          {activeStep === 3
+            ? (
+              <Grid style={{ display: 'flex', justifyContent: 'flex-end' }} container className="container" spacing={16}>
+                <Grid style={{ display: 'flex', justifyContent: 'flex-end' }} item xs={12}>
+                  <Button onClick={this.handleBack} style={{ width: '100%' }} size="large" variant="contained" color="primary">Na pocetak</Button>
+                </Grid>
               </Grid>
-            </Grid>
-          ) : (
-            <Grid style={{ display: 'flex', justifyContent: 'flex-end' }} container className="container" spacing={16}>
-              <Grid style={{ display: 'flex', justifyContent: 'flex-end' }} item xs={12}>
-                <Button onClick={this.handleBack} style={{ width: '100%' }} size="large" variant="contained" color="primary">Na pocetak</Button>
-              </Grid>
-            </Grid>
-          )}
+            ) : null}
         </Paper>
       </div>
     );
