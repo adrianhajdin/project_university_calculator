@@ -8,14 +8,14 @@ body {
   background-color: lightgray;
 }
 
-form {
-  margin-bottom: 20px;
-}
-
 .container {
 justify-content: center;
 }
 
 .paper {
   width: 55%;
+}
+
+.stepper {
+  margin-top: 20px;
 }

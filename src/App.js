@@ -9,8 +9,11 @@ import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
 class App extends Component {
   constructor(props) {
     super(props);
+    this.state = this.getInitialState();
+  }
 
-    this.state = {
+  getInitialState = () => {
+    const initialState = {
       prosjekSvihRazreda: '',
       prosjekPrviRazred: '',
       prosjekDrugiRazred: '',
@@ -31,7 +34,14 @@ class App extends Component {
       evaluationOpt: '',
       activeStep: 0,
     };
-  }
+
+    return initialState;
+}
+
+ resetState = () => {
+    this.setState(this.getInitialState());
+ }
+
 
   handleChange = ({ target: { name, value } }) => {
     const numberValue = parseFloat(value, 10);
@@ -42,7 +52,7 @@ class App extends Component {
   }
 
   handleBack = () => {
-    this.setState({ activeStep: 0 });
+    this.resetState();
   }
 
   handleClick = () => {
@@ -64,6 +74,7 @@ class App extends Component {
 
     if (activeStep === 0) {
       this.setState({ activeStep: activeStep + 1 });
+      console.log(';reach')
     } else if (activeStep === 1) {
       this.setState({
         activeStep: activeStep + 1,
@@ -108,7 +119,6 @@ class App extends Component {
     if (activeStep === 0) {
       dialogContent = (
         <React.Fragment>
-          <ValidatorForm onSubmit={this.handleClick}>
             <h3>Vrednovanje za vas fakultet</h3>
             <h3>Ocjene iz srednje škole</h3>
             <Grid container className="container" spacing={16}>
@@ -122,8 +132,8 @@ class App extends Component {
                   InputProps={{
                     endAdornment: <InputAdornment position="end">%</InputAdornment>,
                   }}
-                  validators={['required']}
-                  errorMessages={['Ovo polje je obvezno']}
+                  validators={['required', 'minNumber:0', 'maxNumber:100']}
+                  errorMessages={['Ovo polje je obvezno', 'Postotak mora biti veci od 0', 'Postotak ne moze biti veci od 100']}
                 />
               </Grid>
             </Grid>
@@ -139,8 +149,8 @@ class App extends Component {
                   InputProps={{
                     endAdornment: <InputAdornment position="end">%</InputAdornment>,
                   }}
-                  validators={['required']}
-                  errorMessages={['Ovo polje je obvezno']}
+                  validators={['required', 'minNumber:0', 'maxNumber:100']}
+                  errorMessages={['Ovo polje je obvezno', 'Postotak mora biti veci od 0', 'Postotak ne moze biti veci od 100']}
                 />
               </Grid>
               <Grid item xs={4}>
@@ -153,8 +163,8 @@ class App extends Component {
                   InputProps={{
                     endAdornment: <InputAdornment position="end">%</InputAdornment>,
                   }}
-                  validators={['required']}
-                  errorMessages={['Ovo polje je obvezno']}
+                  validators={['required', 'minNumber:0', 'maxNumber:100']}
+                  errorMessages={['Ovo polje je obvezno', 'Postotak mora biti veci od 0', 'Postotak ne moze biti veci od 100']}
                 />
               </Grid>
               <Grid item xs={4}>
@@ -167,8 +177,8 @@ class App extends Component {
                   InputProps={{
                     endAdornment: <InputAdornment position="end">%</InputAdornment>,
                   }}
-                  validators={['required']}
-                  errorMessages={['Ovo polje je obvezno']}
+                  validators={['required', 'minNumber:0', 'maxNumber:100']}
+                  errorMessages={['Ovo polje je obvezno', 'Postotak mora biti veci od 0', 'Postotak ne moze biti veci od 100']}
                 />
               </Grid>
             </Grid>
@@ -184,23 +194,17 @@ class App extends Component {
                   InputProps={{
                     endAdornment: <InputAdornment position="end">%</InputAdornment>,
                   }}
-                  validators={['required']}
-                  errorMessages={['Ovo polje je obvezno']}
+                  validators={['required', 'minNumber:0', 'maxNumber:100']}
+                  errorMessages={['Ovo polje je obvezno', 'Postotak mora biti veci od 0', 'Postotak ne moze biti veci od 100']}
                 />
               </Grid>
             </Grid>
-            <Grid style={{ display: 'flex', justifyContent: 'flex-end' }} container className="container" spacing={16}>
-              <Grid style={{ display: 'flex', justifyContent: 'flex-end' }} item xs={12}>
-                <Button type="submit" style={{ width: '100%' }} size="large" variant="contained" color="primary">{activeStep === 2 ? 'Završi' : 'Dalje'}</Button>
-              </Grid>
-            </Grid>
-          </ValidatorForm>
+
         </React.Fragment>
       );
     } else if (activeStep === 1) {
       dialogContent = (
         <React.Fragment>
-          <ValidatorForm onSubmit={this.handleClick}>
             <h3>Prosjeci sva cetiri razreda</h3>
             <Grid container className="container" spacing={16}>
               <Grid item xs={3}>
@@ -210,8 +214,8 @@ class App extends Component {
                   value={prosjekPrviRazred}
                   type="number"
                   onChange={this.handleChange}
-                  validators={['required']}
-                  errorMessages={['Ovo polje je obvezno']}
+                  validators={['required', 'minNumber:1', 'maxNumber:5']}
+                  errorMessages={['Ovo polje je obvezno', 'Prosjek ne moze biti manji od 1.00', 'Prosjek ne moze biti veci od 5.00']}
                 />
               </Grid>
               <Grid item xs={3}>
@@ -221,8 +225,8 @@ class App extends Component {
                   value={prosjekDrugiRazred}
                   type="number"
                   onChange={this.handleChange}
-                  validators={['required']}
-                  errorMessages={['Ovo polje je obvezno']}
+                  validators={['required', 'minNumber:1', 'maxNumber:5']}
+                  errorMessages={['Ovo polje je obvezno', 'Prosjek ne moze biti manji od 1.00', 'Prosjek ne moze biti veci od 5.00']}
                 />
               </Grid>
               <Grid item xs={3}>
@@ -232,8 +236,8 @@ class App extends Component {
                   value={prosjekTreciRazred}
                   type="number"
                   onChange={this.handleChange}
-                  validators={['required']}
-                  errorMessages={['Ovo polje je obvezno']}
+                  validators={['required', 'minNumber:1', 'maxNumber:5']}
+                  errorMessages={['Ovo polje je obvezno', 'Prosjek ne moze biti manji od 1.00', 'Prosjek ne moze biti veci od 5.00']}
                 />
               </Grid>
               <Grid item xs={3}>
@@ -243,23 +247,17 @@ class App extends Component {
                   value={prosjekCetvrtiRazred}
                   type="number"
                   onChange={this.handleChange}
-                  validators={['required']}
-                  errorMessages={['Ovo polje je obvezno']}
+                  validators={['required', 'minNumber:1', 'maxNumber:5']}
+                  errorMessages={['Ovo polje je obvezno', 'Prosjek ne moze biti manji od 1.00', 'Prosjek ne moze biti veci od 5.00']}
                 />
               </Grid>
             </Grid>
-            <Grid style={{ display: 'flex', justifyContent: 'flex-end' }} container className="container" spacing={16}>
-              <Grid style={{ display: 'flex', justifyContent: 'flex-end' }} item xs={12}>
-                <Button type="submit" style={{ width: '100%' }} size="large" variant="contained" color="primary">{activeStep === 2 ? 'Završi' : 'Dalje'}</Button>
-              </Grid>
-            </Grid>
-          </ValidatorForm>
+
         </React.Fragment>
       );
     } else if (activeStep === 2) {
       dialogContent = (
         <React.Fragment>
-          <ValidatorForm onSubmit={this.handleClick}>
             <h3>Prosjeci s drzavne mature</h3>
             <Grid container className="container" spacing={16}>
               <Grid item xs={4}>
@@ -272,8 +270,8 @@ class App extends Component {
                   InputProps={{
                     endAdornment: <InputAdornment position="end">%</InputAdornment>,
                   }}
-                  validators={['required']}
-                  errorMessages={['Ovo polje je obvezno']}
+                  validators={['required', 'minNumber:0', 'maxNumber:100']}
+                  errorMessages={['Ovo polje je obvezno', 'Postotak mora biti veci od 0', 'Postotak ne moze biti veci od 100']}
                 />
               </Grid>
               <Grid item xs={4}>
@@ -286,8 +284,8 @@ class App extends Component {
                   InputProps={{
                     endAdornment: <InputAdornment position="end">%</InputAdornment>,
                   }}
-                  validators={['required']}
-                  errorMessages={['Ovo polje je obvezno']}
+                  validators={['required', 'minNumber:0', 'maxNumber:100']}
+                  errorMessages={['Ovo polje je obvezno', 'Postotak mora biti veci od 0', 'Postotak ne moze biti veci od 100']}
                 />
               </Grid>
               <Grid item xs={4}>
@@ -300,8 +298,8 @@ class App extends Component {
                   InputProps={{
                     endAdornment: <InputAdornment position="end">%</InputAdornment>,
                   }}
-                  validators={['required']}
-                  errorMessages={['Ovo polje je obvezno']}
+                  validators={['required', 'minNumber:0', 'maxNumber:100']}
+                  errorMessages={['Ovo polje je obvezno', 'Postotak mora biti veci od 0', 'Postotak ne moze biti veci od 100']}
                 />
               </Grid>
               <Grid item xs={4}>
@@ -314,23 +312,17 @@ class App extends Component {
                   InputProps={{
                     endAdornment: <InputAdornment position="end">%</InputAdornment>,
                   }}
-                  validators={['required']}
-                  errorMessages={['Ovo polje je obvezno']}
+                  validators={['required', 'minNumber:0', 'maxNumber:100']}
+                  errorMessages={['Ovo polje je obvezno', 'Postotak mora biti veci od 0', 'Postotak ne moze biti veci od 100']}
                 />
               </Grid>
             </Grid>
-            <Grid style={{ display: 'flex', justifyContent: 'flex-end' }} container className="container" spacing={16}>
-              <Grid style={{ display: 'flex', justifyContent: 'flex-end' }} item xs={12}>
-                <Button type="submit" style={{ width: '100%' }} size="large" variant="contained" color="primary">{activeStep === 2 ? 'Završi' : 'Dalje'}</Button>
-              </Grid>
-            </Grid>
-          </ValidatorForm>
+
         </React.Fragment>
       );
     } else if (activeStep === 3) {
       dialogContent = (
         <React.Fragment>
-          <form autoComplete="off" onSubmit={this.handleSend}>
             <h3>Rezultati</h3>
             <Grid container className="container" spacing={16}>
               <Grid item xs={4}>
@@ -404,7 +396,6 @@ class App extends Component {
                 />
               </Grid>
             </Grid>
-          </form>
         </React.Fragment>
       );
     }
@@ -414,9 +405,9 @@ class App extends Component {
         <Paper className="paper">
           <h1>Kalkulator bodova za upis na fakultet</h1>
           <Divider />
-          {dialogContent}
-          <Divider />
-          <Stepper activeStep={activeStep}>
+          <ValidatorForm name='form' onSubmit={this.handleClick}>
+            {dialogContent}
+          <Stepper className="stepper" activeStep={activeStep}>
             <Step key={1}>
               <StepLabel>Raspodjela bodova za upis</StepLabel>
             </Step>
@@ -430,14 +421,22 @@ class App extends Component {
               <StepLabel>Ukupan broj bodova</StepLabel>
             </Step>
           </Stepper>
-          {activeStep === 3
+          {activeStep !== 3
             ? (
-              <Grid style={{ display: 'flex', justifyContent: 'flex-end' }} container className="container" spacing={16}>
-                <Grid style={{ display: 'flex', justifyContent: 'flex-end' }} item xs={12}>
-                  <Button onClick={this.handleBack} style={{ width: '100%' }} size="large" variant="contained" color="primary">Na pocetak</Button>
+              <Grid container className="container" spacing={16}>
+              <Grid item xs={12}>
+                <Button type="submit" fullWidth size="large" variant="contained" color="primary">{activeStep === 2 ? 'Završi' : 'Dalje'}</Button>
+              </Grid>
+            </Grid>
+            )
+            : (
+              <Grid container className="container" spacing={16}>
+                <Grid item xs={12}>
+                  <Button onClick={this.handleBack} fullWidth size="large" variant="contained" color="primary">Na pocetak</Button>
                 </Grid>
               </Grid>
-            ) : null}
+            ) }
+            </ValidatorForm>
         </Paper>
       </div>
     );
