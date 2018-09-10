@@ -108,7 +108,7 @@ class App extends Component {
     if (activeStep === 0) {
       dialogContent = (
         <React.Fragment>
-            <h3>Vrednovanje za vas fakultet</h3>
+            <h3>Vrednovanje za vaš fakultet</h3>
             <h3>Ocjene iz srednje škole</h3>
             <Grid container className="container" spacing={16}>
               <Grid item xs={4}>
@@ -122,7 +122,7 @@ class App extends Component {
                     endAdornment: <InputAdornment position="end">%</InputAdornment>,
                   }}
                   validators={['required', 'minNumber:0', 'maxNumber:100']}
-                  errorMessages={['Ovo polje je obvezno', 'Postotak mora biti veci od 0', 'Postotak ne moze biti veci od 100']}
+                  errorMessages={['Ovo polje je obvezno', 'Postotak mora biti veći od 0', 'Postotak ne može biti veći od 100']}
                 />
               </Grid>
             </Grid>
@@ -139,7 +139,7 @@ class App extends Component {
                     endAdornment: <InputAdornment position="end">%</InputAdornment>,
                   }}
                   validators={['required', 'minNumber:0', 'maxNumber:100']}
-                  errorMessages={['Ovo polje je obvezno', 'Postotak mora biti veci od 0', 'Postotak ne moze biti veci od 100']}
+                  errorMessages={['Ovo polje je obvezno', 'Postotak mora biti veći od 0', 'Postotak ne može biti veći od 100']}
                 />
               </Grid>
               <Grid item xs={4}>
@@ -153,7 +153,7 @@ class App extends Component {
                     endAdornment: <InputAdornment position="end">%</InputAdornment>,
                   }}
                   validators={['required', 'minNumber:0', 'maxNumber:100']}
-                  errorMessages={['Ovo polje je obvezno', 'Postotak mora biti veci od 0', 'Postotak ne moze biti veci od 100']}
+                  errorMessages={['Ovo polje je obvezno', 'Postotak mora biti veći od 0', 'Postotak ne može biti veći od 100']}
                 />
               </Grid>
               <Grid item xs={4}>
@@ -167,7 +167,7 @@ class App extends Component {
                     endAdornment: <InputAdornment position="end">%</InputAdornment>,
                   }}
                   validators={['required', 'minNumber:0', 'maxNumber:100']}
-                  errorMessages={['Ovo polje je obvezno', 'Postotak mora biti veci od 0', 'Postotak ne moze biti veci od 100']}
+                  errorMessages={['Ovo polje je obvezno', 'Postotak mora biti veći od 0', 'Postotak ne može biti veći od 100']}
                 />
               </Grid>
             </Grid>
@@ -184,7 +184,7 @@ class App extends Component {
                     endAdornment: <InputAdornment position="end">%</InputAdornment>,
                   }}
                   validators={['required', 'minNumber:0', 'maxNumber:100']}
-                  errorMessages={['Ovo polje je obvezno', 'Postotak mora biti veci od 0', 'Postotak ne moze biti veci od 100']}
+                  errorMessages={['Ovo polje je obvezno', 'Postotak mora biti veći od 0', 'Postotak ne može biti veći od 100']}
                 />
               </Grid>
             </Grid>
@@ -204,7 +204,7 @@ class App extends Component {
                   type="number"
                   onChange={this.handleChange}
                   validators={['required', 'minNumber:1', 'maxNumber:5']}
-                  errorMessages={['Ovo polje je obvezno', 'Prosjek ne moze biti manji od 1.00', 'Prosjek ne moze biti veci od 5.00']}
+                  errorMessages={['Ovo polje je obvezno', 'Prosjek ne može biti manji od 1.00', 'Prosjek ne može biti veći od 5.00']}
                 />
               </Grid>
               <Grid item xs={3}>
@@ -215,7 +215,7 @@ class App extends Component {
                   type="number"
                   onChange={this.handleChange}
                   validators={['required', 'minNumber:1', 'maxNumber:5']}
-                  errorMessages={['Ovo polje je obvezno', 'Prosjek ne moze biti manji od 1.00', 'Prosjek ne moze biti veci od 5.00']}
+                  errorMessages={['Ovo polje je obvezno', 'Prosjek ne može biti manji od 1.00', 'Prosjek ne može biti veći od 5.00']}
                 />
               </Grid>
               <Grid item xs={3}>
@@ -226,7 +226,7 @@ class App extends Component {
                   type="number"
                   onChange={this.handleChange}
                   validators={['required', 'minNumber:1', 'maxNumber:5']}
-                  errorMessages={['Ovo polje je obvezno', 'Prosjek ne moze biti manji od 1.00', 'Prosjek ne moze biti veci od 5.00']}
+                  errorMessages={['Ovo polje je obvezno', 'Prosjek ne može biti manji od 1.00', 'Prosjek ne može biti veći od 5.00']}
                 />
               </Grid>
               <Grid item xs={3}>
@@ -237,7 +237,7 @@ class App extends Component {
                   type="number"
                   onChange={this.handleChange}
                   validators={['required', 'minNumber:1', 'maxNumber:5']}
-                  errorMessages={['Ovo polje je obvezno', 'Prosjek ne moze biti manji od 1.00', 'Prosjek ne moze biti veci od 5.00']}
+                  errorMessages={['Ovo polje je obvezno', 'Prosjek ne može biti manji od 1.00', 'Prosjek ne može biti veći od 5.00']}
                 />
               </Grid>
             </Grid>
@@ -260,7 +260,7 @@ class App extends Component {
                     endAdornment: <InputAdornment position="end">%</InputAdornment>,
                   }}
                   validators={['required', 'minNumber:0', 'maxNumber:100']}
-                  errorMessages={['Ovo polje je obvezno', 'Postotak mora biti veci od 0', 'Postotak ne moze biti veci od 100']}
+                  errorMessages={['Ovo polje je obvezno', 'Postotak mora biti veći od 0', 'Postotak ne može biti veći od 100']}
                 />
               </Grid>
               <Grid item xs={4}>
@@ -274,7 +274,7 @@ class App extends Component {
                     endAdornment: <InputAdornment position="end">%</InputAdornment>,
                   }}
                   validators={['required', 'minNumber:0', 'maxNumber:100']}
-                  errorMessages={['Ovo polje je obvezno', 'Postotak mora biti veci od 0', 'Postotak ne moze biti veci od 100']}
+                  errorMessages={['Ovo polje je obvezno', 'Postotak mora biti veći od 0', 'Postotak ne može biti veći od 100']}
                 />
               </Grid>
               <Grid item xs={4}>
@@ -288,7 +288,7 @@ class App extends Component {
                     endAdornment: <InputAdornment position="end">%</InputAdornment>,
                   }}
                   validators={['required', 'minNumber:0', 'maxNumber:100']}
-                  errorMessages={['Ovo polje je obvezno', 'Postotak mora biti veci od 0', 'Postotak ne moze biti veci od 100']}
+                  errorMessages={['Ovo polje je obvezno', 'Postotak mora biti veći od 0', 'Postotak ne može biti veći od 100']}
                 />
               </Grid>
               <Grid item xs={4}>
@@ -302,7 +302,7 @@ class App extends Component {
                     endAdornment: <InputAdornment position="end">%</InputAdornment>,
                   }}
                   validators={['required', 'minNumber:0', 'maxNumber:100']}
-                  errorMessages={['Ovo polje je obvezno', 'Postotak mora biti veci od 0', 'Postotak ne moze biti veci od 100']}
+                  errorMessages={['Ovo polje je obvezno', 'Postotak mora biti veći od 0', 'Postotak ne može biti veći od 100']}
                 />
               </Grid>
             </Grid>
@@ -421,7 +421,7 @@ class App extends Component {
             : (
               <Grid container className="container" spacing={16}>
                 <Grid item xs={12}>
-                  <Button onClick={this.handleBack} fullWidth size="large" variant="contained" color="primary">Na pocetak</Button>
+                  <Button onClick={this.handleBack} fullWidth size="large" variant="contained" color="primary">Na početak</Button>
                 </Grid>
               </Grid>
             ) }
