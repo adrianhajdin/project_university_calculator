@@ -3,8 +3,9 @@ import React, { Component } from 'react';
 import './App.css';
 
 import TextField from '@material-ui/core/TextField';
-import { Button, Paper, Divider, Stepper, Step, StepLabel, InputAdornment, Grid } from '@material-ui/core';
-import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
+import { Button, Paper, Divider, Stepper, Step, StepLabel, Grid } from '@material-ui/core';
+import { ValidatorForm } from 'react-material-ui-form-validator';
+import Input  from './Input'
 
 class App extends Component {
   constructor(props) {
@@ -111,84 +112,48 @@ class App extends Component {
             <h3>Vrednovanje za vaš fakultet</h3>
             <h3>Ocjene iz srednje škole</h3>
             <Grid container className="container" spacing={16}>
-              <Grid item xs={4}>
-                <TextValidator
+                <Input
                   name="evaluationGrades"
                   label="Prosjek svih ocjena"
-                  type="number"
                   value={evaluationGrades}
                   onChange={this.handleChange}
-                  InputProps={{
-                    endAdornment: <InputAdornment position="end">%</InputAdornment>,
-                  }}
-                  validators={['required', 'minNumber:0', 'maxNumber:100']}
-                  errorMessages={['Ovo polje je obvezno', 'Postotak mora biti veći od 0', 'Postotak ne može biti veći od 100']}
+                  percentage
                 />
               </Grid>
-            </Grid>
-            <h3>Obvezni dio državne mature</h3>
+              <h3>Obvezni dio državne mature</h3>
             <Grid container className="container" spacing={16}>
-              <Grid item xs={4}>
-                <TextValidator
+                <Input
                   name="evaluationHj"
                   label="Hrvatski"
-                  type="number"
                   value={evaluationHj}
                   onChange={this.handleChange}
-                  InputProps={{
-                    endAdornment: <InputAdornment position="end">%</InputAdornment>,
-                  }}
-                  validators={['required', 'minNumber:0', 'maxNumber:100']}
-                  errorMessages={['Ovo polje je obvezno', 'Postotak mora biti veći od 0', 'Postotak ne može biti veći od 100']}
+                  percentage
                 />
-              </Grid>
-              <Grid item xs={4}>
-                <TextValidator
+                <Input
                   name="evaluationMat"
                   label="Matematika"
-                  type="number"
                   value={evaluationMat}
                   onChange={this.handleChange}
-                  InputProps={{
-                    endAdornment: <InputAdornment position="end">%</InputAdornment>,
-                  }}
-                  validators={['required', 'minNumber:0', 'maxNumber:100']}
-                  errorMessages={['Ovo polje je obvezno', 'Postotak mora biti veći od 0', 'Postotak ne može biti veći od 100']}
+                  percentage
                 />
-              </Grid>
-              <Grid item xs={4}>
-                <TextValidator
+                <Input
                   name="evaluationEj"
                   label="Engleski jezik"
-                  type="number"
                   value={evaluationEj}
                   onChange={this.handleChange}
-                  InputProps={{
-                    endAdornment: <InputAdornment position="end">%</InputAdornment>,
-                  }}
-                  validators={['required', 'minNumber:0', 'maxNumber:100']}
-                  errorMessages={['Ovo polje je obvezno', 'Postotak mora biti veći od 0', 'Postotak ne može biti veći od 100']}
+                  percentage
                 />
               </Grid>
-            </Grid>
             <h3>Izborni dio državne mature</h3>
             <Grid container className="container" spacing={16}>
-              <Grid item xs={4}>
-                <TextValidator
+                <Input
                   name="evaluationOpt"
                   label="Izborni predmet"
-                  type="number"
                   value={evaluationOpt}
                   onChange={this.handleChange}
-                  InputProps={{
-                    endAdornment: <InputAdornment position="end">%</InputAdornment>,
-                  }}
-                  validators={['required', 'minNumber:0', 'maxNumber:100']}
-                  errorMessages={['Ovo polje je obvezno', 'Postotak mora biti veći od 0', 'Postotak ne može biti veći od 100']}
+                  percentage
                 />
-              </Grid>
-            </Grid>
-
+                </Grid>
         </React.Fragment>
       );
     } else if (activeStep === 1) {
@@ -196,52 +161,31 @@ class App extends Component {
         <React.Fragment>
             <h3>Prosjeci sva četiri razreda</h3>
             <Grid container className="container" spacing={16}>
-              <Grid item xs={3}>
-                <TextValidator
+                <Input
                   name="prosjekPrviRazred"
                   label="1. razred"
                   value={prosjekPrviRazred}
-                  type="number"
                   onChange={this.handleChange}
-                  validators={['required', 'minNumber:1', 'maxNumber:5']}
-                  errorMessages={['Ovo polje je obvezno', 'Prosjek ne može biti manji od 1.00', 'Prosjek ne može biti veći od 5.00']}
                 />
-              </Grid>
-              <Grid item xs={3}>
-                <TextValidator
+                <Input
                   name="prosjekDrugiRazred"
                   label="2. razred"
                   value={prosjekDrugiRazred}
-                  type="number"
                   onChange={this.handleChange}
-                  validators={['required', 'minNumber:1', 'maxNumber:5']}
-                  errorMessages={['Ovo polje je obvezno', 'Prosjek ne može biti manji od 1.00', 'Prosjek ne može biti veći od 5.00']}
                 />
-              </Grid>
-              <Grid item xs={3}>
-                <TextValidator
+                <Input
                   name="prosjekTreciRazred"
                   label="3. razred"
                   value={prosjekTreciRazred}
-                  type="number"
                   onChange={this.handleChange}
-                  validators={['required', 'minNumber:1', 'maxNumber:5']}
-                  errorMessages={['Ovo polje je obvezno', 'Prosjek ne može biti manji od 1.00', 'Prosjek ne može biti veći od 5.00']}
                 />
-              </Grid>
-              <Grid item xs={3}>
-                <TextValidator
+                <Input
                   name="prosjekCetvrtiRazred"
                   label="4. razred"
                   value={prosjekCetvrtiRazred}
-                  type="number"
                   onChange={this.handleChange}
-                  validators={['required', 'minNumber:1', 'maxNumber:5']}
-                  errorMessages={['Ovo polje je obvezno', 'Prosjek ne može biti manji od 1.00', 'Prosjek ne može biti veći od 5.00']}
                 />
               </Grid>
-            </Grid>
-
         </React.Fragment>
       );
     } else if (activeStep === 2) {
@@ -249,64 +193,35 @@ class App extends Component {
         <React.Fragment>
             <h3>Prosjeci s državne mature</h3>
             <Grid container className="container" spacing={16}>
-              <Grid item xs={4}>
-                <TextValidator
+                <Input
                   name="postotakMaturaHj"
                   label="Hrvatski jezik"
                   value={postotakMaturaHj}
-                  type="number"
                   onChange={this.handleChange}
-                  InputProps={{
-                    endAdornment: <InputAdornment position="end">%</InputAdornment>,
-                  }}
-                  validators={['required', 'minNumber:0', 'maxNumber:100']}
-                  errorMessages={['Ovo polje je obvezno', 'Postotak mora biti veći od 0', 'Postotak ne može biti veći od 100']}
+                  percentage
                 />
-              </Grid>
-              <Grid item xs={4}>
-                <TextValidator
+                <Input
                   name="postotakMaturaMat"
                   label="Matematika"
                   value={postotakMaturaMat}
-                  type="number"
                   onChange={this.handleChange}
-                  InputProps={{
-                    endAdornment: <InputAdornment position="end">%</InputAdornment>,
-                  }}
-                  validators={['required', 'minNumber:0', 'maxNumber:100']}
-                  errorMessages={['Ovo polje je obvezno', 'Postotak mora biti veći od 0', 'Postotak ne može biti veći od 100']}
+                  percentage
                 />
-              </Grid>
-              <Grid item xs={4}>
-                <TextValidator
+                <Input
                   name="postotakMaturaEj"
                   label="Engleski jezik"
                   value={postotakMaturaEj}
-                  type="number"
                   onChange={this.handleChange}
-                  InputProps={{
-                    endAdornment: <InputAdornment position="end">%</InputAdornment>,
-                  }}
-                  validators={['required', 'minNumber:0', 'maxNumber:100']}
-                  errorMessages={['Ovo polje je obvezno', 'Postotak mora biti veći od 0', 'Postotak ne može biti veći od 100']}
+                  percentage
                 />
-              </Grid>
-              <Grid item xs={4}>
-                <TextValidator
+                <Input
                   name="postotakMaturaIzb"
                   label="Izborni predmet"
                   value={postotakMaturaIzb}
-                  type="number"
                   onChange={this.handleChange}
-                  InputProps={{
-                    endAdornment: <InputAdornment position="end">%</InputAdornment>,
-                  }}
-                  validators={['required', 'minNumber:0', 'maxNumber:100']}
-                  errorMessages={['Ovo polje je obvezno', 'Postotak mora biti veći od 0', 'Postotak ne može biti veći od 100']}
+                  percentage
                 />
-              </Grid>
-            </Grid>
-
+                </Grid>
         </React.Fragment>
       );
     } else if (activeStep === 3) {
@@ -314,7 +229,6 @@ class App extends Component {
         <React.Fragment>
             <h3>Rezultati</h3>
             <Grid container className="container" spacing={16}>
-              <Grid item xs={4}>
                 <TextField
                   label="Ukupan prosjek"
                   type="number"
@@ -323,8 +237,6 @@ class App extends Component {
                   }}
                   value={(prosjekSvihRazreda / 4).toFixed(2)}
                 />
-              </Grid>
-              <Grid item xs={4}>
                 <TextField
                   label="Broj bodova od ocjena"
                   type="number"
@@ -333,8 +245,6 @@ class App extends Component {
                   }}
                   value={Math.round((prosjekSvihRazreda / 4).toFixed(2) / 5 * evaluationGrades * 10)}
                 />
-              </Grid>
-              <Grid item xs={4}>
                 <TextField
                   label="Broj bodova od HJ"
                   type="number"
@@ -343,8 +253,6 @@ class App extends Component {
                   }}
                   value={Math.round(bodoviZaHj)}
                 />
-              </Grid>
-              <Grid item xs={4}>
                 <TextField
                   label="Broj bodova od MAT"
                   type="number"
@@ -353,8 +261,6 @@ class App extends Component {
                   }}
                   value={Math.round(bodoviZaMat)}
                 />
-              </Grid>
-              <Grid item xs={4}>
                 <TextField
                   label="Broj bodova od EJ"
                   type="number"
@@ -363,8 +269,6 @@ class App extends Component {
                   }}
                   value={Math.round(bodoviZaEj)}
                 />
-              </Grid>
-              <Grid item xs={4}>
                 <TextField
                   label="Broj bodova od IZB"
                   type="number"
@@ -373,8 +277,6 @@ class App extends Component {
                   }}
                   value={Math.round(bodoviZaIzb)}
                 />
-              </Grid>
-              <Grid item xs={4}>
                 <TextField
                   label="Ukupan broj bodova"
                   type="number"
@@ -384,7 +286,6 @@ class App extends Component {
                   value={Math.round(bodoviZaIzb + bodoviZaEj + bodoviZaHj + bodoviZaMat + Math.round((prosjekSvihRazreda / 4).toFixed(2) / 5 * evaluationGrades * 10))}
                 />
               </Grid>
-            </Grid>
         </React.Fragment>
       );
     }

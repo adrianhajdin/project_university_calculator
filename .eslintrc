@@ -19,19 +19,7 @@
         "maxEOF": 1
       }
     ],
-    "no-underscore-dangle": [
-      "error",
-      {
-        "allow": [
-          "_d",
-          "_dh",
-          "_h",
-          "_id",
-          "_n",
-          "_t"
-        ]
-      }
-    ],
+    "no-underscore-dangle": "error",
     "object-curly-newline": 0,
     "react/jsx-filename-extension": 0,
     "react/jsx-one-expression-per-line": 0,
