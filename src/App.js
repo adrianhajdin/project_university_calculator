@@ -9,11 +9,7 @@ import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = this.getInitialState();
-  }
-
-  getInitialState = () => {
-    const initialState = {
+    this.state = {
       prosjekSvihRazreda: '',
       prosjekPrviRazred: '',
       prosjekDrugiRazred: '',
@@ -34,14 +30,7 @@ class App extends Component {
       evaluationOpt: '',
       activeStep: 0,
     };
-
-    return initialState;
-}
-
- resetState = () => {
-    this.setState(this.getInitialState());
- }
-
+  }
 
   handleChange = ({ target: { name, value } }) => {
     const numberValue = parseFloat(value, 10);
@@ -52,7 +41,7 @@ class App extends Component {
   }
 
   handleBack = () => {
-    this.resetState();
+    window.location.reload()
   }
 
   handleClick = () => {
