@@ -194,7 +194,7 @@ class App extends Component {
     } else if (activeStep === 1) {
       dialogContent = (
         <React.Fragment>
-            <h3>Prosjeci sva cetiri razreda</h3>
+            <h3>Prosjeci sva četiri razreda</h3>
             <Grid container className="container" spacing={16}>
               <Grid item xs={3}>
                 <TextValidator
@@ -247,7 +247,7 @@ class App extends Component {
     } else if (activeStep === 2) {
       dialogContent = (
         <React.Fragment>
-            <h3>Prosjeci s drzavne mature</h3>
+            <h3>Prosjeci s državne mature</h3>
             <Grid container className="container" spacing={16}>
               <Grid item xs={4}>
                 <TextValidator

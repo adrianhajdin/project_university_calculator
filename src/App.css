@@ -1,11 +1,13 @@
 .App {
-  text-align: center;
   display: flex;
   justify-content: center;
+  align-items: center;
+  height: 100vh;
 }
 
 body {
   background-color: lightgray;
+  font-family: 'Roboto', sans-serif;
 }
 
 .container {
@@ -13,7 +15,8 @@ justify-content: center;
 }
 
 .paper {
-  width: 55%;
+  text-align: center;
+  max-width: 60%;
 }
 
 .stepper {
