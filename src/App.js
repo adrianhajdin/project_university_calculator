@@ -72,10 +72,10 @@ class App extends Component {
     } else if (activeStep === 2) {
       this.setState({
         activeStep: activeStep + 1,
-        bodoviZaHj: postotakMaturaHj * evaluationHj * 10 / 100,
-        bodoviZaEj: postotakMaturaEj * evaluationEj * 10 / 100,
-        bodoviZaMat: postotakMaturaMat * evaluationMat * 10 / 100,
-        bodoviZaIzb: postotakMaturaIzb * evaluationOpt * 10 / 100,
+        bodoviZaHj: postotakMaturaHj * evaluationHj / 10,
+        bodoviZaEj: postotakMaturaEj * evaluationEj / 10,
+        bodoviZaMat: postotakMaturaMat * evaluationMat / 10,
+        bodoviZaIzb: postotakMaturaIzb * evaluationOpt / 10,
       });
     }
   }
@@ -103,11 +103,15 @@ class App extends Component {
       evaluationOpt,
     } = this.state;
 
+    const bodoviOdMature = bodoviZaEj + bodoviZaHj + bodoviZaIzb + bodoviZaMat;
+    const bodoviOdOcjena = Math.round((prosjekSvihRazreda / 4).toFixed(2) / 5 * evaluationGrades * 10);
+
     let dialogContent;
 
     if (activeStep === 0) {
       dialogContent = (
         <React.Fragment>
+          <h3><a href="https://www.postani-student.hr/Ucilista/Nositelji.aspx#">Ovdje pogledajte Informacije za vas fakultet</a></h3>
           <h3>Vrednovanje za vaš fakultet</h3>
           <h3>Ocjene iz srednje škole</h3>
           <Grid container className="container" spacing={16}>
@@ -242,7 +246,7 @@ class App extends Component {
               InputProps={{
                 readOnly: true,
               }}
-              value={Math.round((prosjekSvihRazreda / 4).toFixed(2) / 5 * evaluationGrades * 10)}
+              value={bodoviOdOcjena}
             />
             <TextField
               label="Broj bodova od HJ"
@@ -282,7 +286,7 @@ class App extends Component {
               InputProps={{
                 readOnly: true,
               }}
-              value={Math.round(bodoviZaIzb + bodoviZaEj + bodoviZaHj + bodoviZaMat + Math.round((prosjekSvihRazreda / 4).toFixed(2) / 5 * evaluationGrades * 10))}
+              value={Math.round(bodoviOdMature + bodoviOdOcjena)}
             />
           </Grid>
         </React.Fragment>
