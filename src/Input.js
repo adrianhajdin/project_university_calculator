@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { TextValidator } from 'react-material-ui-form-validator';
-import { InputAdornment, Grid } from '@material-ui/core';
+import { InputAdornment } from '@material-ui/core';
 
 const Input = (props) => {
   const { percentage, name, label, value, onChange } = props;
@@ -24,16 +24,14 @@ const Input = (props) => {
   }
 
   return (
-    <Grid item xs={4}>
-      <TextValidator
-        name={name}
-        label={label}
-        type="number"
-        value={value}
-        onChange={onChange}
-        {...inputProps}
-      />
-    </Grid>
+    <TextValidator
+      name={name}
+      label={label}
+      type="number"
+      value={value}
+      onChange={onChange}
+      {...inputProps}
+    />
   );
 };
 

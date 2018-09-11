@@ -16,7 +16,13 @@ justify-content: center;
 
 .paper {
   text-align: center;
-  max-width: 60%;
+  width: 55%;
+}
+
+@media only screen and (max-width: 600px) {
+  .paper {
+    width: 100%;
+  }
 }
 
 .stepper {
@@ -27,4 +33,12 @@ input[type=number]::-webkit-inner-spin-button,
 input[type=number]::-webkit-outer-spin-button {
   -webkit-appearance: none;
   margin: 0;
+}
+
+.sectionDivider {
+   padding: 8px 24px;
+}
+
+.margin-bottom {
+  margin-bottom: 10px;
 }
