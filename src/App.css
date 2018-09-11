@@ -10,23 +10,15 @@ body {
   font-family: 'Roboto', sans-serif;
 }
 
-.container {
-justify-content: center;
-}
-
 .paper {
   text-align: center;
-  width: 55%;
+  width: 60%;
 }
 
 @media only screen and (max-width: 600px) {
   .paper {
     width: 100%;
   }
-}
-
-.stepper {
-  margin-top: 20px;
 }
 
 input[type=number]::-webkit-inner-spin-button,
@@ -41,4 +33,8 @@ input[type=number]::-webkit-outer-spin-button {
 
 .margin-bottom {
   margin-bottom: 10px;
+}
+.center {
+  display: flex;
+  justify-content: center;
 }

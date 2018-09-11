@@ -2,8 +2,10 @@
 import React, { Component } from 'react';
 import './App.css';
 
-import { Button, Stepper, MobileStepper, Step, StepLabel, Grid, Card, CardHeader, CardContent } from '@material-ui/core';
+import { Button, Stepper, Divider, MobileStepper, Step, StepLabel, Grid, Card, CardHeader, CardContent, Tooltip, Icon, Typography } from '@material-ui/core';
 import { ValidatorForm } from 'react-material-ui-form-validator';
+import { isMobile } from 'react-device-detect';
+
 import Input from './Input';
 
 class App extends Component {
@@ -100,45 +102,69 @@ class App extends Component {
       evaluationOpt,
     } = this.state;
 
-    const bodoviOdMature = bodoviZaEj + bodoviZaHj + bodoviZaIzb + bodoviZaMat;
-    const bodoviOdOcjena = Math.round((prosjekSvihRazreda / 4).toFixed(2) / 5 * evaluationGrades * 10);
-
     let dialogContent;
 
     if (activeStep === 0) {
       dialogContent = (
         <React.Fragment>
-          <h3>Ocjene iz srednje škole</h3>
+          <Divider light style={{ margin: '20px 0' }} />
+          <Typography style={{ display: 'flex', justifyContent: 'center' }} variant="title">
+            Ocjene iz srednje škole
+            <Tooltip title="blabla">
+              <Icon style={{ paddingLeft: '5px', opacity: '0.6' }}>info_outlined</Icon>
+            </Tooltip>
+          </Typography>
           <Input
+            style={{ paddingBottom: '20px', marginBottom: '20px' }}
             name="evaluationGrades"
             label="Prosjek svih ocjena"
             value={evaluationGrades}
             onChange={this.handleChange}
             percentage
           />
-          <h3>Obvezni dio drzavne mature</h3>
-          <Input
-            name="evaluationHj"
-            label="Hrvatski"
-            value={evaluationHj}
-            onChange={this.handleChange}
-            percentage
-          />
-          <Input
-            name="evaluationMat"
-            label="Matematika"
-            value={evaluationMat}
-            onChange={this.handleChange}
-            percentage
-          />
-          <Input
-            name="evaluationEj"
-            label="Engleski jezik"
-            value={evaluationEj}
-            onChange={this.handleChange}
-            percentage
-          />
-          <h3>Izborni dio drzavne mature</h3>
+          <Divider light style={{ margin: '20px 0' }} />
+          <Typography style={{ display: 'flex', justifyContent: 'center' }} variant="title">
+            Obvezni dio drzavne mature
+            <Tooltip title="blabla">
+              <Icon style={{ paddingLeft: '5px', opacity: '0.6' }}>info_outlined</Icon>
+            </Tooltip>
+          </Typography>
+          <Grid container justify="center">
+            <Grid item sm={1} lg={4}>
+              <Input
+                name="evaluationHj"
+                label="Hrvatski"
+                value={evaluationHj}
+                onChange={this.handleChange}
+                percentage
+              />
+            </Grid>
+            <Grid item sm={1} lg={4}>
+              <Input
+                name="evaluationMat"
+                label="Matematika"
+                value={evaluationMat}
+                onChange={this.handleChange}
+                percentage
+              />
+            </Grid>
+            <Grid item sm={1} lg={4}>
+              <Input
+                name="evaluationEj"
+                label="Engleski jezik"
+                value={evaluationEj}
+                onChange={this.handleChange}
+                percentage
+              />
+            </Grid>
+          </Grid>
+          <Divider light style={{ margin: '20px 0' }} />
+          <Typography style={{ display: 'flex', justifyContent: 'center' }} variant="title">
+            Izborni dio drzavne mature
+            <Tooltip title="blabla">
+              <Icon style={{ paddingLeft: '5px', opacity: '0.6' }}>info_outlined</Icon>
+            </Tooltip>
+          </Typography>
           <Input
             name="evaluationOpt"
             label="Izborni predmet"
@@ -146,77 +172,114 @@ class App extends Component {
             onChange={this.handleChange}
             percentage
           />
+          <Divider light style={{ margin: '20px 0' }} />
         </React.Fragment>
       );
     } else if (activeStep === 1) {
       dialogContent = (
         <React.Fragment>
-          <h3>Prosjeci sva četiri razreda</h3>
-          <Input
-            name="prosjekPrviRazred"
-            label="1. razred"
-            value={prosjekPrviRazred}
-            onChange={this.handleChange}
-          />
-          <Input
-            name="prosjekDrugiRazred"
-            label="2. razred"
-            value={prosjekDrugiRazred}
-            onChange={this.handleChange}
-          />
-          <Input
-            name="prosjekTreciRazred"
-            label="3. razred"
-            value={prosjekTreciRazred}
-            onChange={this.handleChange}
-          />
-          <Input
-            name="prosjekCetvrtiRazred"
-            label="4. razred"
-            value={prosjekCetvrtiRazred}
-            onChange={this.handleChange}
-          />
+          <Divider light style={{ margin: '20px 0' }} />
+          <Typography style={{ display: 'flex', justifyContent: 'center' }} variant="title">
+            Prosjeci sva cetiri razreda
+            <Tooltip title="blabla">
+              <Icon style={{ paddingLeft: '5px', opacity: '0.6' }}>info_outlined</Icon>
+            </Tooltip>
+          </Typography>
+          <Grid container justify="center">
+            <Grid item sm={1} lg={3}>
+              <Input
+                name="prosjekPrviRazred"
+                value={prosjekPrviRazred}
+                onChange={this.handleChange}
+                label="1. razred"
+              />
+            </Grid>
+            <Grid item sm={1} lg={3}>
+              <Input
+                name="prosjekDrugiRazred"
+                value={prosjekDrugiRazred}
+                onChange={this.handleChange}
+                label="2. razred"
+              />
+            </Grid>
+            <Grid item sm={1} lg={3}>
+              <Input
+                name="prosjekTreciRazred"
+                value={prosjekTreciRazred}
+                onChange={this.handleChange}
+                label="3. razred"
+              />
+            </Grid>
+            <Grid item sm={1} lg={3}>
+              <Input
+                name="prosjekCetvrtiRazred"
+                value={prosjekCetvrtiRazred}
+                onChange={this.handleChange}
+                label="4. razred"
+              />
+            </Grid>
+          </Grid>
+          <Divider light style={{ margin: '20px 0' }} />
         </React.Fragment>
       );
     } else if (activeStep === 2) {
       dialogContent = (
         <React.Fragment>
-          <h3>Prosjeci s državne mature</h3>
-          <Input
-            name="postotakMaturaHj"
-            label="Hrvatski jezik"
-            value={postotakMaturaHj}
-            onChange={this.handleChange}
-            percentage
-          />
-          <Input
-            name="postotakMaturaMat"
-            label="Matematika"
-            value={postotakMaturaMat}
-            onChange={this.handleChange}
-            percentage
-          />
-          <Input
-            name="postotakMaturaEj"
-            label="Engleski jezik"
-            value={postotakMaturaEj}
-            onChange={this.handleChange}
-            percentage
-          />
-          <Input
-            name="postotakMaturaIzb"
-            label="Izborni predmet"
-            value={postotakMaturaIzb}
-            onChange={this.handleChange}
-            percentage
-          />
+          <Divider light style={{ margin: '20px 0' }} />
+          <Typography style={{ display: 'flex', justifyContent: 'center' }} variant="title">
+            Prosjeci s mature
+            <Tooltip title="blabla">
+              <Icon style={{ paddingLeft: '5px', opacity: '0.6' }}>info_outlined</Icon>
+            </Tooltip>
+          </Typography>
+          <Grid container justify="center">
+            <Grid item sm={1} lg={3}>
+              <Input
+                name="postotakMaturaHj"
+                label="Hrvatski jezik"
+                value={postotakMaturaHj}
+                onChange={this.handleChange}
+                percentage
+              />
+            </Grid>
+            <Grid item sm={1} lg={3}>
+              <Input
+                name="postotakMaturaMat"
+                label="Matematika"
+                value={postotakMaturaMat}
+                onChange={this.handleChange}
+                percentage
+              />
+            </Grid>
+            <Grid item sm={1} lg={3}>
+              <Input
+                name="postotakMaturaEj"
+                label="Engleski jezik"
+                value={postotakMaturaEj}
+                onChange={this.handleChange}
+                percentage
+              />
+            </Grid>
+            <Grid item sm={1} lg={3}>
+              <Input
+                name="postotakMaturaIzb"
+                label="Izborni predmet"
+                value={postotakMaturaIzb}
+                onChange={this.handleChange}
+                percentage
+              />
+            </Grid>
+          </Grid>
+          <Divider light style={{ margin: '20px 0' }} />
         </React.Fragment>
       );
     } else if (activeStep === 3) {
+      const bodoviOdMature = bodoviZaEj + bodoviZaHj + bodoviZaIzb + bodoviZaMat;
+      const bodoviOdOcjena = Math.round((prosjekSvihRazreda / 4).toFixed(2) / 5 * evaluationGrades * 10);
       dialogContent = (
         <React.Fragment>
           <h3>Rezultati</h3>
-          <Grid container className="container" spacing={16}>
+          <Grid container justify="center" spacing={16}>
             <Grid item xs={4}><h4>Ukupan prosjek: {(prosjekSvihRazreda / 4).toFixed(2)}</h4></Grid>
             <Grid item xs={4}><h4>Broj bodova od ocjena: {bodoviOdOcjena}</h4></Grid>
             <Grid item xs={4}><h4>Broj bodova od HJ: {bodoviZaHj}</h4></Grid>
@@ -228,16 +291,29 @@ class App extends Component {
         </React.Fragment>
       );
     }
-
     return (
       <div className="App">
         <Card className="paper">
-          <CardHeader title="Kalkulator bodova za upis na fakultet" />
-          <CardContent>
-            <ValidatorForm name="form" onSubmit={this.handleClick}>
+          <CardHeader style={{ paddingBottom: '0' }} title="Kalkulator bodova za upis na fakultet" />
+          <CardContent style={{ paddingTop: '0' }}>
+            <ValidatorForm name="prosjeci" onSubmit={this.handleClick}>
               {dialogContent}
-              <Grid container className="container" spacing={16}>
-                <Stepper className="stepper" activeStep={activeStep}>
+              {
+            isMobile
+              ? (
+                <MobileStepper
+                  steps={4}
+                  position="static"
+                  activeStep={activeStep}
+                  nextButton={(
+                    <Button size="small" onClick={this.handleNext} disabled={activeStep === 4 - 1}>Back</Button>
+                  )}
+                  backButton={(
+                    <Button size="small" onClick={this.handleBack} disabled={activeStep === 0}>Next</Button>
+                  )}
+                />
+              ) : (
+                <Stepper activeStep={activeStep}>
                   <Step key={1}>
                     <StepLabel>Raspodjela bodova za upis</StepLabel>
                   </Step>
@@ -251,28 +327,17 @@ class App extends Component {
                     <StepLabel>Ukupan broj bodova</StepLabel>
                   </Step>
                 </Stepper>
-                {/* <MobileStepper
-                steps={4}
-                position="static"
-                activeStep={activeStep}
-                nextButton={(
-                  <Button size="small" onClick={this.handleNext} disabled={activeStep === 4 - 1}>Back</Button>
-                  )}
-                backButton={(
-                  <Button size="small" onClick={this.handleBack} disabled={activeStep === 0}>Next</Button>
-                  )}
-              /> */}
-              </Grid>
+              )}
               {activeStep !== 3
                 ? (
-                  <Grid container className="container" spacing={16}>
+                  <Grid container justify="center" spacing={16}>
                     <Grid item xs={12}>
                       <Button type="submit" fullWidth size="large" variant="contained" color="primary">{activeStep === 2 ? 'Završi' : 'Dalje'}</Button>
                     </Grid>
                   </Grid>
                 )
                 : (
-                  <Grid container className="container" spacing={16}>
+                  <Grid container justify="center" spacing={16}>
                     <Grid item xs={12}>
                       <Button onClick={this.handleBack} fullWidth size="large" variant="contained" color="primary">Na početak</Button>
                     </Grid>
