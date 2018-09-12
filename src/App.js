@@ -103,7 +103,6 @@ class App extends Component {
     } = this.state;
 
     let dialogContent;
-
     if (activeStep === 0) {
       dialogContent = (
         <React.Fragment>
@@ -319,7 +318,7 @@ class App extends Component {
         <Card className="paper">
           <CardHeader style={{ paddingBottom: '0' }} title="Kalkulator bodova za upis na fakultet" />
           <CardContent style={{ paddingTop: '0' }}>
-            <ValidatorForm name="prosjeci" onSubmit={this.handleClick}>
+            <ValidatorForm name="form" onSubmit={this.handleClick}>
               {dialogContent}
               {!isMobile ? (
                 <Stepper activeStep={activeStep}>
@@ -337,21 +336,21 @@ class App extends Component {
                   </Step>
                 </Stepper>
               ) : null}
-              {activeStep !== 3
+              { activeStep === 3
                 ? (
                   <Grid container justify="center" spacing={16}>
                     <Grid item xs={12}>
-                      <Button type="submit" fullWidth size="large" variant="contained" color="primary">{activeStep === 2 ? 'Završi' : 'Dalje'}</Button>
+                      <Button onClick={this.handleBack} fullWidth size="large" variant="contained" color="primary">Na pocetak</Button>
                     </Grid>
                   </Grid>
                 )
                 : (
                   <Grid container justify="center" spacing={16}>
-                    <Grid item xs={12}>
-                      <Button onClick={this.handleBack} fullWidth size="large" variant="contained" color="primary">Na početak</Button>
+                    <Grid item xs={6}>
+                      <Button type="submit" fullWidth size="large" variant="contained" color="primary">{activeStep === 2 ? 'Završi' : 'Dalje'}</Button>
                     </Grid>
                   </Grid>
-                ) }
+                )}
             </ValidatorForm>
           </CardContent>
         </Card>
