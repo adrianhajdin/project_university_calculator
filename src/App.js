@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import './App.css';
 
-import { Button, Stepper, Divider, MobileStepper, Step, StepLabel, Grid, Card, CardHeader, CardContent, Tooltip, Icon, Typography } from '@material-ui/core';
+import { TableCell, Table, TableBody, TableRow, Button, Stepper, Divider, Step, StepLabel, Grid, Card, CardHeader, CardContent, Tooltip, Icon, Typography } from '@material-ui/core';
 import { ValidatorForm } from 'react-material-ui-form-validator';
 import { isMobile } from 'react-device-detect';
 
@@ -279,15 +279,38 @@ class App extends Component {
       dialogContent = (
         <React.Fragment>
           <h3>Rezultati</h3>
-          <Grid container justify="center" spacing={16}>
-            <Grid item xs={4}><h4>Ukupan prosjek: {(prosjekSvihRazreda / 4).toFixed(2)}</h4></Grid>
-            <Grid item xs={4}><h4>Broj bodova od ocjena: {bodoviOdOcjena}</h4></Grid>
-            <Grid item xs={4}><h4>Broj bodova od HJ: {bodoviZaHj}</h4></Grid>
-            <Grid item xs={4}><h4>Broj bodova od MAT: {bodoviZaMat}</h4></Grid>
-            <Grid item xs={4}><h4>Broj bodova od EJ: {bodoviZaEj}</h4></Grid>
-            <Grid item xs={4}><h4>Broj bodova od IZB: {bodoviZaIzb}</h4></Grid>
-            <Grid item xs={4}><h4>Ukupan broj bodova: {Math.round(bodoviOdMature + bodoviOdOcjena)}</h4></Grid>
-          </Grid>
+          <Table>
+            <TableBody>
+              <TableRow>
+                <TableCell>Ukupan prosjek: </TableCell>
+                <TableCell>{(prosjekSvihRazreda / 4).toFixed(2)}</TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell>Broj bodova od ocjena: </TableCell>
+                <TableCell>{bodoviOdOcjena}</TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell>Broj bodova od mature iz Hrvatskog jezika </TableCell>
+                <TableCell>{bodoviZaHj}</TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell>Broj bodova od Matematike </TableCell>
+                <TableCell>{bodoviZaMat}</TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell>Broj bodova od mature iz Engleskog jezika: </TableCell>
+                <TableCell>{bodoviZaEj}</TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell>Broj bodova od mature iz Izbornog predmeta: </TableCell>
+                <TableCell>{bodoviZaIzb}</TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell>Ukupan broj bodova: </TableCell>
+                <TableCell>{Math.round(bodoviOdMature + bodoviOdOcjena)}</TableCell>
+              </TableRow>
+            </TableBody>
+          </Table>
         </React.Fragment>
       );
     }
@@ -298,21 +321,7 @@ class App extends Component {
           <CardContent style={{ paddingTop: '0' }}>
             <ValidatorForm name="prosjeci" onSubmit={this.handleClick}>
               {dialogContent}
-              {
-            isMobile
-              ? (
-                <MobileStepper
-                  steps={4}
-                  position="static"
-                  activeStep={activeStep}
-                  nextButton={(
-                    <Button size="small" onClick={this.handleNext} disabled={activeStep === 4 - 1}>Back</Button>
-                  )}
-                  backButton={(
-                    <Button size="small" onClick={this.handleBack} disabled={activeStep === 0}>Next</Button>
-                  )}
-                />
-              ) : (
+              {!isMobile ? (
                 <Stepper activeStep={activeStep}>
                   <Step key={1}>
                     <StepLabel>Raspodjela bodova za upis</StepLabel>
@@ -327,7 +336,7 @@ class App extends Component {
                     <StepLabel>Ukupan broj bodova</StepLabel>
                   </Step>
                 </Stepper>
-              )}
+              ) : null}
               {activeStep !== 3
                 ? (
                   <Grid container justify="center" spacing={16}>
