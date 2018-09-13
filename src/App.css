@@ -29,6 +29,8 @@ input[type=number]::-webkit-outer-spin-button {
 
 .sectionDivider {
    padding: 8px 24px;
+   background-color: aquamarine;
+   margin-top: 20px;
 }
 
 .margin-bottom {
@@ -37,4 +39,8 @@ input[type=number]::-webkit-outer-spin-button {
 .center {
   display: flex;
   justify-content: center;
+}
+
+.typography {
+  padding-bottom: 10px;
 }
