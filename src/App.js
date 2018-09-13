@@ -189,7 +189,7 @@ class App extends Component {
             </Tooltip>
           </Typography>
           <Grid container justify="center">
-            <Grid item xs={1} lg={3}>
+            <Grid item xs={12} lg={3}>
               <Input
                 name="prosjekPrviRazred"
                 value={prosjekPrviRazred}
@@ -197,7 +197,7 @@ class App extends Component {
                 label="1. razred"
               />
             </Grid>
-            <Grid item xs={1} lg={3}>
+            <Grid item xs={12} lg={3}>
               <Input
                 name="prosjekDrugiRazred"
                 value={prosjekDrugiRazred}
@@ -205,7 +205,7 @@ class App extends Component {
                 label="2. razred"
               />
             </Grid>
-            <Grid item xs={1} lg={3}>
+            <Grid item xs={12} lg={3}>
               <Input
                 name="prosjekTreciRazred"
                 value={prosjekTreciRazred}
@@ -213,7 +213,7 @@ class App extends Component {
                 label="3. razred"
               />
             </Grid>
-            <Grid item sm={1} lg={3}>
+            <Grid item sm={12} lg={3}>
               <Input
                 name="prosjekCetvrtiRazred"
                 value={prosjekCetvrtiRazred}
