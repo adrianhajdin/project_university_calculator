@@ -346,7 +346,7 @@ class App extends Component {
     return (
       <div className="App">
         <Card className="paper">
-          <div container style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}>
+          <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}>
             <CardHeader style={isMobile ? { paddingBottom: 0 } : null} title="Kalkulator bodova za upis na fakultet" />
             <img style={isMobile ? { paddingLeft: '14px' } : { padding: '16px 0' }} src="icons8-calculator-64.png" alt="Kitten" height="64" width="64" />
           </div>
