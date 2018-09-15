@@ -125,7 +125,7 @@ class App extends Component {
             }
 
           <Input
-            autofocus
+            autoFocus
             style={{ paddingBottom: '20px', marginBottom: '20px' }}
             name="evaluationGrades"
             label="Prosjek svih ocjena"
@@ -188,7 +188,7 @@ class App extends Component {
           </Typography>
           {isMobile
             ? (
-              <Typography variant="caption">Ovdje upišite postotak od ukupnog broja bodova koji vam određeni fakultet pridaje za izborni√ dio drzavne mature</Typography>
+              <Typography variant="caption">Ovdje upišite postotak od ukupnog broja bodova koji vam određeni fakultet pridaje za izborni dio drzavne mature</Typography>
             ) : null
             }
           <Input
@@ -207,13 +207,22 @@ class App extends Component {
           <Divider light style={{ margin: '0 0 20px 0' }} />
           <Typography className="typography" style={{ display: 'flex', justifyContent: 'center' }} variant="title">
             Prosjeci sva cetiri razreda
-            <Tooltip title="Ovdje upišite prosjeke ocjena od 1. do 4. razreda srednje skole">
-              <Icon style={{ paddingLeft: '5px', opacity: '0.6' }}>info_outlined</Icon>
-            </Tooltip>
+            {isMobile ? null
+              : (
+                <Tooltip title="Ovdje upišite prosjeke ocjena od 1. do 4. razreda srednje skole">
+                  <Icon style={{ paddingLeft: '5px', opacity: '0.6' }}>info_outlined</Icon>
+                </Tooltip>
+              )}
           </Typography>
+          {isMobile
+            ? (
+              <Typography variant="caption">Ovdje upišite prosjeke ocjena od 1. do 4. razreda srednje skole</Typography>
+            ) : null
+            }
           <Grid container justify="center">
             <Grid item xs={12} lg={3}>
               <Input
+                autoFocus
                 name="prosjekPrviRazred"
                 value={prosjekPrviRazred}
                 onChange={this.handleChange}
@@ -253,15 +262,23 @@ class App extends Component {
         <React.Fragment>
           <Divider light style={{ margin: '0 0 20px 0' }} />
           <Typography className="typography" style={{ display: 'flex', justifyContent: 'center' }} variant="title">
-            Prosjeci s mature
-            <Tooltip title="Ovdje upišite postotke pojedinih predmeta s mature">
-              <Icon style={{ paddingLeft: '5px', opacity: '0.6' }}>info_outlined</Icon>
-            </Tooltip>
+            Rezultati mature
+            {isMobile ? null
+              : (
+                <Tooltip title="Ovdje upišite postotke pojedinih predmeta s mature">
+                  <Icon style={{ paddingLeft: '5px', opacity: '0.6' }}>info_outlined</Icon>
+                </Tooltip>
+              )}
           </Typography>
+          {isMobile
+            ? (
+              <Typography variant="caption">Ovdje upišite postotke pojedinih predmeta s mature</Typography>
+            ) : null
+            }
           <Grid container justify="center">
-            <Grid item sm={1} lg={3}>
+            <Grid item xs={12} lg={3}>
               <Input
-                autofocus
+                autoFocus
                 name="postotakMaturaHj"
                 label="Hrvatski jezik"
                 value={postotakMaturaHj}
@@ -269,7 +286,7 @@ class App extends Component {
                 percentage
               />
             </Grid>
-            <Grid item sm={1} lg={3}>
+            <Grid item xs={12} lg={3}>
               <Input
                 name="postotakMaturaMat"
                 label="Matematika"
@@ -278,7 +295,7 @@ class App extends Component {
                 percentage
               />
             </Grid>
-            <Grid item sm={1} lg={3}>
+            <Grid item xs={12} lg={3}>
               <Input
                 name="postotakMaturaEj"
                 label="Engleski jezik"
@@ -287,7 +304,7 @@ class App extends Component {
                 percentage
               />
             </Grid>
-            <Grid item sm={1} lg={3}>
+            <Grid item xs={12} lg={3}>
               <Input
                 name="postotakMaturaIzb"
                 label="Izborni predmet"
@@ -305,6 +322,7 @@ class App extends Component {
       const bodoviOdOcjena = Math.round((prosjekSvihRazreda / 4).toFixed(2) / 5 * evaluationGrades * 10);
       dialogContent = (
         <React.Fragment>
+          <Divider light style={{ margin: '0 0 20px 0' }} />
           <Typography className="typography" style={{ display: 'flex', justifyContent: 'center' }} variant="title">
             Rezultati
           </Typography>
@@ -345,7 +363,7 @@ class App extends Component {
     }
     return (
       <div className="App">
-        <Card className="paper">
+        <Card className="paper" style={isMobile ? { height: '100%' } : null}>
           <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}>
             <CardHeader style={isMobile ? { paddingBottom: 0 } : null} title="Kalkulator bodova za upis na fakultet" />
             <img style={isMobile ? { paddingLeft: '14px' } : { padding: '16px 0' }} src="icons8-calculator-64.png" alt="Kitten" height="64" width="64" />

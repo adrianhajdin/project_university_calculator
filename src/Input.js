@@ -4,7 +4,7 @@ import { TextValidator } from 'react-material-ui-form-validator';
 import { InputAdornment } from '@material-ui/core';
 
 const Input = (props) => {
-  const { percentage, name, label, value, onChange, helperText } = props;
+  const { percentage, name, label, value, onChange, helperText, autoFocus } = props;
 
   let inputProps;
 
@@ -32,6 +32,7 @@ const Input = (props) => {
       onChange={onChange}
       {...inputProps}
       helperText={helperText}
+      autoFocus={autoFocus}
     />
   );
 };
