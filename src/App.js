@@ -113,7 +113,7 @@ class App extends Component {
           <Typography className="typography" style={{ display: 'flex', justifyContent: 'center' }} variant="title">
             Ocjene iz srednje škole
             {isMobile ? null : (
-              <Tooltip title="Ovdje upišite postotak od ukupnog broja bodova koji vam određeni fakultet pridaje za prosjek ocjena srednje škole">
+              <Tooltip tooltip={{ fontSize: '2em' }} title="Ovdje upišite postotak od ukupnog broja bodova koji vam određeni fakultet pridaje za prosjek ocjena srednje škole">
                 <Icon style={{ paddingLeft: '5px', opacity: '0.6' }}>info_outlined</Icon>
               </Tooltip>
             )}
@@ -135,7 +135,7 @@ class App extends Component {
           />
           <Divider light style={{ margin: '20px 0' }} />
           <Typography className="typography" style={{ display: 'flex', justifyContent: 'center' }} variant="title">
-            Obvezni dio dravne mature
+            Obvezni dio državne mature
             {isMobile ? null : (
               <Tooltip title="Ovdje upišite postotak od ukupnog broja bodova koji vam određeni fakultet pridaje za obvezni dio drzavne mature">
                 <Icon style={{ paddingLeft: '5px', opacity: '0.6' }}>info_outlined</Icon>
@@ -179,7 +179,7 @@ class App extends Component {
           </Grid>
           <Divider light style={{ margin: '20px 0' }} />
           <Typography className="typography" style={{ display: 'flex', justifyContent: 'center' }} variant="title">
-            Izborni dio drzavne mature
+            Izborni dio državne mature
             {isMobile ? null : (
               <Tooltip title="Ovdje upišite postotak od ukupnog broja bodova koji vam određeni fakultet pridaje za izborni dio drzavne mature">
                 <Icon style={{ paddingLeft: '5px', opacity: '0.6' }}>info_outlined</Icon>
@@ -204,7 +204,7 @@ class App extends Component {
     } else if (activeStep === 1) {
       dialogContent = (
         <React.Fragment>
-          <Divider light style={{ margin: '20px 0' }} />
+          <Divider light style={{ margin: '0 0 20px 0' }} />
           <Typography className="typography" style={{ display: 'flex', justifyContent: 'center' }} variant="title">
             Prosjeci sva cetiri razreda
             <Tooltip title="Ovdje upišite prosjeke ocjena od 1. do 4. razreda srednje skole">
@@ -251,7 +251,7 @@ class App extends Component {
     } else if (activeStep === 2) {
       dialogContent = (
         <React.Fragment>
-          <Divider light style={{ margin: '20px 0' }} />
+          <Divider light style={{ margin: '0 0 20px 0' }} />
           <Typography className="typography" style={{ display: 'flex', justifyContent: 'center' }} variant="title">
             Prosjeci s mature
             <Tooltip title="Ovdje upišite postotke pojedinih predmeta s mature">
@@ -319,7 +319,7 @@ class App extends Component {
                 <TableCell>{bodoviOdOcjena}</TableCell>
               </TableRow>
               <TableRow>
-                <TableCell>Broj bodova od mature iz Hrvatskog jezika </TableCell>
+                <TableCell>Broj bodova od mature iz Hrvatskog jezika: </TableCell>
                 <TableCell>{bodoviZaHj}</TableCell>
               </TableRow>
               <TableRow>
@@ -379,7 +379,7 @@ class App extends Component {
                 )
                 : (
                   <Grid container justify="center" spacing={16}>
-                    <Grid item xs={6}>
+                    <Grid item xs={12}>
                       <Button type="submit" fullWidth size="large" variant="contained" color="primary">{activeStep === 2 ? 'Završi' : 'Dalje'}</Button>
                     </Grid>
                   </Grid>

@@ -1,13 +1,15 @@
 body, html {
   margin: 0;
   padding: 0;
+  height: 100vh;
 }
 
 .App {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100%;
+  height: 100vh;
+  margin-top: 6%;
 }
 
 body {
@@ -18,6 +20,7 @@ body {
 .paper {
   text-align: center;
   width: 60%;
+  height: 100%;
 }
 
 @media only screen and (max-width: 600px) {
