@@ -113,14 +113,14 @@ class App extends Component {
           <Typography className="typography" style={{ display: 'flex', justifyContent: 'center' }} variant="title">
             Ocjene iz srednje škole
             {isMobile ? null : (
-              <Tooltip tooltip={{ fontSize: '2em' }} title="Ovdje upišite postotak od ukupnog broja bodova koji vam određeni fakultet pridaje za prosjek ocjena srednje škole">
+              <Tooltip title="Ovdje upišite postotak od ukupnog broja bodova koji vam određeni fakultet pridaje za prosjek ocjena srednje škole">
                 <Icon style={{ paddingLeft: '5px', opacity: '0.6' }}>info_outlined</Icon>
               </Tooltip>
             )}
           </Typography>
           {isMobile
             ? (
-              <Typography variant="caption">Ovdje upišite postotak od ukupnog broja bodova koji vam određeni fakultet pridaje za prosjek ocjena srednje škole</Typography>
+              <Typography className="mobileTooltip" variant="caption">Ovdje upišite postotak od ukupnog broja bodova koji vam određeni fakultet pridaje za prosjek ocjena srednje škole</Typography>
             ) : null
             }
 
@@ -144,7 +144,7 @@ class App extends Component {
           </Typography>
           {isMobile
             ? (
-              <Typography variant="caption">Ovdje upišite postotak od ukupnog broja bodova koji vam određeni fakultet pridaje za obvezni dio drzavne mature</Typography>
+              <Typography className="mobileTooltip" variant="caption">Ovdje upišite postotak od ukupnog broja bodova koji vam određeni fakultet pridaje za obvezni dio drzavne mature</Typography>
             ) : null
             }
 
@@ -188,7 +188,7 @@ class App extends Component {
           </Typography>
           {isMobile
             ? (
-              <Typography variant="caption">Ovdje upišite postotak od ukupnog broja bodova koji vam određeni fakultet pridaje za izborni dio drzavne mature</Typography>
+              <Typography className="mobileTooltip" variant="caption">Ovdje upišite postotak od ukupnog broja bodova koji vam određeni fakultet pridaje za izborni dio drzavne mature</Typography>
             ) : null
             }
           <Input
@@ -216,7 +216,7 @@ class App extends Component {
           </Typography>
           {isMobile
             ? (
-              <Typography variant="caption">Ovdje upišite prosjeke ocjena od 1. do 4. razreda srednje skole</Typography>
+              <Typography className="mobileTooltip" variant="caption">Ovdje upišite prosjeke ocjena od 1. do 4. razreda srednje skole</Typography>
             ) : null
             }
           <Grid container justify="center">
@@ -272,7 +272,7 @@ class App extends Component {
           </Typography>
           {isMobile
             ? (
-              <Typography variant="caption">Ovdje upišite postotke pojedinih predmeta s mature</Typography>
+              <Typography className="mobileTooltip" variant="caption">Ovdje upišite postotke pojedinih predmeta s mature</Typography>
             ) : null
             }
           <Grid container justify="center">
@@ -363,7 +363,7 @@ class App extends Component {
     }
     return (
       <div className="App">
-        <Card className="paper" style={isMobile ? { height: '100%' } : null}>
+        <Card style={{ justifyContent: 'space-between' }} className="paper" style={isMobile ? { height: '100%' } : null}>
           <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}>
             <CardHeader style={isMobile ? { paddingBottom: 0 } : null} title="Kalkulator bodova za upis na fakultet" />
             <img style={isMobile ? { paddingLeft: '14px' } : { padding: '16px 0' }} src="icons8-calculator-64.png" alt="Kitten" height="64" width="64" />
