@@ -109,7 +109,7 @@ class App extends Component {
     if (activeStep === 0) {
       dialogContent = (
         <React.Fragment>
-          <Divider light style={{ margin: '20px 0' }} />
+          <Divider light style={{ margin: '0 0 20px 0' }} />
           <Typography className="typography" style={{ display: 'flex', justifyContent: 'center' }} variant="title">
             Ocjene iz srednje škole
             <Tooltip title="Ovdje upišite postotak od ukupnog broja bodova koji vam određeni fakultet pridaje za prosjek ocjena srednje škole">
@@ -323,7 +323,10 @@ class App extends Component {
     return (
       <div className="App">
         <Card className="paper">
-          <CardHeader style={{ paddingBottom: '0' }} title="Kalkulator bodova za upis na fakultet" />
+          <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}>
+            <CardHeader title="Kalkulator bodova za upis na fakultet" />
+            <img style={{ padding: '16px 0' }} src="icons8-calculator-64.png" alt="Kitten" height="64" width="64" />
+          </div>
           <CardContent style={{ paddingTop: '0' }}>
             <ValidatorForm name="form" onSubmit={this.handleClick}>
               {dialogContent}
