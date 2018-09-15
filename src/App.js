@@ -112,10 +112,18 @@ class App extends Component {
           <Divider light style={{ margin: '0 0 20px 0' }} />
           <Typography className="typography" style={{ display: 'flex', justifyContent: 'center' }} variant="title">
             Ocjene iz srednje škole
-            <Tooltip title="Ovdje upišite postotak od ukupnog broja bodova koji vam određeni fakultet pridaje za prosjek ocjena srednje škole">
-              <Icon style={{ paddingLeft: '5px', opacity: '0.6' }}>info_outlined</Icon>
-            </Tooltip>
+            {isMobile ? null : (
+              <Tooltip title="Ovdje upišite postotak od ukupnog broja bodova koji vam određeni fakultet pridaje za prosjek ocjena srednje škole">
+                <Icon style={{ paddingLeft: '5px', opacity: '0.6' }}>info_outlined</Icon>
+              </Tooltip>
+            )}
           </Typography>
+          {isMobile
+            ? (
+              <Typography variant="caption">Ovdje upišite postotak od ukupnog broja bodova koji vam određeni fakultet pridaje za prosjek ocjena srednje škole</Typography>
+            ) : null
+            }
+
           <Input
             autofocus
             style={{ paddingBottom: '20px', marginBottom: '20px' }}
@@ -128,10 +136,18 @@ class App extends Component {
           <Divider light style={{ margin: '20px 0' }} />
           <Typography className="typography" style={{ display: 'flex', justifyContent: 'center' }} variant="title">
             Obvezni dio dravne mature
-            <Tooltip title="Ovdje upišite postotak od ukupnog broja bodova koji vam određeni fakultet pridaje za obvezni dio drzavne mature">
-              <Icon style={{ paddingLeft: '5px', opacity: '0.6' }}>info_outlined</Icon>
-            </Tooltip>
+            {isMobile ? null : (
+              <Tooltip title="Ovdje upišite postotak od ukupnog broja bodova koji vam određeni fakultet pridaje za obvezni dio drzavne mature">
+                <Icon style={{ paddingLeft: '5px', opacity: '0.6' }}>info_outlined</Icon>
+              </Tooltip>
+            )}
           </Typography>
+          {isMobile
+            ? (
+              <Typography variant="caption">Ovdje upišite postotak od ukupnog broja bodova koji vam određeni fakultet pridaje za obvezni dio drzavne mature</Typography>
+            ) : null
+            }
+
           <Grid container justify="center">
             <Grid item xs={12} lg={4}>
               <Input
@@ -164,10 +180,17 @@ class App extends Component {
           <Divider light style={{ margin: '20px 0' }} />
           <Typography className="typography" style={{ display: 'flex', justifyContent: 'center' }} variant="title">
             Izborni dio drzavne mature
-            <Tooltip title="Ovdje upišite postotak od ukupnog broja bodova koji vam određeni fakultet pridaje za izborni dio drzavne mature">
-              <Icon style={{ paddingLeft: '5px', opacity: '0.6' }}>info_outlined</Icon>
-            </Tooltip>
+            {isMobile ? null : (
+              <Tooltip title="Ovdje upišite postotak od ukupnog broja bodova koji vam određeni fakultet pridaje za izborni dio drzavne mature">
+                <Icon style={{ paddingLeft: '5px', opacity: '0.6' }}>info_outlined</Icon>
+              </Tooltip>
+            )}
           </Typography>
+          {isMobile
+            ? (
+              <Typography variant="caption">Ovdje upišite postotak od ukupnog broja bodova koji vam određeni fakultet pridaje za izborni√ dio drzavne mature</Typography>
+            ) : null
+            }
           <Input
             name="evaluationOpt"
             label="Izborni predmet"
