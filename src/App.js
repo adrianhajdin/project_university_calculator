@@ -1,12 +1,13 @@
 
 import React, { Component } from 'react';
 
-import { TableCell, Table, TableBody, TableRow, Button, Stepper, Divider, Step, StepLabel, Grid, Card, CardHeader, CardContent, Tooltip, Icon, Typography } from '@material-ui/core';
+import { Button, Divider, Grid, Card, CardHeader, CardContent, Tooltip, Icon, Typography } from '@material-ui/core';
 import { ValidatorForm } from 'react-material-ui-form-validator';
 import { isMobile } from 'react-device-detect';
 
 import './App.css';
-import Input from './Input';
+import logo from './public/calculator-icon.png';
+import { Input, Stepper, Table } from './components';
 
 class App extends Component {
   constructor(props) {
@@ -101,7 +102,6 @@ class App extends Component {
       evaluationMat,
       evaluationOpt,
     } = this.state;
-    const steps = ['Raspodjela bodova za upis', 'Prosjek ocjena', 'Rezultati mature', 'Ukupan broj bodova'];
 
     let dialogContent;
 
@@ -188,6 +188,7 @@ class App extends Component {
                 value={prosjekPrviRazred}
                 onChange={this.handleChange}
                 label="1. razred"
+                required
               />
             </Grid>
             <Grid item xs={12} lg={3}>
@@ -196,6 +197,7 @@ class App extends Component {
                 value={prosjekDrugiRazred}
                 onChange={this.handleChange}
                 label="2. razred"
+                required
               />
             </Grid>
             <Grid item xs={12} lg={3}>
@@ -204,6 +206,7 @@ class App extends Component {
                 value={prosjekTreciRazred}
                 onChange={this.handleChange}
                 label="3. razred"
+                required
               />
             </Grid>
             <Grid item sm={12} lg={3}>
@@ -212,6 +215,7 @@ class App extends Component {
                 value={prosjekCetvrtiRazred}
                 onChange={this.handleChange}
                 label="4. razred"
+                required
               />
             </Grid>
           </Grid>
@@ -234,6 +238,7 @@ class App extends Component {
                 value={postotakMaturaHj}
                 onChange={this.handleChange}
                 percentage
+                required
               />
             </Grid>
             <Grid item xs={12} lg={3}>
@@ -243,6 +248,7 @@ class App extends Component {
                 value={postotakMaturaMat}
                 onChange={this.handleChange}
                 percentage
+                required
               />
             </Grid>
             <Grid item xs={12} lg={3}>
@@ -252,6 +258,7 @@ class App extends Component {
                 value={postotakMaturaEj}
                 onChange={this.handleChange}
                 percentage
+                required
               />
             </Grid>
             { evaluationOpt !== ''
@@ -263,6 +270,7 @@ class App extends Component {
                     value={postotakMaturaIzb}
                     onChange={this.handleChange}
                     percentage
+                    required
                   />
                 </Grid>
               ) : null
@@ -279,35 +287,8 @@ class App extends Component {
         <React.Fragment>
           <Divider light className="dividerMarginBottom" />
           <Typography className="typography" variant="title">Rezultati</Typography>
-          <Table>
-            <TableBody>
-              <TableRow>
-                <TableCell>Ukupan prosjek: </TableCell>
-                <TableCell>{(prosjekSvihRazreda / 4).toFixed(2)}</TableCell>
-              </TableRow>
-              <TableRow>
-                <TableCell>Broj bodova od ocjena: </TableCell>
-                <TableCell>{bodoviOdOcjena}</TableCell>
-              </TableRow>
-              <TableRow>
-                <TableCell>Broj bodova od mature iz Hrvatskog jezika: </TableCell>
-                <TableCell>{bodoviZaHj}</TableCell>
-              </TableRow>
-              <TableRow>
-                <TableCell>Broj bodova od Matematike </TableCell>
-                <TableCell>{bodoviZaMat}</TableCell>
-              </TableRow>
-              <TableRow>
-                <TableCell>Broj bodova od mature iz Engleskog jezika: </TableCell>
-                <TableCell>{bodoviZaEj}</TableCell>
-              </TableRow>
-              <TableRow>
-                <TableCell>Broj bodova od mature iz Izbornog predmeta: </TableCell>
-                <TableCell>{bodoviZaIzb}</TableCell>
-              </TableRow>
-            </TableBody>
-          </Table>
-          <Typography className="sectionDivider" variant="title">Ukupan broj bodova: {Math.round(bodoviOdMature + bodoviOdOcjena)}</Typography>
+          <Table props={{ evaluationOpt, prosjekSvihRazreda, bodoviOdOcjena, bodoviZaHj, bodoviZaMat, bodoviZaEj, bodoviZaIzb }} />
+          <Typography className="result" variant="title">Ukupan broj bodova: {Math.round(bodoviOdMature + bodoviOdOcjena)}</Typography>
           <Divider light className="divider" />
         </React.Fragment>
       );
@@ -315,23 +296,15 @@ class App extends Component {
 
     return (
       <div className="App">
-        <Card raised className="paper" style={isMobile ? { height: '100%', justifyContent: 'space-between' } : { justifyContent: 'space-between' }}>
-          <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}>
-            <CardHeader style={isMobile ? { paddingBottom: 0 } : null} title="Kalkulator bodova za upis na fakultet" />
-            <img style={isMobile ? { paddingLeft: '14px' } : { padding: '16px 0' }} src="icons8-calculator-64.png" alt="Kitten" height="64" width="64" />
+        <Card raised className="paper">
+          <div className="heading">
+            <CardHeader className="cardHeader" title="Kalkulator bodova za upis na fakultet" />
+            <img className="icon" src={logo} alt="calculator-icon" height="64" width="64" />
           </div>
           <CardContent className="paddingTop0">
-            <ValidatorForm noValidate name="form" onSubmit={this.handleClick}>
+            <ValidatorForm noValidate onSubmit={this.handleClick}>
               {dialogContent}
-              {!isMobile ? (
-                <Stepper className="paddingTop0" activeStep={activeStep}>
-                  {steps.map((label, index) => (
-                    <Step key={index}>
-                      <StepLabel>{label}</StepLabel>
-                    </Step>
-                  ))}
-                </Stepper>
-              ) : null}
+              <Stepper activeStep={activeStep} />
               { activeStep === 3
                 ? <Button onClick={this.handleBack} fullWidth size="large" variant="contained" color="primary">Na početak</Button>
                 : <Button type="submit" fullWidth size="large" variant="contained" color="primary">{activeStep === 2 ? 'Završi' : 'Dalje'}</Button>
