@@ -49,12 +49,12 @@ body {
 
 .divider {
   margin: 20px 0 !important;
-  background-color: rgba(127, 76, 178, 0.28)!important;
+  background-color: rgba(127, 76, 178, 0.4)!important;
 }
 
 .dividerMarginBottom {
   margin-bottom: 20px !important;
-  background-color: rgba(127, 76, 178, 0.28) !important;
+  background-color: rgba(127, 76, 178, 0.4) !important;
 }
 
 .tooltipIcon {
