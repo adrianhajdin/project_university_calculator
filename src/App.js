@@ -306,8 +306,8 @@ class App extends Component {
               {dialogContent}
               <Stepper activeStep={activeStep} />
               { activeStep === 3
-                ? <Button onClick={this.handleBack} fullWidth size="large" variant="contained" color="primary">Na početak</Button>
-                : <Button type="submit" fullWidth size="large" variant="contained" color="primary">{activeStep === 2 ? 'Završi' : 'Dalje'}</Button>
+                ? <Button onClick={this.handleBack} fullWidth size="large" variant="contained" style={{ backgroundColor: 'rgba(127, 76, 178)' }}>Na početak</Button>
+                : <Button type="submit" fullWidth size="large" variant="contained" style={{ backgroundColor: 'rgba(127, 76, 178)' }}>{activeStep === 2 ? 'Završi' : 'Dalje'}</Button>
               }
             </ValidatorForm>
           </CardContent>
