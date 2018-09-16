@@ -54,3 +54,7 @@ input[type=number]::-webkit-outer-spin-button {
 .typography {
   padding-bottom: 10px;
 }
+
+.divider {
+  margin: 20px 0 !important;
+}

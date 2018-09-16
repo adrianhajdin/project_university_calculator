@@ -125,7 +125,7 @@ class App extends Component {
             }
 
           <Input
-            autoFocus
+
             style={{ paddingBottom: '20px', marginBottom: '20px' }}
             name="evaluationGrades"
             label="Prosjek svih ocjena"
@@ -133,7 +133,7 @@ class App extends Component {
             onChange={this.handleChange}
             percentage
           />
-          <Divider light style={{ margin: '20px 0' }} />
+          <Divider light className="divider" />
           <Typography className="typography" style={{ display: 'flex', justifyContent: 'center' }} variant="title">
             Obvezni dio državne mature
             {isMobile ? null : (
@@ -177,7 +177,7 @@ class App extends Component {
               />
             </Grid>
           </Grid>
-          <Divider light style={{ margin: '20px 0' }} />
+          <Divider light className="divider" />
           <Typography className="typography" style={{ display: 'flex', justifyContent: 'center' }} variant="title">
             Izborni dio državne mature
             {isMobile ? null : (
@@ -197,11 +197,117 @@ class App extends Component {
             value={evaluationOpt}
             onChange={this.handleChange}
             percentage
+            notRequired
           />
-          <Divider light style={{ margin: '20px 0' }} />
+          <Divider light className="divider" />
         </React.Fragment>
+
       );
     } else if (activeStep === 1) {
+      dialogContent = (
+        <React.Fragment>
+          <Divider light style={{ margin: '0 0 20px 0' }} />
+          <Grid container justify="center">
+            <Grid item xs={12} lg={3}>
+              <Typography className="typography" style={{ display: 'flex', justifyContent: 'center' }} variant="subheading">
+          Dodatne provjere
+                {isMobile ? null : (
+                  <Tooltip title="Ovdje upišite postotak od ukupnog broja bodova koji vam određeni fakultet pridaje za izborni dio drzavne mature">
+                    <Icon style={{ paddingLeft: '5px', opacity: '0.6' }}>info_outlined</Icon>
+                  </Tooltip>
+                )}
+              </Typography>
+              {isMobile
+                ? (
+                  <Typography className="mobileTooltip" variant="caption">Ovdje upišite postotak od ukupnog broja bodova koji vam određeni fakultet pridaje za izborni dio drzavne mature</Typography>
+                ) : null
+            }
+              <Input
+                name="placeholder"
+                label="Izborni predmet"
+                value={this.state.placeholder}
+                onChange={this.handleChange}
+                percentage
+                notRequired
+              />
+            </Grid>
+            <Divider light className="divider" />
+            <Grid item xs={12} lg={3}>
+              <Typography className="typography" style={{ display: 'flex', justifyContent: 'center' }} variant="subheading">
+          Druga postignuća
+                {isMobile ? null : (
+                  <Tooltip title="Ovdje upišite postotak od ukupnog broja bodova koji vam određeni fakultet pridaje za izborni dio drzavne mature">
+                    <Icon style={{ paddingLeft: '5px', opacity: '0.6' }}>info_outlined</Icon>
+                  </Tooltip>
+                )}
+              </Typography>
+              {isMobile
+                ? (
+                  <Typography className="mobileTooltip" variant="caption">Ovdje upišite postotak od ukupnog broja bodova koji vam određeni fakultet pridaje za izborni dio drzavne mature</Typography>
+                ) : null
+            }
+              <Input
+                name="placeholder"
+                label="Izborni predmet"
+                value={this.state.placeholder}
+                onChange={this.handleChange}
+                percentage
+                notRequired
+              />
+            </Grid>
+            <Divider light className="divider" />
+            <Grid item xs={12} lg={3}>
+              <Typography className="typography" style={{ display: 'flex', justifyContent: 'center' }} variant="subheading">
+          Rezultati natjecanja
+                {isMobile ? null : (
+                  <Tooltip title="Ovdje upišite postotak od ukupnog broja bodova koji vam određeni fakultet pridaje za izborni dio drzavne mature">
+                    <Icon style={{ paddingLeft: '5px', opacity: '0.6' }}>info_outlined</Icon>
+                  </Tooltip>
+                )}
+              </Typography>
+              {isMobile
+                ? (
+                  <Typography className="mobileTooltip" variant="caption">Ovdje upišite postotak od ukupnog broja bodova koji vam određeni fakultet pridaje za izborni dio drzavne mature</Typography>
+                ) : null
+            }
+              <Input
+                name="placeholder"
+                label="Izborni predmet"
+                value={this.state.placeholder}
+                onChange={this.handleChange}
+                percentage
+                notRequired
+              />
+            </Grid>
+            <Divider light className="divider" />
+            <Grid item xs={12} lg={3}>
+              <Typography className="typography" style={{ display: 'flex', justifyContent: 'center' }} variant="subheading">
+          Kategorija sportaša
+                {isMobile ? null : (
+                  <Tooltip title="Ovdje upišite postotak od ukupnog broja bodova koji vam određeni fakultet pridaje za izborni dio drzavne mature">
+                    <Icon style={{ paddingLeft: '5px', opacity: '0.6' }}>info_outlined</Icon>
+                  </Tooltip>
+                )}
+              </Typography>
+              {isMobile
+                ? (
+                  <Typography className="mobileTooltip" variant="caption">Ovdje upišite postotak od ukupnog broja bodova koji vam određeni fakultet pridaje za izborni dio drzavne mature</Typography>
+                ) : null
+            }
+              <Input
+                name="placeholder"
+                label="Izborni predmet"
+                value={this.state.placeholder}
+                onChange={this.handleChange}
+                percentage
+                notRequired
+              />
+            </Grid>
+          </Grid>
+          <Divider light className="divider" />
+        </React.Fragment>
+      );
+    } else if (activeStep === 2) {
       dialogContent = (
         <React.Fragment>
           <Divider light style={{ margin: '0 0 20px 0' }} />
@@ -222,7 +328,6 @@ class App extends Component {
           <Grid container justify="center">
             <Grid item xs={12} lg={3}>
               <Input
-                autoFocus
                 name="prosjekPrviRazred"
                 value={prosjekPrviRazred}
                 onChange={this.handleChange}
@@ -254,10 +359,11 @@ class App extends Component {
               />
             </Grid>
           </Grid>
-          <Divider light style={{ margin: '20px 0' }} />
+          <Divider light className="divider" />
         </React.Fragment>
       );
-    } else if (activeStep === 2) {
+    } else if (activeStep === 3) {
+      console.log(evaluationOpt);
       dialogContent = (
         <React.Fragment>
           <Divider light style={{ margin: '0 0 20px 0' }} />
@@ -278,7 +384,7 @@ class App extends Component {
           <Grid container justify="center">
             <Grid item xs={12} lg={3}>
               <Input
-                autoFocus
+
                 name="postotakMaturaHj"
                 label="Hrvatski jezik"
                 value={postotakMaturaHj}
@@ -304,17 +410,21 @@ class App extends Component {
                 percentage
               />
             </Grid>
-            <Grid item xs={12} lg={3}>
-              <Input
-                name="postotakMaturaIzb"
-                label="Izborni predmet"
-                value={postotakMaturaIzb}
-                onChange={this.handleChange}
-                percentage
-              />
-            </Grid>
+            { this.state.evaluationOpt !== ''
+              ? (
+                <Grid item xs={12} lg={3}>
+                  <Input
+                    name="postotakMaturaIzb"
+                    label="Izborni predmet"
+                    value={postotakMaturaIzb}
+                    onChange={this.handleChange}
+                    percentage
+                  />
+                </Grid>
+              ) : null
+            }
           </Grid>
-          <Divider light style={{ margin: '20px 0' }} />
+          <Divider light className="divider" />
         </React.Fragment>
       );
     } else if (activeStep === 3) {
@@ -357,7 +467,7 @@ class App extends Component {
           <Typography className="sectionDivider" style={{ display: 'flex', justifyContent: 'center', marginTop: '20px' }} variant="title">
             Ukupan broj bodova: {Math.round(bodoviOdMature + bodoviOdOcjena)}
           </Typography>
-          <Divider light style={{ margin: '20px 0' }} />
+          <Divider light className="divider" />
         </React.Fragment>
       );
     }
@@ -377,12 +487,15 @@ class App extends Component {
                     <StepLabel>Raspodjela bodova za upis</StepLabel>
                   </Step>
                   <Step key={2}>
-                    <StepLabel>Prosjek ocjena</StepLabel>
+                    <StepLabel>Raspodjela bodova za upis</StepLabel>
                   </Step>
                   <Step key={3}>
-                    <StepLabel>Rezultati mature</StepLabel>
+                    <StepLabel>Prosjek ocjena</StepLabel>
                   </Step>
                   <Step key={4}>
+                    <StepLabel>Rezultati mature</StepLabel>
+                  </Step>
+                  <Step key={5}>
                     <StepLabel>Ukupan broj bodova</StepLabel>
                   </Step>
                 </Stepper>
