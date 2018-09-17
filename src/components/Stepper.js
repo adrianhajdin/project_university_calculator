@@ -1,5 +1,6 @@
 
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import { isMobile } from 'react-device-detect';
 import { Stepper, Step, StepLabel, MobileStepper } from '@material-ui/core';
@@ -19,14 +20,17 @@ const stepper = ({ activeStep }) => (
     )
     : (
       <MobileStepper
-        variant="progress"
+        variant="dots"
         steps={4}
         position="static"
         activeStep={activeStep}
         className="mobileStepper"
       />
     )
-
 );
+
+stepper.propTypes = {
+  activeStep: PropTypes.number.isRequired,
+};
 
 export default stepper;

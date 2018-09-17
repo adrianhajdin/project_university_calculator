@@ -93,7 +93,8 @@ body {
   padding: 0 0 20px 0 !important;
 }
 
-.MuiLinearProgress-root-202{
-  height: 6px !important;
-  width: 80% !important;
+.MuiMobileStepper-dot-199 {
+  width: 10px !important;
+  height: 10px !important;
+  margin: 0 3px;
 }
