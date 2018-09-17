@@ -289,7 +289,7 @@ class App extends Component {
           <Divider light className="dividerMarginBottom" />
           <Typography className="typography" variant="title">Rezultati</Typography>
           <Table props={{ evaluationMaturaElective, percentagesTotal, totalGradePoints, pointsMaturaCroatian, pointsMaturaMathematics, pointsMaturaEnglish, pointsMaturaElective }} />
-          <Typography className="result" variant="title">Ukupan broj bodova: {Math.round(totalMaturaPoints + totalGradePoints)}</Typography>
+          <Typography className="result" variant="title">Ukupan broj bodova: {totalMaturaPoints + totalGradePoints}</Typography>
           <Divider light className="divider" />
         </React.Fragment>
       );

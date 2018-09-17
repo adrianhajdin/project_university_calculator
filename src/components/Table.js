@@ -1,39 +1,44 @@
 
 import React from 'react';
 import { TableCell, Table, TableBody, TableRow } from '@material-ui/core';
+import PropTypes from 'prop-types';
 
-const table = ({ props: { evaluationOpt, prosjekSvihRazreda, bodoviOdOcjena, bodoviZaHj, bodoviZaMat, bodoviZaEj, bodoviZaIzb } }) => (
+const table = ({ props: { evaluationMaturaElective, percentagesTotal, totalGradePoints, pointsMaturaCroatian, pointsMaturaMathematics, pointsMaturaEnglish, pointsMaturaElective } }) => (
   <Table>
     <TableBody>
       <TableRow>
         <TableCell>Ukupan prosjek: </TableCell>
-        <TableCell>{(prosjekSvihRazreda / 4).toFixed(2)}</TableCell>
+        <TableCell>{(percentagesTotal / 4).toFixed(2)}</TableCell>
       </TableRow>
       <TableRow>
         <TableCell>Broj bodova od ocjena: </TableCell>
-        <TableCell>{bodoviOdOcjena}</TableCell>
+        <TableCell>{totalGradePoints}</TableCell>
       </TableRow>
       <TableRow>
         <TableCell>Broj bodova od mature iz Hrvatskog jezika: </TableCell>
-        <TableCell>{bodoviZaHj}</TableCell>
+        <TableCell>{pointsMaturaCroatian}</TableCell>
       </TableRow>
       <TableRow>
         <TableCell>Broj bodova od Matematike </TableCell>
-        <TableCell>{bodoviZaMat}</TableCell>
+        <TableCell>{pointsMaturaMathematics}</TableCell>
       </TableRow>
       <TableRow>
         <TableCell>Broj bodova od mature iz Engleskog jezika: </TableCell>
-        <TableCell>{bodoviZaEj}</TableCell>
+        <TableCell>{pointsMaturaEnglish}</TableCell>
       </TableRow>
-      {evaluationOpt
+      {evaluationMaturaElective
         ? (
           <TableRow>
             <TableCell>Broj bodova od mature iz Izbornog predmeta: </TableCell>
-            <TableCell>{bodoviZaIzb}</TableCell>
+            <TableCell>{pointsMaturaElective}</TableCell>
           </TableRow>
         ) : null}
     </TableBody>
   </Table>
 );
+
+table.propTypes = {
+  props: PropTypes.shape({}).isRequired,
+};
 
 export default table;
