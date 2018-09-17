@@ -1,16 +1,18 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-
-import { isMobile } from 'react-device-detect';
 import { Stepper, Step, StepLabel, MobileStepper } from '@material-ui/core';
+import { isMobile } from 'react-device-detect';
+import { withStyles } from '@material-ui/core/styles';
+
+import styles from './styles/styles';
 
 const steps = ['Raspodjela bodova za upis', 'Prosjek ocjena', 'Rezultati mature', 'Ukupan broj bodova'];
 
-const stepper = ({ activeStep }) => (
+const stepper = ({ activeStep, classes }) => (
   !isMobile
     ? (
-      <Stepper className="paddingTop0" activeStep={activeStep}>
+      <Stepper classes={{ root: classes.root }} activeStep={activeStep}>
         {steps.map((label, index) => (
           <Step key={index}>
             <StepLabel>{label}</StepLabel>
@@ -24,13 +26,14 @@ const stepper = ({ activeStep }) => (
         steps={4}
         position="static"
         activeStep={activeStep}
-        className="mobileStepper"
+        classes={{ root: classes.mobileStepper }}
       />
     )
 );
 
 stepper.propTypes = {
   activeStep: PropTypes.number.isRequired,
+  classes: PropTypes.shape({}).isRequired,
 };
 
-export default stepper;
+export default withStyles(styles)(stepper);

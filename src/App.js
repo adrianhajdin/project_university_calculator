@@ -1,14 +1,16 @@
 
 import React, { Component } from 'react';
 
-import { Button, Card, CardContent, CardHeader, Divider, Grid, Icon, Tooltip, Typography,
-} from '@material-ui/core';
+import './App.css';
+import PropTypes from 'prop-types';
+import { Button, Divider, Grid, Icon, Tooltip, Typography, Paper } from '@material-ui/core';
 import { ValidatorForm } from 'react-material-ui-form-validator';
 import { isMobile } from 'react-device-detect';
+import { withStyles } from '@material-ui/core/styles';
 
-import './App.css';
-import logo from './public/calculator-icon.png';
 import { Input, Stepper, Table } from './components';
+import styles from './styles';
+import logo from './public/calculator-icon.png';
 
 class App extends Component {
   constructor(props) {
@@ -103,17 +105,23 @@ class App extends Component {
       pointsMaturaEnglish,
       pointsMaturaMathematics,
     } = this.state;
+    const { classes } = this.props;
 
     let dialogContent;
 
     if (activeStep === 0) {
       dialogContent = (
         <React.Fragment>
-          <Divider light className="dividerMarginBottom" />
+          <Divider light classes={{ root: classes.dividerMarginBottom }} />
           <Typography className="typography" variant="title">
-            Ocjene iz srednje škole {!isMobile ? <Tooltip title="Ovdje upišite postotak od ukupnog broja bodova koji vam određeni fakultet pridaje za prosjek ocjena srednje škole"><Icon className="tooltipIcon">info_outlined</Icon></Tooltip> : null}
+            Ocjene iz srednje škole
+            {!isMobile ? (
+              <Tooltip title="Ovdje upišite postotak od ukupnog broja bodova koji vam određeni fakultet pridaje za prosjek ocjena srednje škole">
+                <Icon classes={{ root: classes.tooltipIcon }}>info_outlined</Icon>
+              </Tooltip>
+            ) : null}
           </Typography>
-          {isMobile ? <Typography className="mobileTooltip" variant="caption">Ovdje upišite postotak od ukupnog broja bodova koji vam određeni fakultet pridaje za prosjek ocjena srednje škole</Typography> : null}
+          {isMobile ? <Typography classes={{ root: classes.mobileTooltip }} variant="caption">Ovdje upišite postotak od ukupnog broja bodova koji vam određeni fakultet pridaje za prosjek ocjena srednje škole</Typography> : null}
           <Input
             name="evaluationSchoolGrades"
             label="Prosjek svih ocjena"
@@ -122,11 +130,16 @@ class App extends Component {
             percentage
             required
           />
-          <Divider light className="divider" />
+          <Divider light classes={{ root: classes.divider }} />
           <Typography className="typography" variant="title">
-            Obvezni dio državne mature {!isMobile ? <Tooltip title="Ovdje upišite postotak od ukupnog broja bodova koji vam određeni fakultet pridaje za obvezni dio drzavne mature"><Icon className="tooltipIcon">info_outlined</Icon></Tooltip> : null}
+            Obvezni dio državne mature
+            {!isMobile ? (
+              <Tooltip title="Ovdje upišite postotak od ukupnog broja bodova koji vam određeni fakultet pridaje za obvezni dio drzavne mature">
+                <Icon classes={{ root: classes.tooltipIcon }}>info_outlined</Icon>
+              </Tooltip>
+            ) : null}
           </Typography>
-          {isMobile ? <Typography className="mobileTooltip" variant="caption">Ovdje upišite postotak od ukupnog broja bodova koji vam određeni fakultet pridaje za obvezni dio drzavne mature</Typography> : null}
+          {isMobile ? <Typography classes={{ root: classes.mobileTooltip }} variant="caption">Ovdje upišite postotak od ukupnog broja bodova koji vam određeni fakultet pridaje za obvezni dio drzavne mature</Typography> : null}
           <Grid container justify="center">
             <Grid item xs={12} lg={4}>
               <Input
@@ -159,11 +172,16 @@ class App extends Component {
               />
             </Grid>
           </Grid>
-          <Divider light className="divider" />
+          <Divider light classes={{ root: classes.divider }} />
           <Typography className="typography" variant="title">
-            Izborni dio državne mature {!isMobile ? <Tooltip title="Ovdje upišite postotak od ukupnog broja bodova koji vam određeni fakultet pridaje za izborni dio drzavne mature"><Icon className="tooltipIcon">info_outlined</Icon></Tooltip> : null}
+            Izborni dio državne mature
+            {!isMobile ? (
+              <Tooltip title="Ovdje upišite postotak od ukupnog broja bodova koji vam određeni fakultet pridaje za izborni dio drzavne mature">
+                <Icon classes={{ root: classes.tooltipIcon }}>info_outlined</Icon>
+              </Tooltip>
+            ) : null}
           </Typography>
-          {isMobile ? <Typography className="mobileTooltip" variant="caption">Ovdje upišite postotak od ukupnog broja bodova koji vam određeni fakultet pridaje za izborni dio drzavne mature</Typography> : null}
+          {isMobile ? <Typography classes={{ root: classes.mobileTooltip }} variant="caption">Ovdje upišite postotak od ukupnog broja bodova koji vam određeni fakultet pridaje za izborni dio drzavne mature</Typography> : null}
           <Input
             name="evaluationMaturaElective"
             label="Izborni predmet"
@@ -171,17 +189,17 @@ class App extends Component {
             onChange={this.handleChange}
             percentage
           />
-          <Divider light className="divider" />
+          <Divider light classes={{ root: classes.divider }} />
         </React.Fragment>
       );
     } else if (activeStep === 1) {
       dialogContent = (
         <React.Fragment>
-          <Divider light className="dividerMarginBottom" />
+          <Divider light classes={{ root: classes.dividerMarginBottom }} />
           <Typography className="typography" variant="title">
-            Prosjeci sva cetiri razreda {!isMobile ? <Tooltip title="Ovdje upišite prosjeke ocjena od 1. do 4. razreda srednje skole"><Icon className="tooltipIcon">info_outlined</Icon></Tooltip> : null}
+            Prosjeci sva cetiri razreda {!isMobile ? <Tooltip title="Ovdje upišite prosjeke ocjena od 1. do 4. razreda srednje skole"><Icon classes={{ root: classes.tooltipIcon }}>info_outlined</Icon></Tooltip> : null}
           </Typography>
-          {isMobile ? <Typography className="mobileTooltip" variant="caption">Ovdje upišite prosjeke ocjena od 1. do 4. razreda srednje skole</Typography> : null }
+          {isMobile ? <Typography classes={{ root: classes.mobileTooltip }} variant="caption">Ovdje upišite prosjeke ocjena od 1. do 4. razreda srednje skole</Typography> : null }
           <Grid container justify="center">
             <Grid item xs={12} lg={3}>
               <Input
@@ -220,17 +238,17 @@ class App extends Component {
               />
             </Grid>
           </Grid>
-          <Divider light className="divider" />
+          <Divider light classes={{ root: classes.divider }} />
         </React.Fragment>
       );
     } else if (activeStep === 2) {
       dialogContent = (
         <React.Fragment>
-          <Divider light className="dividerMarginBottom" />
+          <Divider light classes={{ root: classes.dividerMarginBottom }} />
           <Typography className="typography" variant="title">
-            Rezultati mature {!isMobile ? <Tooltip title="Ovdje upišite postotke pojedinih predmeta s mature"><Icon className="tooltipIcon">info_outlined</Icon></Tooltip> : null}
+            Rezultati mature {!isMobile ? <Tooltip title="Ovdje upišite postotke pojedinih predmeta s mature"><Icon classes={{ root: classes.tooltipIcon }}>info_outlined</Icon></Tooltip> : null}
           </Typography>
-          {isMobile ? <Typography className="mobileTooltip" variant="caption">Ovdje upišite postotke pojedinih predmeta s mature</Typography> : null }
+          {isMobile ? <Typography classes={{ root: classes.mobileTooltip }} variant="caption">Ovdje upišite postotke pojedinih predmeta s mature</Typography> : null }
           <Grid container justify="center">
             <Grid item xs={12} lg={3}>
               <Input
@@ -277,7 +295,7 @@ class App extends Component {
               ) : null
             }
           </Grid>
-          <Divider light className="divider" />
+          <Divider light classes={{ root: classes.divider }} />
         </React.Fragment>
       );
     } else if (activeStep === 3) {
@@ -286,36 +304,42 @@ class App extends Component {
 
       dialogContent = (
         <React.Fragment>
-          <Divider light className="dividerMarginBottom" />
+          <Divider light classes={{ root: classes.dividerMarginBottom }} />
           <Typography className="typography" variant="title">Rezultati</Typography>
           <Table props={{ evaluationMaturaElective, percentagesTotal, totalGradePoints, pointsMaturaCroatian, pointsMaturaMathematics, pointsMaturaEnglish, pointsMaturaElective }} />
           <Typography justify="center" className="result" variant="title">Ukupan broj bodova: {totalMaturaPoints + totalGradePoints}</Typography>
-          <Divider light className="divider" />
+          <Divider light classes={{ root: classes.divider }} />
         </React.Fragment>
       );
     }
 
     return (
       <div className="App">
-        <Card raised className="paper">
+        <Paper style={{ padding: '0 24px 24px 24px' }} elevation={8} className="paper">
           <div className="heading">
-            <CardHeader className="cardHeader" title="Kalkulator bodova za upis na fakultet" />
+            <Typography
+              style={{ display: 'flex', alignItems: 'center', paddingRight: '10px' }}
+              variant="headline"
+            >Kalkulator bodova za upis na fakultet
+            </Typography>
             <img className="icon" src={logo} alt="calculator-icon" height="64" width="64" />
           </div>
-          <CardContent className="paddingTop0">
-            <ValidatorForm noValidate onSubmit={this.handleClick}>
-              {dialogContent}
-              <Stepper activeStep={activeStep} />
-              { activeStep === 3
-                ? <Button onClick={this.handleBack} fullWidth size="large" variant="contained" color="primary">Na početak</Button>
-                : <Button type="submit" fullWidth size="large" variant="contained" color="primary">{activeStep === 2 ? 'Završi' : 'Dalje'}</Button>
-              }
-            </ValidatorForm>
-          </CardContent>
-        </Card>
+          <ValidatorForm noValidate onSubmit={this.handleClick}>
+            {dialogContent}
+            <Stepper activeStep={activeStep} />
+            { activeStep === 3
+              ? <Button onClick={this.handleBack} fullWidth size="large" variant="contained" color="primary">Na početak</Button>
+              : <Button type="submit" fullWidth size="large" variant="contained" color="primary">{activeStep === 2 ? 'Završi' : 'Dalje'}</Button>
+            }
+          </ValidatorForm>
+        </Paper>
       </div>
     );
   }
 }
 
-export default App;
+App.propTypes = {
+  classes: PropTypes.shape({}).isRequired,
+};
+
+export default withStyles(styles)(App);

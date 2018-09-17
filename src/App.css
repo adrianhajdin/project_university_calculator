@@ -1,16 +1,13 @@
-body, html {
+body, html, .App {
   margin: 0;
   padding: 0;
+  height: 100vh;
 }
 
 .App {
   display: flex;
   justify-content: center;
   align-items: center;
-}
-
-.mobileTooltip {
-  margin-bottom: 10px !important;
 }
 
 body {
@@ -37,40 +34,15 @@ body {
 
 .typography {
   padding-bottom: 10px;
-  display: flex;
-  justify-content: center;
-  align-items: center !important;
-}
-
-.MuiTypography-title-41 {
-  display: flex !important;
-  align-items: center !important;
-}
-
-
-.divider {
-  margin: 20px 0 !important;
-  background-color: rgba(127, 76, 178, 0.4)!important;
-}
-
-.dividerMarginBottom {
-  margin-bottom: 20px !important;
-  background-color: rgba(127, 76, 178, 0.4) !important;
 }
 
 .result {
   padding: 8px 24px;
   background-color: aquamarine;
-  margin-top: 20px !important;
-}
-
-.tooltipIcon {
-  padding-left: 5px !important;
-  opacity: 0.6 !important;
 }
 
 .paddingTop0 {
-  padding-top: 0 !important;
+  padding-top: 0;
 }
 
 .icon {
@@ -78,33 +50,12 @@ body {
 }
 
 @media only screen and (max-width: 600px) {
-  .cardHeader {
-    padding-bottom: 0 !important;
-  }
-
   .paper {
     width: 100%;
+    height: 100%;
   }
 
   .icon {
     padding: 0;
   }
-}
-
-.mobileStepper {
-  background: white !important;
-  display: flex;
-  justify-content: center !important;
-  padding: 0 0 20px 0 !important;
-}
-
-.MuiMobileStepper-dot-199 {
-  width: 10px !important;
-  height: 10px !important;
-  margin: 0 3px;
-}
-
-.alignCenter {
-  display: flex;
-  align-items: center;
 }
