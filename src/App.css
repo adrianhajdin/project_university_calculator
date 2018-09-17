@@ -20,6 +20,8 @@ body {
   width: 60%;
   overflow: auto !important;
   justify-content: space-between;
+  padding: 24px;
+  padding-top: 68px
 }
 
 .margin-bottom {

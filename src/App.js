@@ -67,6 +67,7 @@ class App extends Component {
 
     if (activeStep === 0) {
       this.setState({ activeStep: activeStep + 1 });
+      window.scrollTo(0, 0);
     } else if (activeStep === 1) {
       this.setState({
         activeStep: activeStep + 1,
@@ -314,8 +315,8 @@ class App extends Component {
     }
 
     return (
-      <div className="App">
-        <Paper style={{ padding: '0 24px 24px 24px' }} elevation={8} className="paper">
+      <div id="app" className="App">
+        <Paper className="paper" elevation={8}>
           <div className="heading">
             <Typography
               style={{ display: 'flex', alignItems: 'center', paddingRight: '10px' }}
