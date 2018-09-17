@@ -1,7 +1,8 @@
 
 import React, { Component } from 'react';
 
-import { Button, Divider, Grid, Card, CardHeader, CardContent, Tooltip, Icon, Typography } from '@material-ui/core';
+import { Button, Card, CardContent, CardHeader, Divider, Grid, Icon, Tooltip, Typography,
+} from '@material-ui/core';
 import { ValidatorForm } from 'react-material-ui-form-validator';
 import { isMobile } from 'react-device-detect';
 
@@ -13,25 +14,25 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      prosjekSvihRazreda: '',
-      prosjekPrviRazred: '',
-      prosjekDrugiRazred: '',
-      prosjekTreciRazred: '',
-      prosjekCetvrtiRazred: '',
-      evaluationGrades: '',
-      bodoviZaHj: '',
-      bodoviZaMat: '',
-      bodoviZaEj: '',
-      bodoviZaIzb: '',
-      postotakMaturaHj: '',
-      postotakMaturaMat: '',
-      postotakMaturaEj: '',
-      postotakMaturaIzb: '',
-      evaluationHj: '',
-      evaluationMat: '',
-      evaluationEj: '',
-      evaluationOpt: '',
       activeStep: 0,
+      evaluationMaturaCroatian: '',
+      evaluationMaturaElective: '',
+      evaluationMaturaEnglish: '',
+      evaluationMaturaMathematics: '',
+      evaluationSchoolGrades: '',
+      percentageFirstGrade: '',
+      percentageFourthGrade: '',
+      percentageMaturaCroatian: '',
+      percentageMaturaElective: '',
+      percentageMaturaEnglish: '',
+      percentageMaturaMathematics: '',
+      percentageSecondGrade: '',
+      percentageThirdGrade: '',
+      percentagesTotal: '',
+      pointsMaturaCroatian: '',
+      pointsMaturaElective: '',
+      pointsMaturaEnglish: '',
+      pointsMaturaMathematics: '',
     };
   }
 
@@ -48,18 +49,18 @@ class App extends Component {
   handleClick = () => {
     const {
       activeStep,
-      prosjekPrviRazred,
-      prosjekDrugiRazred,
-      prosjekTreciRazred,
-      prosjekCetvrtiRazred,
-      postotakMaturaHj,
-      evaluationHj,
-      postotakMaturaEj,
-      postotakMaturaMat,
-      evaluationEj,
-      evaluationMat,
-      postotakMaturaIzb,
-      evaluationOpt,
+      evaluationMaturaCroatian,
+      evaluationMaturaElective,
+      evaluationMaturaEnglish,
+      evaluationMaturaMathematics,
+      percentageFirstGrade,
+      percentageFourthGrade,
+      percentageMaturaCroatian,
+      percentageMaturaElective,
+      percentageMaturaEnglish,
+      percentageMaturaMathematics,
+      percentageSecondGrade,
+      percentageThirdGrade,
     } = this.state;
 
     if (activeStep === 0) {
@@ -67,40 +68,40 @@ class App extends Component {
     } else if (activeStep === 1) {
       this.setState({
         activeStep: activeStep + 1,
-        prosjekSvihRazreda: parseFloat(prosjekPrviRazred, 10) + parseFloat(prosjekDrugiRazred, 10) + parseFloat(prosjekTreciRazred, 10) + parseFloat(prosjekCetvrtiRazred, 10),
+        percentagesTotal: parseFloat(percentageFirstGrade, 10) + parseFloat(percentageSecondGrade, 10) + parseFloat(percentageThirdGrade, 10) + parseFloat(percentageFourthGrade, 10),
       });
     } else if (activeStep === 2) {
       this.setState({
         activeStep: activeStep + 1,
-        bodoviZaHj: postotakMaturaHj * evaluationHj / 10,
-        bodoviZaEj: postotakMaturaEj * evaluationEj / 10,
-        bodoviZaMat: postotakMaturaMat * evaluationMat / 10,
-        bodoviZaIzb: postotakMaturaIzb * evaluationOpt / 10,
+        pointsMaturaCroatian: percentageMaturaCroatian * evaluationMaturaCroatian / 10,
+        pointsMaturaElective: percentageMaturaElective * evaluationMaturaElective / 10,
+        pointsMaturaEnglish: percentageMaturaEnglish * evaluationMaturaEnglish / 10,
+        pointsMaturaMathematics: percentageMaturaMathematics * evaluationMaturaMathematics / 10,
       });
     }
   }
 
   render() {
     const {
-      prosjekSvihRazreda,
-      prosjekCetvrtiRazred,
-      prosjekDrugiRazred,
-      prosjekPrviRazred,
-      prosjekTreciRazred,
-      evaluationGrades,
-      postotakMaturaEj,
-      postotakMaturaHj,
-      postotakMaturaIzb,
-      postotakMaturaMat,
-      bodoviZaHj,
-      bodoviZaEj,
-      bodoviZaMat,
-      bodoviZaIzb,
       activeStep,
-      evaluationHj,
-      evaluationEj,
-      evaluationMat,
-      evaluationOpt,
+      evaluationMaturaCroatian,
+      evaluationMaturaElective,
+      evaluationMaturaEnglish,
+      evaluationMaturaMathematics,
+      evaluationSchoolGrades,
+      percentageFirstGrade,
+      percentageFourthGrade,
+      percentageMaturaCroatian,
+      percentageMaturaElective,
+      percentageMaturaEnglish,
+      percentageMaturaMathematics,
+      percentageSecondGrade,
+      percentageThirdGrade,
+      percentagesTotal,
+      pointsMaturaCroatian,
+      pointsMaturaElective,
+      pointsMaturaEnglish,
+      pointsMaturaMathematics,
     } = this.state;
 
     let dialogContent;
@@ -114,9 +115,9 @@ class App extends Component {
           </Typography>
           {isMobile ? <Typography className="mobileTooltip" variant="caption">Ovdje upišite postotak od ukupnog broja bodova koji vam određeni fakultet pridaje za prosjek ocjena srednje škole</Typography> : null}
           <Input
-            name="evaluationGrades"
+            name="evaluationSchoolGrades"
             label="Prosjek svih ocjena"
-            value={evaluationGrades}
+            value={evaluationSchoolGrades}
             onChange={this.handleChange}
             percentage
             required
@@ -129,9 +130,9 @@ class App extends Component {
           <Grid container justify="center">
             <Grid item xs={12} lg={4}>
               <Input
-                name="evaluationHj"
+                name="evaluationMaturaCroatian"
                 label="Hrvatski"
-                value={evaluationHj}
+                value={evaluationMaturaCroatian}
                 onChange={this.handleChange}
                 percentage
                 required
@@ -139,9 +140,9 @@ class App extends Component {
             </Grid>
             <Grid item xs={12} lg={4}>
               <Input
-                name="evaluationMat"
+                name="evaluationMaturaMathematics"
                 label="Matematika"
-                value={evaluationMat}
+                value={evaluationMaturaMathematics}
                 onChange={this.handleChange}
                 percentage
                 required
@@ -149,9 +150,9 @@ class App extends Component {
             </Grid>
             <Grid item xs={12} lg={4}>
               <Input
-                name="evaluationEj"
+                name="evaluationMaturaEnglish"
                 label="Engleski jezik"
-                value={evaluationEj}
+                value={evaluationMaturaEnglish}
                 onChange={this.handleChange}
                 percentage
                 required
@@ -164,9 +165,9 @@ class App extends Component {
           </Typography>
           {isMobile ? <Typography className="mobileTooltip" variant="caption">Ovdje upišite postotak od ukupnog broja bodova koji vam određeni fakultet pridaje za izborni dio drzavne mature</Typography> : null}
           <Input
-            name="evaluationOpt"
+            name="evaluationMaturaElective"
             label="Izborni predmet"
-            value={evaluationOpt}
+            value={evaluationMaturaElective}
             onChange={this.handleChange}
             percentage
           />
@@ -184,38 +185,38 @@ class App extends Component {
           <Grid container justify="center">
             <Grid item xs={12} lg={3}>
               <Input
-                name="prosjekPrviRazred"
-                value={prosjekPrviRazred}
-                onChange={this.handleChange}
                 label="1. razred"
+                name="percentageFirstGrade"
+                onChange={this.handleChange}
                 required
+                value={percentageFirstGrade}
               />
             </Grid>
             <Grid item xs={12} lg={3}>
               <Input
-                name="prosjekDrugiRazred"
-                value={prosjekDrugiRazred}
-                onChange={this.handleChange}
                 label="2. razred"
+                name="percentageSecondGrade"
+                onChange={this.handleChange}
                 required
+                value={percentageSecondGrade}
               />
             </Grid>
             <Grid item xs={12} lg={3}>
               <Input
-                name="prosjekTreciRazred"
-                value={prosjekTreciRazred}
-                onChange={this.handleChange}
                 label="3. razred"
+                name="percentageThirdGrade"
+                onChange={this.handleChange}
                 required
+                value={percentageThirdGrade}
               />
             </Grid>
             <Grid item sm={12} lg={3}>
               <Input
-                name="prosjekCetvrtiRazred"
-                value={prosjekCetvrtiRazred}
-                onChange={this.handleChange}
                 label="4. razred"
+                name="percentageFourthGrade"
+                onChange={this.handleChange}
                 required
+                value={percentageFourthGrade}
               />
             </Grid>
           </Grid>
@@ -233,44 +234,44 @@ class App extends Component {
           <Grid container justify="center">
             <Grid item xs={12} lg={3}>
               <Input
-                name="postotakMaturaHj"
                 label="Hrvatski jezik"
-                value={postotakMaturaHj}
+                name="percentageMaturaCroatian"
                 onChange={this.handleChange}
                 percentage
                 required
+                value={percentageMaturaCroatian}
               />
             </Grid>
             <Grid item xs={12} lg={3}>
               <Input
-                name="postotakMaturaMat"
                 label="Matematika"
-                value={postotakMaturaMat}
+                name="percentageMaturaMathematics"
                 onChange={this.handleChange}
                 percentage
                 required
+                value={percentageMaturaMathematics}
               />
             </Grid>
             <Grid item xs={12} lg={3}>
               <Input
-                name="postotakMaturaEj"
                 label="Engleski jezik"
-                value={postotakMaturaEj}
+                name="percentageMaturaEnglish"
                 onChange={this.handleChange}
                 percentage
                 required
+                value={percentageMaturaEnglish}
               />
             </Grid>
-            { evaluationOpt !== ''
+            { evaluationMaturaElective !== ''
               ? (
                 <Grid item xs={12} lg={3}>
                   <Input
-                    name="postotakMaturaIzb"
                     label="Izborni predmet"
-                    value={postotakMaturaIzb}
+                    name="percentageMaturaElective"
                     onChange={this.handleChange}
                     percentage
                     required
+                    value={percentageMaturaElective}
                   />
                 </Grid>
               ) : null
@@ -280,15 +281,15 @@ class App extends Component {
         </React.Fragment>
       );
     } else if (activeStep === 3) {
-      const bodoviOdMature = bodoviZaEj + bodoviZaHj + bodoviZaIzb + bodoviZaMat;
-      const bodoviOdOcjena = Math.round((prosjekSvihRazreda / 4).toFixed(2) / 5 * evaluationGrades * 10);
+      const totalMaturaPoints = pointsMaturaEnglish + pointsMaturaCroatian + pointsMaturaElective + pointsMaturaMathematics;
+      const totalGradePoints = Math.round((percentagesTotal / 4).toFixed(2) / 5 * evaluationSchoolGrades * 10);
 
       dialogContent = (
         <React.Fragment>
           <Divider light className="dividerMarginBottom" />
           <Typography className="typography" variant="title">Rezultati</Typography>
-          <Table props={{ evaluationOpt, prosjekSvihRazreda, bodoviOdOcjena, bodoviZaHj, bodoviZaMat, bodoviZaEj, bodoviZaIzb }} />
-          <Typography className="result" variant="title">Ukupan broj bodova: {Math.round(bodoviOdMature + bodoviOdOcjena)}</Typography>
+          <Table props={{ evaluationMaturaElective, percentagesTotal, totalGradePoints, pointsMaturaCroatian, pointsMaturaMathematics, pointsMaturaEnglish, pointsMaturaElective }} />
+          <Typography className="result" variant="title">Ukupan broj bodova: {Math.round(totalMaturaPoints + totalGradePoints)}</Typography>
           <Divider light className="divider" />
         </React.Fragment>
       );

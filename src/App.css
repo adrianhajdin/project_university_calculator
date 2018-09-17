@@ -21,7 +21,7 @@ body {
 
 .paper {
   text-align: center;
-  width: 50%;
+  width: 60%;
   overflow: auto !important;
   justify-content: space-between;
 }
@@ -40,7 +40,14 @@ body {
   padding-bottom: 10px;
   display: flex;
   justify-content: center;
+  align-items: center !important;
 }
+
+.MuiTypography-title-41 {
+  display: flex !important;
+  align-items: center !important;
+}
+
 
 .divider {
   margin: 20px 0 !important;
@@ -97,4 +104,9 @@ body {
   width: 10px !important;
   height: 10px !important;
   margin: 0 3px;
+}
+
+.alignCenter {
+  display: flex;
+  align-items: center;
 }

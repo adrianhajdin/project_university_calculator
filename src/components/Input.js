@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
 import { TextValidator } from 'react-material-ui-form-validator';
 import { InputAdornment } from '@material-ui/core';
@@ -44,10 +43,6 @@ const Input = (props) => {
       required={required}
     />
   );
-};
-
-Input.propTypes = {
-  activeStep: PropTypes.number.isRequired,
 };
 
 export default Input;
