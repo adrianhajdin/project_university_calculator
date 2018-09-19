@@ -1,9 +1,12 @@
 
 import React, { Component } from 'react';
 
+import ReactChartkick, { BarChart } from 'react-chartkick';
+import Chart from 'chart.js';
+
 import './App.css';
 import PropTypes from 'prop-types';
-import { Button, Divider, Grid, Icon, Tooltip, Typography, Paper, Select, MenuItem } from '@material-ui/core';
+import { Button, Divider, Grid, Icon, Tooltip, Typography, Paper, NativeSelect } from '@material-ui/core';
 import { ValidatorForm } from 'react-material-ui-form-validator';
 import { isMobile } from 'react-device-detect';
 import { withStyles } from '@material-ui/core/styles';
@@ -11,6 +14,8 @@ import { withStyles } from '@material-ui/core/styles';
 import { Input, Stepper, Table } from './components';
 import styles from './styles';
 import logo from './public/calculator-icon.png';
+
+ReactChartkick.addAdapter(Chart);
 
 class App extends Component {
   constructor(props) {
@@ -144,16 +149,15 @@ class App extends Component {
                 required
                 value={evaluationMaturaCroatian}
               />
-              <Select
+              <NativeSelect
                 name="evaluationMaturaCroatianLevel"
-                native
                 className="marginLeft10"
                 value={evaluationMaturaCroatianLevel}
                 onChange={this.handleSelectChange}
               >
-                <MenuItem value="A">A</MenuItem>
-                <MenuItem value="B">B</MenuItem>
-              </Select>
+                <option value="A">A</option>
+                <option value="B">B</option>
+              </NativeSelect>
             </Grid>
             <Grid item xs={12} lg={4}>
               <Input
@@ -164,15 +168,15 @@ class App extends Component {
                 required
                 value={evaluationMaturaMathematics}
               />
-              <Select
+              <NativeSelect
                 name="evaluationMaturaMathematicsLevel"
                 className="marginLeft10"
                 value={evaluationMaturaMathematicsLevel}
                 onChange={this.handleSelectChange}
               >
-                <MenuItem value="A">A</MenuItem>
-                <MenuItem value="B">B</MenuItem>
-              </Select>
+                <option value="A">A</option>
+                <option value="B">B</option>
+              </NativeSelect>
             </Grid>
             <Grid item xs={12} lg={4}>
               <Input
@@ -183,15 +187,15 @@ class App extends Component {
                 required
                 value={evaluationMaturaEnglish}
               />
-              <Select
+              <NativeSelect
                 name="evaluationMaturaEnglishLevel"
                 className="marginLeft10"
                 value={evaluationMaturaEnglishLevel}
-                onChange={this.handleSelectChange}
+                onChange={this.handleNativeSelectChange}
               >
-                <MenuItem value="A">A</MenuItem>
-                <MenuItem value="B">B</MenuItem>
-              </Select>
+                <option value="A">A</option>
+                <option value="B">B</option>
+              </NativeSelect>
             </Grid>
           </Grid>
           <Divider light classes={{ root: classes.divider }} />
@@ -316,15 +320,16 @@ class App extends Component {
         </React.Fragment>
       );
     } else if (activeStep === 3) {
-      const totalMaturaPoints = pointsMaturaEnglish + pointsMaturaCroatian + pointsMaturaElective + pointsMaturaMathematics;
       const totalGradePoints = Math.round((percentagesTotal / 4).toFixed(2) / 5 * evaluationSchoolGrades * 10);
+      const totalMaturaPoints = pointsMaturaEnglish + pointsMaturaCroatian + pointsMaturaElective + pointsMaturaMathematics;
 
       dialogContent = (
         <React.Fragment>
           <Divider light classes={{ root: classes.dividerMarginBottom }} />
           <Typography className="typography" variant="title">Rezultati</Typography>
           <Table props={{ evaluationMaturaElective, percentagesTotal, totalGradePoints, pointsMaturaCroatian, pointsMaturaMathematics, pointsMaturaEnglish, pointsMaturaElective }} />
-          <Typography justify="center" className="result" variant="title">Ukupan broj bodova: {totalMaturaPoints + totalGradePoints}</Typography>
+          <BarChart height="100px" max={1000} data={[['Broj bodova', totalMaturaPoints + totalGradePoints]]} />
+          {/* <Typography justify="center" className="result" variant="title">Ukupan broj bodova: {totalMaturaPoints + totalGradePoints}</Typography> */}
           <Divider light classes={{ root: classes.divider }} />
         </React.Fragment>
       );

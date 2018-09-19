@@ -6,6 +6,7 @@
   "dependencies": {
     "@material-ui/core": "^3.0.2",
     "babel-eslint": "^9.0.0",
+    "chart.js": "^2.7.2",
     "eslint": "^5.5.0",
     "eslint-config-airbnb": "^17.1.0",
     "eslint-plugin-import": "^2.14.0",
@@ -14,6 +15,7 @@
     "gh-pages": "^1.2.0",
     "prop-types": "^15.6.2",
     "react": "^16.4.2",
+    "react-chartkick": "^0.3.0",
     "react-device-detect": "^1.5.9",
     "react-dom": "^16.4.2",
     "react-material-ui-form-validator": "^2.0.1",
