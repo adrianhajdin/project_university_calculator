@@ -38,9 +38,9 @@ class App extends Component {
     };
   }
 
-  handleChange = (event) => {
+  handleChange = ({ target: { value, name } }) => {
     this.setState({
-      [event.name]: event.value,
+      [name]: value,
     });
   }
 
