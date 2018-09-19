@@ -17,11 +17,9 @@ body {
 
 .paper {
   text-align: center;
-  width: 60%;
   overflow: auto !important;
   justify-content: space-between;
-  padding: 24px;
-  padding-top: 0;
+  padding: 0 24px 24px 24px;
 }
 
 .margin-bottom {
@@ -31,13 +29,20 @@ body {
 .heading {
   display: flex;
   flex-wrap: wrap;
+  align-items: center;
   justify-content: center;
+  margin: 8px 0;
 }
 
 .typography {
-  padding-bottom: 10px;
   display: flex  !important;
   justify-content: center !important;
+}
+
+.headingTypography {
+  display: flex;
+  line-height: 1.5em !important;
+  padding: 0 10px !important;
 }
 
 .result {
@@ -50,17 +55,33 @@ body {
 }
 
 .icon {
-  padding: 16px 0;
+  height: 64px;
+  width: 64px;
 }
+
+.mobileTooltip {
+  margin: 10px 0 !important;
+  font-size: 0.85rem !important;
+}
+
 
 @media only screen and (max-width: 600px) {
   .paper {
-    width: 100%;
-    height: 100%;
-    padding-top: 68px;
+    height: 100vh;
+    padding-top: 24px;
   }
 
   .icon {
-    padding: 0;
+    padding: 10px 0;
+    width: 85px;
+    height: 85px;
+  }
+
+  .headingTypography {
+    flex: 1;
+  }
+
+  .mobileTooltip {
+    font-size: 0.75rem;
   }
 }

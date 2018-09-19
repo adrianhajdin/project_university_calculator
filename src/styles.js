@@ -13,8 +13,4 @@ export default {
     margin: '20px 0',
     backgroundColor: 'rgba(127, 76, 178, 0.4)',
   },
-
-  mobileTooltip: {
-    marginBottom: '10px',
-  },
 };
