@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 
 import './App.css';
 import PropTypes from 'prop-types';
-import { Button, Divider, Grid, Icon, Tooltip, Typography, Paper } from '@material-ui/core';
+import { Button, Divider, Grid, Icon, Tooltip, Typography, Paper, Select, MenuItem } from '@material-ui/core';
 import { ValidatorForm } from 'react-material-ui-form-validator';
 import { isMobile } from 'react-device-detect';
 import { withStyles } from '@material-ui/core/styles';
@@ -35,13 +35,17 @@ class App extends Component {
       pointsMaturaElective: '',
       pointsMaturaEnglish: '',
       pointsMaturaMathematics: '',
+      evaluationMaturaCroatianLevel: 'A',
+      evaluationMaturaEnglishLevel: 'A',
+      evaluationMaturaMathematicsLevel: 'A',
     };
   }
 
-  handleChange = ({ target: { value, name } }) => {
-    this.setState({
-      [name]: value,
-    });
+  handleChange = ({ target: { value, name } }) => this.setState({ [name]: value });
+
+  handleSelectChange = ({ target: { value, name } }) => {
+    console.log(value, name);
+    this.setState({ [name]: value });
   }
 
   handleBack = () => {
@@ -63,6 +67,7 @@ class App extends Component {
       percentageMaturaMathematics,
       percentageSecondGrade,
       percentageThirdGrade,
+      evaluationMaturaCroatianLevel, evaluationMaturaEnglishLevel, evaluationMaturaMathematicsLevel,
     } = this.state;
 
     if (activeStep === 0) {
@@ -75,10 +80,10 @@ class App extends Component {
     } else if (activeStep === 2) {
       this.setState({
         activeStep: activeStep + 1,
-        pointsMaturaCroatian: percentageMaturaCroatian * evaluationMaturaCroatian / 10,
-        pointsMaturaElective: percentageMaturaElective * evaluationMaturaElective / 10,
-        pointsMaturaEnglish: percentageMaturaEnglish * evaluationMaturaEnglish / 10,
-        pointsMaturaMathematics: percentageMaturaMathematics * evaluationMaturaMathematics / 10,
+        pointsMaturaCroatian: Math.round((percentageMaturaCroatian * (evaluationMaturaCroatianLevel === 'A' ? 1.6 : 1) / 160) * evaluationMaturaCroatian * 10),
+        pointsMaturaEnglish: Math.round((percentageMaturaEnglish * (evaluationMaturaEnglishLevel === 'A' ? 1.6 : 1) / 160) * evaluationMaturaEnglish * 10),
+        pointsMaturaMathematics: Math.round((percentageMaturaMathematics * (evaluationMaturaMathematicsLevel === 'A' ? 1.6 : 1) / 160) * evaluationMaturaMathematics * 10),
+        pointsMaturaElective: Math.round(percentageMaturaElective * evaluationMaturaElective / 10),
       });
     }
 
@@ -106,6 +111,9 @@ class App extends Component {
       pointsMaturaElective,
       pointsMaturaEnglish,
       pointsMaturaMathematics,
+      evaluationMaturaCroatianLevel,
+      evaluationMaturaEnglishLevel,
+      evaluationMaturaMathematicsLevel,
     } = this.state;
     const { classes } = this.props;
 
@@ -139,6 +147,15 @@ class App extends Component {
                 required
                 value={evaluationMaturaCroatian}
               />
+              <Select
+                name="evaluationMaturaCroatianLevel"
+                className="marginLeft10"
+                value={evaluationMaturaCroatianLevel}
+                onChange={this.handleSelectChange}
+              >
+                <MenuItem value="A">A</MenuItem>
+                <MenuItem value="B">B</MenuItem>
+              </Select>
             </Grid>
             <Grid item xs={12} lg={4}>
               <Input
@@ -149,6 +166,15 @@ class App extends Component {
                 required
                 value={evaluationMaturaMathematics}
               />
+              <Select
+                name="evaluationMaturaMathematicsLevel"
+                className="marginLeft10"
+                value={evaluationMaturaMathematicsLevel}
+                onChange={this.handleSelectChange}
+              >
+                <MenuItem value="A">A</MenuItem>
+                <MenuItem value="B">B</MenuItem>
+              </Select>
             </Grid>
             <Grid item xs={12} lg={4}>
               <Input
@@ -159,6 +185,15 @@ class App extends Component {
                 required
                 value={evaluationMaturaEnglish}
               />
+              <Select
+                name="evaluationMaturaEnglishLevel"
+                className="marginLeft10"
+                value={evaluationMaturaEnglishLevel}
+                onChange={this.handleSelectChange}
+              >
+                <MenuItem value="A">A</MenuItem>
+                <MenuItem value="B">B</MenuItem>
+              </Select>
             </Grid>
           </Grid>
           <Divider light classes={{ root: classes.divider }} />
@@ -300,7 +335,7 @@ class App extends Component {
     return (
       <div id="app" className="App">
         <Grid justify="center" container>
-          <Grid item xs={12} sm={8} md={6} lg={6}>
+          <Grid item xs={12} sm={8} md={6} lg={8} xl={6}>
             <Paper className="paper" elevation={8}>
               <div className="heading">
                 <Typography className="headingTypography" variant="headline">Kalkulator bodova za upis na fakultet</Typography>

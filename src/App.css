@@ -64,6 +64,9 @@ body {
   font-size: 0.85rem !important;
 }
 
+.marginLeft10 {
+  margin-left: 10px;
+}
 
 @media only screen and (max-width: 600px) {
   .paper {
