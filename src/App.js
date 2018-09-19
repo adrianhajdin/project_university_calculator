@@ -43,10 +43,7 @@ class App extends Component {
 
   handleChange = ({ target: { value, name } }) => this.setState({ [name]: value });
 
-  handleSelectChange = ({ target: { value, name } }) => {
-    console.log(value, name);
-    this.setState({ [name]: value });
-  }
+  handleSelectChange = ({ target: { value, name } }) => this.setState({ [name]: value });
 
   handleBack = () => {
     window.location.reload();
@@ -149,6 +146,7 @@ class App extends Component {
               />
               <Select
                 name="evaluationMaturaCroatianLevel"
+                native
                 className="marginLeft10"
                 value={evaluationMaturaCroatianLevel}
                 onChange={this.handleSelectChange}
