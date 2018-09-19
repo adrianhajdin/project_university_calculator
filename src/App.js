@@ -318,11 +318,7 @@ class App extends Component {
       <div id="app" className="App">
         <Paper className="paper" elevation={8}>
           <div className="heading">
-            <Typography
-              style={{ display: 'flex', alignItems: 'center', paddingRight: '10px' }}
-              variant="headline"
-            >Kalkulator bodova za upis na fakultet
-            </Typography>
+            <Typography style={{ display: 'flex', alignItems: 'center', paddingRight: '10px' }} variant="headline">Kalkulator bodova za upis na fakultet</Typography>
             <img className="icon" src={logo} alt="calculator-icon" height="64" width="64" />
           </div>
           <ValidatorForm noValidate onSubmit={this.handleClick}>

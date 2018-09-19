@@ -21,7 +21,7 @@ body {
   overflow: auto !important;
   justify-content: space-between;
   padding: 24px;
-  padding-top: 68px
+  padding-top: 0;
 }
 
 .margin-bottom {
@@ -36,6 +36,8 @@ body {
 
 .typography {
   padding-bottom: 10px;
+  display: flex  !important;
+  justify-content: center !important;
 }
 
 .result {
@@ -55,6 +57,7 @@ body {
   .paper {
     width: 100%;
     height: 100%;
+    padding-top: 68px;
   }
 
   .icon {
