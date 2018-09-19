@@ -142,7 +142,7 @@ class App extends Component {
           </Typography>
           {isMobile ? <Typography classes={{ root: classes.mobileTooltip }} variant="caption">Ovdje upišite postotak od ukupnog broja bodova koji vam određeni fakultet pridaje za obvezni dio drzavne mature</Typography> : null}
           <Grid container justify="center">
-            <Grid item xs={12} lg={4}>
+            <Grid item xs={12} md={4}>
               <Input
                 name="evaluationMaturaCroatian"
                 label="Hrvatski"
@@ -152,7 +152,7 @@ class App extends Component {
                 required
               />
             </Grid>
-            <Grid item xs={12} lg={4}>
+            <Grid item xs={12} md={4}>
               <Input
                 name="evaluationMaturaMathematics"
                 label="Matematika"
@@ -162,7 +162,7 @@ class App extends Component {
                 required
               />
             </Grid>
-            <Grid item xs={12} lg={4}>
+            <Grid item xs={12} md={4}>
               <Input
                 name="evaluationMaturaEnglish"
                 label="Engleski jezik"
@@ -202,7 +202,7 @@ class App extends Component {
           </Typography>
           {isMobile ? <Typography classes={{ root: classes.mobileTooltip }} variant="caption">Ovdje upišite prosjeke ocjena od 1. do 4. razreda srednje skole</Typography> : null }
           <Grid container justify="center">
-            <Grid item xs={12} lg={3}>
+            <Grid item xs={12} md={3}>
               <Input
                 label="1. razred"
                 name="percentageFirstGrade"
@@ -211,7 +211,7 @@ class App extends Component {
                 value={percentageFirstGrade}
               />
             </Grid>
-            <Grid item xs={12} lg={3}>
+            <Grid item xs={12} md={3}>
               <Input
                 label="2. razred"
                 name="percentageSecondGrade"
@@ -220,7 +220,7 @@ class App extends Component {
                 value={percentageSecondGrade}
               />
             </Grid>
-            <Grid item xs={12} lg={3}>
+            <Grid item xs={12} md={3}>
               <Input
                 label="3. razred"
                 name="percentageThirdGrade"
@@ -229,7 +229,7 @@ class App extends Component {
                 value={percentageThirdGrade}
               />
             </Grid>
-            <Grid item sm={12} lg={3}>
+            <Grid item sm={12} md={3}>
               <Input
                 label="4. razred"
                 name="percentageFourthGrade"
