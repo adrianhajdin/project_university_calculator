@@ -126,7 +126,7 @@ class App extends Component {
         <React.Fragment>
           <Divider light classes={{ root: classes.dividerMarginBottom }} style={{ marginBottom: '10px' }} />
           <Typography className="mobileTooltip" style={{ marginBottom: 0 }} variant="caption">
-            Ukoliko niste sigurni koliko vaš fakultet pridaje pojedinim predmetima, posjetite: <br /><Button className="button" target="_blank" href="https://www.postani-student.hr/Ucilista/Nositelji.aspx" color="primary">Postani Student</Button>
+            Ukoliko niste sigurni koliko vaš fakultet pridaje pojedinim predmetima, posjetite:<Button className="button" target="_blank" href="https://www.postani-student.hr/Ucilista/Nositelji.aspx" color="primary">Postani Student</Button>
           </Typography>
           <Divider light classes={{ root: classes.dividerMarginBottom }} />
           <Typography className="typography" variant="title">Ocjene iz srednje škole</Typography>

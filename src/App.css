@@ -64,6 +64,10 @@ body {
   font-size: 0.85rem !important;
 }
 
+.button {
+  padding: 0 7px !important;
+}
+
 .marginLeft10 {
   margin-left: 10px;
 }
