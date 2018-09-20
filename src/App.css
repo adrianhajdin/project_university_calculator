@@ -15,8 +15,8 @@ body {
   font-family: 'Roboto', sans-serif;
 }
 
-canvas {
-  margin-top: 20px;
+.result {
+  margin-top: 20px !important;
 }
 
 .paper {
@@ -48,13 +48,6 @@ canvas {
   display: flex;
   line-height: 1.5em !important;
   padding: 0 10px !important;
-}
-
-.result {
-  padding: 8px 24px;
-  color: white !important;
-  background-color: #3630A5;
-  font-weight: 100 !important;
 }
 
 .paddingTop0 {
