@@ -41,6 +41,7 @@ canvas {
 .typography {
   display: flex  !important;
   justify-content: center !important;
+  margin-bottom: 10px !important;
 }
 
 .headingTypography {
@@ -66,7 +67,7 @@ canvas {
 }
 
 .mobileTooltip {
-  margin: 10px 0 !important;
+  margin-bottom: 10px !important;
   font-size: 0.85rem !important;
 }
 

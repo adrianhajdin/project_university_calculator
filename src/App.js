@@ -6,7 +6,7 @@ import Chart from 'chart.js';
 
 import './App.css';
 import PropTypes from 'prop-types';
-import { Button, Divider, Grid, Icon, Tooltip, Typography, Paper, NativeSelect } from '@material-ui/core';
+import { Button, Divider, Grid, Typography, Paper, NativeSelect } from '@material-ui/core';
 import { ValidatorForm } from 'react-material-ui-form-validator';
 import { isMobile } from 'react-device-detect';
 import { withStyles } from '@material-ui/core/styles';
@@ -124,6 +124,10 @@ class App extends Component {
     if (activeStep === 0) {
       dialogContent = (
         <React.Fragment>
+          <Divider light classes={{ root: classes.dividerMarginBottom }} style={{ marginBottom: '10px' }} />
+          <Typography className="mobileTooltip" style={{ marginBottom: 0 }} variant="caption">
+            Ukoliko niste sigurni koliko vaš fakultet pridaje pojedinim predmetima, posjetite: <Button href="https://www.postani-student.hr/Ucilista/Nositelji.aspx" color="primary">Postani Student</Button>
+          </Typography>
           <Divider light classes={{ root: classes.dividerMarginBottom }} />
           <Typography className="typography" variant="title">Ocjene iz srednje škole</Typography>
           <Typography className="mobileTooltip" variant="caption">Ovdje upišite postotak od ukupnog broja bodova koji vam {isMobile ? null : <br />} određeni fakultet pridaje za prosjek ocjena srednje škole</Typography>
@@ -217,10 +221,8 @@ class App extends Component {
       dialogContent = (
         <React.Fragment>
           <Divider light classes={{ root: classes.dividerMarginBottom }} />
-          <Typography className="typography" variant="title">
-            Prosjeci sva cetiri razreda {!isMobile ? <Tooltip title="Ovdje upišite prosjeke ocjena od 1. do 4. razreda srednje skole"><Icon classes={{ root: classes.tooltipIcon }}>info_outlined</Icon></Tooltip> : null}
-          </Typography>
-          {isMobile ? <Typography classes={{ root: classes.mobileTooltip }} variant="caption">Ovdje upišite prosjeke ocjena od 1. do 4. razreda srednje skole</Typography> : null }
+          <Typography className="typography" variant="title">Prosjeci sva cetiri razreda</Typography>
+          <Typography className="mobileTooltip" variant="caption">Ovdje upišite postotak od ukupnog broja bodova koji vam određeni {isMobile ? null : <br />} fakultet pridaje za izborni dio drzavne mature</Typography>
           <Grid container justify="center">
             <Grid item xs={12} lg={3}>
               <Input
@@ -266,10 +268,8 @@ class App extends Component {
       dialogContent = (
         <React.Fragment>
           <Divider light classes={{ root: classes.dividerMarginBottom }} />
-          <Typography className="typography" variant="title">
-            Rezultati mature {!isMobile ? <Tooltip title="Ovdje upišite postotke pojedinih predmeta s mature"><Icon classes={{ root: classes.tooltipIcon }}>info_outlined</Icon></Tooltip> : null}
-          </Typography>
-          {isMobile ? <Typography classes={{ root: classes.mobileTooltip }} variant="caption">Ovdje upišite postotke pojedinih predmeta s mature</Typography> : null }
+          <Typography className="typography" variant="title">Rezultati mature</Typography>
+          <Typography className="mobileTooltip" variant="caption">Ovdje upišite postotak od ukupnog broja bodova koji vam određeni {isMobile ? null : <br />} fakultet pridaje za izborni dio drzavne mature</Typography>
           <Grid container justify="center">
             <Grid item xs={12} lg={3}>
               <Input
