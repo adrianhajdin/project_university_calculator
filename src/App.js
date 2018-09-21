@@ -1,17 +1,16 @@
-
 import React, { Component } from 'react';
 
-import ReactChartkick, { BarChart } from 'react-chartkick';
 import Chart from 'chart.js';
-
-import './App.css';
 import PropTypes from 'prop-types';
+import ReactChartkick, { BarChart } from 'react-chartkick';
 import { Button, Divider, Grid, Typography, Paper, NativeSelect } from '@material-ui/core';
 import { ValidatorForm } from 'react-material-ui-form-validator';
 import { isMobile } from 'react-device-detect';
-import { withStyles } from '@material-ui/core/styles';
 
+import { withStyles } from '@material-ui/core/styles';
 import { Input, Stepper, Table } from './components';
+import './App.css';
+
 import styles from './styles';
 import logo from './public/calculator-icon.png';
 
@@ -23,9 +22,12 @@ class App extends Component {
     this.state = {
       activeStep: 0,
       evaluationMaturaCroatian: '',
+      evaluationMaturaCroatianLevel: 'A',
       evaluationMaturaElective: '',
       evaluationMaturaEnglish: '',
+      evaluationMaturaEnglishLevel: 'A',
       evaluationMaturaMathematics: '',
+      evaluationMaturaMathematicsLevel: 'A',
       evaluationSchoolGrades: '',
       percentageFirstGrade: '',
       percentageFourthGrade: '',
@@ -40,9 +42,6 @@ class App extends Component {
       pointsMaturaElective: '',
       pointsMaturaEnglish: '',
       pointsMaturaMathematics: '',
-      evaluationMaturaCroatianLevel: 'A',
-      evaluationMaturaEnglishLevel: 'A',
-      evaluationMaturaMathematicsLevel: 'A',
     };
   }
 
@@ -58,9 +57,12 @@ class App extends Component {
     const {
       activeStep,
       evaluationMaturaCroatian,
+      evaluationMaturaCroatianLevel,
       evaluationMaturaElective,
       evaluationMaturaEnglish,
+      evaluationMaturaEnglishLevel,
       evaluationMaturaMathematics,
+      evaluationMaturaMathematicsLevel,
       percentageFirstGrade,
       percentageFourthGrade,
       percentageMaturaCroatian,
@@ -69,7 +71,6 @@ class App extends Component {
       percentageMaturaMathematics,
       percentageSecondGrade,
       percentageThirdGrade,
-      evaluationMaturaCroatianLevel, evaluationMaturaEnglishLevel, evaluationMaturaMathematicsLevel,
     } = this.state;
 
     if (activeStep === 0) {
@@ -83,9 +84,9 @@ class App extends Component {
       this.setState({
         activeStep: activeStep + 1,
         pointsMaturaCroatian: Math.round((percentageMaturaCroatian * (evaluationMaturaCroatianLevel === 'A' ? 1.6 : 1) / 160) * evaluationMaturaCroatian * 10),
+        pointsMaturaElective: Math.round(percentageMaturaElective * evaluationMaturaElective / 10),
         pointsMaturaEnglish: Math.round((percentageMaturaEnglish * (evaluationMaturaEnglishLevel === 'A' ? 1.6 : 1) / 160) * evaluationMaturaEnglish * 10),
         pointsMaturaMathematics: Math.round((percentageMaturaMathematics * (evaluationMaturaMathematicsLevel === 'A' ? 1.6 : 1) / 160) * evaluationMaturaMathematics * 10),
-        pointsMaturaElective: Math.round(percentageMaturaElective * evaluationMaturaElective / 10),
       });
     }
 
@@ -96,9 +97,12 @@ class App extends Component {
     const {
       activeStep,
       evaluationMaturaCroatian,
+      evaluationMaturaCroatianLevel,
       evaluationMaturaElective,
       evaluationMaturaEnglish,
+      evaluationMaturaEnglishLevel,
       evaluationMaturaMathematics,
+      evaluationMaturaMathematicsLevel,
       evaluationSchoolGrades,
       percentageFirstGrade,
       percentageFourthGrade,
@@ -113,9 +117,6 @@ class App extends Component {
       pointsMaturaElective,
       pointsMaturaEnglish,
       pointsMaturaMathematics,
-      evaluationMaturaCroatianLevel,
-      evaluationMaturaEnglishLevel,
-      evaluationMaturaMathematicsLevel,
     } = this.state;
     const { classes } = this.props;
 
@@ -126,7 +127,7 @@ class App extends Component {
         <React.Fragment>
           <Divider light classes={{ root: classes.dividerMarginBottom }} style={{ marginBottom: '10px' }} />
           <Typography className="mobileTooltip" style={{ marginBottom: 0 }} variant="caption">
-            Ukoliko niste sigurni koliko vaš fakultet pridaje pojedinim predmetima, posjetite:<Button className="button" target="_blank" href="https://www.postani-student.hr/Ucilista/Nositelji.aspx" color="primary">Postani Student</Button>
+            Ukoliko niste sigurni koliko vaš fakultet pridaje bodova određenim predmetima, posjetite:<Button className="button" target="_blank" href="https://www.postani-student.hr/Ucilista/Nositelji.aspx" color="primary">Postani Student</Button>
           </Typography>
           <Divider light classes={{ root: classes.dividerMarginBottom }} />
           <Typography className="typography" variant="title">Ocjene iz srednje škole</Typography>
@@ -142,7 +143,7 @@ class App extends Component {
           />
           <Divider light classes={{ root: classes.divider }} />
           <Typography className="typography" variant="title">Obvezni dio državne mature</Typography>
-          <Typography className="mobileTooltip" variant="caption">Ovdje upišite postotak od ukupnog broja bodova koji vam {isMobile ? null : <br />} određeni fakultet pridaje za obvezni dio drzavne mature</Typography>
+          <Typography className="mobileTooltip" variant="caption">Ovdje upišite postotak od ukupnog broja bodova koji vam {isMobile ? null : <br />} određeni fakultet pridaje za obvezni dio državne mature</Typography>
           <Grid container justify="center">
             <Grid item xs={12} lg={4}>
               <Input
@@ -204,7 +205,7 @@ class App extends Component {
           </Grid>
           <Divider light classes={{ root: classes.divider }} />
           <Typography className="typography" variant="title">Izborni dio državne mature</Typography>
-          <Typography className="mobileTooltip" variant="caption">Ovdje upišite postotak od ukupnog broja bodova koji vam određeni {isMobile ? null : <br />} fakultet pridaje za izborni dio drzavne mature</Typography>
+          <Typography className="mobileTooltip" variant="caption">Ovdje upišite postotak od ukupnog broja bodova koji vam određeni {isMobile ? null : <br />} fakultet pridaje za izborni dio državne mature</Typography>
           <Grid container justify="center">
             <Input
               name="evaluationMaturaElective"
@@ -221,8 +222,8 @@ class App extends Component {
       dialogContent = (
         <React.Fragment>
           <Divider light classes={{ root: classes.dividerMarginBottom }} />
-          <Typography className="typography" variant="title">Prosjeci sva cetiri razreda</Typography>
-          <Typography className="mobileTooltip" variant="caption">Ovdje upišite postotak od ukupnog broja bodova koji vam određeni {isMobile ? null : <br />} fakultet pridaje za izborni dio drzavne mature</Typography>
+          <Typography className="typography" variant="title">Prosjeci ocjena srednje škole</Typography>
+          <Typography className="mobileTooltip" variant="caption">Ovdje upišite prosjeke ocjena koje ste postigli tijekom {isMobile ? null : <br />} četiri razreda srednje škole</Typography>
           <Grid container justify="center">
             <Grid item xs={12} lg={3}>
               <Input
@@ -269,7 +270,7 @@ class App extends Component {
         <React.Fragment>
           <Divider light classes={{ root: classes.dividerMarginBottom }} />
           <Typography className="typography" variant="title">Rezultati mature</Typography>
-          <Typography className="mobileTooltip" variant="caption">Ovdje upišite postotak od ukupnog broja bodova koji vam određeni {isMobile ? null : <br />} fakultet pridaje za izborni dio drzavne mature</Typography>
+          <Typography className="mobileTooltip" variant="caption">Ovdje upišite rezultate koje ste postigli na {isMobile ? null : <br />} ispitima državne mature</Typography>
           <Grid container justify="center">
             <Grid item xs={12} lg={3}>
               <Input
@@ -337,8 +338,8 @@ class App extends Component {
     }
 
     return (
-      <div id="app" className="App">
-        <Grid justify="center" container>
+      <div className="App">
+        <Grid style={isMobile ? { justifyContent: 'space-around' } : null} container>
           <Grid item xs={12} sm={8} md={6} lg={8} xl={6}>
             <Paper className="paper" elevation={8}>
               <div className="heading">
@@ -355,8 +356,14 @@ class App extends Component {
               </ValidatorForm>
             </Paper>
           </Grid>
+          {!isMobile ? (
+            <Grid item xs={2}>
+              <img alt="reklama" src="https://lh3.ggpht.com/3q0W5UdEjoVjCVFo4l5aJoAg2-ElBSpBSvcMwuGKG_RNyrePKwSA54ZMaqA_EpEBpBi00hF0=w120" className="commercial" />
+            </Grid>
+          ) : null}
         </Grid>
       </div>
+
     );
   }
 }

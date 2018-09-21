@@ -10,6 +10,17 @@ body, html, .App {
   align-items: center;
 }
 
+.adSense {
+  display: flex;
+  flex: 1;
+  background-color: blueviolet;
+}
+
+.commercial {
+  height: 100%;
+  background-color: blueviolet;
+}
+
 body {
   background-color: lightgray;
   font-family: 'Roboto', sans-serif;
