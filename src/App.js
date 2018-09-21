@@ -6,6 +6,7 @@ import ReactChartkick, { BarChart } from 'react-chartkick';
 import { Button, Divider, Grid, Typography, Paper, NativeSelect } from '@material-ui/core';
 import { ValidatorForm } from 'react-material-ui-form-validator';
 import { isMobile } from 'react-device-detect';
+import axios from 'axios';
 
 import { withStyles } from '@material-ui/core/styles';
 import { Input, Stepper, Table } from './components';
@@ -20,7 +21,7 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      activeStep: 0,
+      activeStep: -1,
       evaluationMaturaCroatian: '',
       evaluationMaturaCroatianLevel: 'A',
       evaluationMaturaElective: '',
@@ -43,6 +44,19 @@ class App extends Component {
       pointsMaturaEnglish: '',
       pointsMaturaMathematics: '',
     };
+  }
+
+  componentDidMount() {
+    axios.interceptors.request.use((config) => {
+      config.headers.Authorization = `Basic ${btoa('adrianhajdin00@gmail.com:t_e2857178246e976d788e8b5af1b0ff8c')}`;
+      return config;
+    }, error => Promise.reject(error));
+
+    axios.get('https://sheetlabs.com/ADRI/evaluation')
+      .then((data) => {
+        console.log(data.data);
+      })
+      .catch(() => console.log('Failed'));
   }
 
   handleChange = ({ target: { value, name } }) => this.setState({ [name]: value });
@@ -122,10 +136,16 @@ class App extends Component {
 
     let dialogContent;
 
-    if (activeStep === 0) {
+    if (activeStep === -1) {
       dialogContent = (
         <React.Fragment>
-          <Divider light classes={{ root: classes.dividerMarginBottom }} style={{ marginBottom: '10px' }} />
+          <h1>Search</h1>
+        </React.Fragment>
+      );
+    } else if (activeStep === 0) {
+      dialogContent = (
+        <React.Fragment>
+          <Divider light classes={{ root: classes.dividerMarginBottom }} style={!isMobile ? { marginBottom: '10px' } : null} />
           <Typography className="mobileTooltip" style={{ marginBottom: 0 }} variant="caption">
             Ukoliko niste sigurni koliko vaš fakultet pridaje bodova određenim predmetima, posjetite:<Button className="button" target="_blank" href="https://www.postani-student.hr/Ucilista/Nositelji.aspx" color="primary">Postani Student</Button>
           </Typography>
@@ -339,8 +359,9 @@ class App extends Component {
 
     return (
       <div className="App">
-        <Grid style={isMobile ? { justifyContent: 'space-around' } : null} container>
-          <Grid item xs={12} sm={8} md={6} lg={8} xl={6}>
+        {/* <div style={{ display: 'flex', flex: 3 }}> */}
+        <Grid style={!isMobile ? { justifyContent: 'space-around', flex: 2 } : null} container>
+          <Grid style={{ marginLeft: '13%' }} item xs={12} sm={8} md={6} lg={8} xl={6}>
             <Paper className="paper" elevation={8}>
               <div className="heading">
                 <Typography className="headingTypography" variant="headline">Kalkulator bodova za upis na fakultet</Typography>
@@ -356,14 +377,14 @@ class App extends Component {
               </ValidatorForm>
             </Paper>
           </Grid>
-          {!isMobile ? (
-            <Grid item xs={2}>
-              <img alt="reklama" src="https://lh3.ggpht.com/3q0W5UdEjoVjCVFo4l5aJoAg2-ElBSpBSvcMwuGKG_RNyrePKwSA54ZMaqA_EpEBpBi00hF0=w120" className="commercial" />
-            </Grid>
-          ) : null}
         </Grid>
+        {!isMobile ? (
+          <Grid style={{ flex: 1 }} item xs={2}>
+            <img alt="reklama" src="https://lh4.ggpht.com/ike-jviZQ32RHuhkwLcAt_9vdpBX1oWKU00NX7QRe5GPl7-5sapzZ0u91_ssg_-Ednak2Hj-Hg=w162" className="commercial" />
+          </Grid>
+        ) : null}
       </div>
-
+    // </div>
     );
   }
 }
