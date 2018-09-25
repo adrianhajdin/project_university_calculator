@@ -3,7 +3,7 @@ import React from 'react';
 import { TableCell, Table, TableBody, TableRow } from '@material-ui/core';
 import PropTypes from 'prop-types';
 
-const table = ({ props: { evaluationMaturaElective, percentagesTotal, totalGradePoints, pointsMaturaCroatian, pointsMaturaMathematics, pointsMaturaEnglish, pointsMaturaElective } }) => (
+const table = ({ props: { evaluationMaturaElective1, evaluationMaturaElective2, evaluationMaturaElective3, percentagesTotal, totalGradePoints, pointsMaturaCroatian, pointsMaturaMathematics, pointsMaturaEnglish, pointsMaturaElective1, pointsMaturaElective2, pointsMaturaElective3 } }) => (
   <Table>
     <TableBody>
       <TableRow>
@@ -26,11 +26,25 @@ const table = ({ props: { evaluationMaturaElective, percentagesTotal, totalGrade
         <TableCell>Broj bodova od mature iz Engleskog jezika:</TableCell>
         <TableCell>{pointsMaturaEnglish}</TableCell>
       </TableRow>
-      {evaluationMaturaElective
+      {evaluationMaturaElective1
         ? (
           <TableRow>
-            <TableCell>Broj bodova od mature iz Izbornog predmeta:</TableCell>
-            <TableCell>{pointsMaturaElective}</TableCell>
+            <TableCell>Broj bodova od mature iz 1. Izbornog predmeta:</TableCell>
+            <TableCell>{pointsMaturaElective1}</TableCell>
+          </TableRow>
+        ) : null}
+      {evaluationMaturaElective2
+        ? (
+          <TableRow>
+            <TableCell>Broj bodova od mature iz 2. Izbornog predmeta:</TableCell>
+            <TableCell>{pointsMaturaElective2}</TableCell>
+          </TableRow>
+        ) : null}
+      {evaluationMaturaElective3
+        ? (
+          <TableRow>
+            <TableCell>Broj bodova od mature iz 3. Izbornog predmeta:</TableCell>
+            <TableCell>{pointsMaturaElective3}</TableCell>
           </TableRow>
         ) : null}
     </TableBody>
