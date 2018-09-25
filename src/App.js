@@ -163,7 +163,7 @@ class App extends Component {
         <React.Fragment>
           <Divider light classes={{ root: classes.dividerMarginBottom }} style={!isMobile ? { marginBottom: '10px' } : null} />
           <Typography className="mobileTooltip" style={{ marginBottom: 0 }} variant="caption">
-            Ukoliko niste sigurni koliko vaš fakultet pridaje bodova određenim predmetima, posjetite:<Button className="button" target="_blank" href="https://www.postani-student.hr/Ucilista/Nositelji.aspx" color="primary">Postani Student</Button>
+            Ukoliko niste sigurni koliko vaš fakultet pridaje bodova određenim predmetima, posjetite:<Button id={isMobile ? 'marginTop10' : null} className="button" target="_blank" href="https://www.postani-student.hr/Ucilista/Nositelji.aspx" color="primary">Postani Student</Button>
           </Typography>
           <Divider light classes={{ root: classes.dividerMarginBottom }} />
           <Typography className="typography" variant="title">Ocjene iz srednje škole</Typography>
@@ -241,7 +241,7 @@ class App extends Component {
           </Grid>
           <Divider light classes={{ root: classes.divider }} />
           <Typography className="typography" variant="title">Izborni dio državne mature</Typography>
-          <Typography className="mobileTooltip" variant="caption">Ovdje upišite postotak od ukupnog broja bodova koji vam određeni {isMobile ? null : <br />} fakultet pridaje za izborni dio državne mature</Typography>
+          <Typography id="noMargin" className="mobileTooltip" variant="caption" style={{ marginBottom: '0 !important' }}>Ovdje upišite postotak od ukupnog broja bodova koji vam određeni {isMobile ? null : <br />} fakultet pridaje za izborni dio državne mature</Typography>
           <Grid container justify="center">
             { evaluationMaturaElectiveInputs
               ? (
@@ -253,8 +253,8 @@ class App extends Component {
                     onChange={this.handleChange}
                     percentage
                   />
-                </Grid>) : null
-              }
+                </Grid>
+              ) : null }
             { evaluationMaturaElectiveInputs2
               ? (
                 <Grid key={2} item xs={12} lg={4}>
@@ -265,8 +265,8 @@ class App extends Component {
                     onChange={this.handleChange}
                     percentage
                   />
-                </Grid>) : null
-              }
+                </Grid>
+              ) : null }
             { evaluationMaturaElectiveInputs3
               ? (
                 <Grid key={3} item xs={12} lg={4}>
@@ -277,15 +277,13 @@ class App extends Component {
                     onChange={this.handleChange}
                     percentage
                   />
-                </Grid>)
-              : (
-                <div>
-                  <br />
-                  <Button onClick={this.addeEvaluationMaturaElective} size="medium" color="primary">Dodaj izborni predmet</Button>
-                </div>
-              )
-              }
+                </Grid>
+              ) : null }
           </Grid>
+          { !evaluationMaturaElectiveInputs3
+            ? (<div><br /><Button className="button" onClick={this.addeEvaluationMaturaElective} size="medium" color="primary">Dodaj izborni predmet</Button></div>)
+            : null
+          }
           <Divider light classes={{ root: classes.divider }} />
         </React.Fragment>
       );
