@@ -181,6 +181,9 @@ class App extends Component {
       pointsMaturaElective1,
       pointsMaturaElective2,
       pointsMaturaElective3,
+      pointsExtraField1,
+      pointsExtraField2,
+      pointsExtraField3,
       pointsMaturaEnglish,
       pointsMaturaMathematics,
       evaluationMaturaElectiveInputs,
@@ -283,16 +286,11 @@ class App extends Component {
             Ovdje upišite postotak od ukupnog broja bodova koji vam određeni
                 {isMobile ? null : <br />}
               fakultet pridaje za izborni dio državne mature
-                { !evaluationMaturaElectiveInputs3
-                  ? (
-                    <div><Button onClick={this.addeEvaluationMaturaElective} color="primary">Dodaj izborni predmet</Button></div>)
-                  : null
-                  }
               </Typography>
               <Grid container justify="center">
                 { evaluationMaturaElectiveInputs
                   ? (
-                    <Grid key={1} item xs={12} lg={6}>
+                    <Grid key={1} item xs={12}>
                       <Input
                         name="evaluationMaturaElective1"
                         label="1. Izborni predmet"
@@ -304,7 +302,7 @@ class App extends Component {
                   ) : null }
                 { evaluationMaturaElectiveInputs2
                   ? (
-                    <Grid key={2} item xs={12} lg={6}>
+                    <Grid style={{ marginTop: '10px' }} key={2} item xs={12}>
                       <Input
                         name="evaluationMaturaElective2"
                         label="2. Izborni predmet"
@@ -316,7 +314,7 @@ class App extends Component {
                   ) : null }
                 { evaluationMaturaElectiveInputs3
                   ? (
-                    <Grid key={3} item xs={12} lg={6}>
+                    <Grid style={{ marginTop: '10px' }} key={3} item xs={12}>
                       <Input
                         name="evaluationMaturaElective3"
                         label="3. Izborni predmet"
@@ -327,6 +325,11 @@ class App extends Component {
                     </Grid>
                   ) : null }
               </Grid>
+              { !evaluationMaturaElectiveInputs3
+                ? (
+                  <Button onClick={this.addeEvaluationMaturaElective} color="primary">Dodaj izborni predmet</Button>)
+                : null
+                  }
             </Grid>
             <Grid item xs={12} lg={6}>
               <Divider light classes={{ root: classes.divider }} />
@@ -335,19 +338,14 @@ class App extends Component {
             Ovdje upišite postotak od ukupnog broja bodova koji vam određeni
                 {isMobile ? null : <br />}
               fakultet pridaje za dodatne provjere i posebna postignuća
-                { !evaluationExtraFields3
-                  ? (
-                    <div><Button onClick={this.addEvaluationExtraField} color="primary">Dodaj izborni predmet</Button></div>)
-                  : null
-                  }
               </Typography>
-              <Grid container justify="center">
+              <Grid style={{ marginTop: '10px' }} container justify="center">
                 { evaluationExtraFields
                   ? (
-                    <Grid key={1} item xs={12} lg={6}>
+                    <Grid key={1} item xs={12}>
                       <Input
                         name="evaluationExtraField1"
-                        label="1. Izborni predmet"
+                        label="1. Dodatno polje"
                         value={evaluationExtraField1}
                         onChange={this.handleChange}
                         percentage
@@ -356,10 +354,10 @@ class App extends Component {
                   ) : null }
                 { evaluationExtraFields2
                   ? (
-                    <Grid key={2} item xs={12} lg={6}>
+                    <Grid style={{ marginTop: '10px' }} key={2} item xs={12}>
                       <Input
                         name="evaluationExtraField2"
-                        label="2. Izborni predmet"
+                        label="2. Dodatno polje"
                         value={evaluationExtraField2}
                         onChange={this.handleChange}
                         percentage
@@ -368,19 +366,22 @@ class App extends Component {
                   ) : null }
                 { evaluationExtraFields3
                   ? (
-                    <Grid key={3} item xs={12} lg={6}>
+                    <Grid style={{ marginTop: '10px' }} key={3} item xs={12}>
                       <Input
                         name="evaluationExtraField3"
-                        label="3. Izborni predmet"
+                        label="3. Dodatno polje"
                         value={evaluationExtraField3}
                         onChange={this.handleChange}
                         percentage
                       />
                     </Grid>
                   ) : null }
-
               </Grid>
-
+              { !evaluationExtraFields3
+                ? (
+                  <Button onClick={this.addEvaluationExtraField} color="primary">Dodaj dodatnu provjeru</Button>)
+                : null
+                  }
             </Grid>
           </Grid>
           <Divider light classes={{ root: classes.divider }} />
@@ -573,7 +574,25 @@ class App extends Component {
           <Divider light classes={{ root: classes.dividerMarginBottom }} />
           <Typography className="typography" variant="title">Rezultati:</Typography>
           <Divider light classes={{ root: classes.divider }} />
-          <Table props={{ evaluationMaturaElective1, evaluationMaturaElective2, evaluationMaturaElective3, percentagesTotal, totalGradePoints, pointsMaturaCroatian, pointsMaturaMathematics, pointsMaturaEnglish, pointsMaturaElective1, pointsMaturaElective2, pointsMaturaElective3 }} />
+          <Table props={{
+            evaluationMaturaElective1,
+            evaluationMaturaElective2,
+            evaluationMaturaElective3,
+            percentagesTotal,
+            totalGradePoints,
+            pointsMaturaCroatian,
+            pointsMaturaMathematics,
+            pointsMaturaEnglish,
+            pointsMaturaElective1,
+            pointsMaturaElective2,
+            pointsMaturaElective3,
+            pointsExtraField1,
+            pointsExtraField2,
+            pointsExtraField3,
+            evaluationExtraField1,
+            evaluationExtraField2,
+            evaluationExtraField3 }}
+          />
           <Typography justify="center" className="result" variant="title">Ukupan broj bodova: {totalMaturaPoints + totalGradePoints}</Typography>
           <BarChart height="100px" max={1000} data={[['Broj bodova', totalMaturaPoints + totalGradePoints]]} />
           <Divider light classes={{ root: classes.divider }} />
@@ -584,26 +603,26 @@ class App extends Component {
     return (
       <div className="App">
         {/* <div style={{ display: 'flex', flex: 3 }}> */}
-        <Grid justify="center" container>
-          {/* style={!isMobile ? { justifyContent: 'space-around', flex: 2 } : null} */}
-          <Grid item xs={12} sm={8} md={6} lg={8} xl={6}>
-            {/* style={{ marginLeft: '13%' }} */}
-            <Paper className="paper" elevation={8}>
-              <div className="heading">
-                <Typography className="headingTypography" variant="headline">Kalkulator bodova za upis na fakultet</Typography>
-                <img className="icon" src={logo} alt="calculator-icon" height="85" width="85" />
-              </div>
-              <ValidatorForm noValidate onSubmit={this.handleClick}>
-                {dialogContent}
-                <Stepper activeStep={activeStep} />
-                { activeStep === 3
-                  ? <Button onClick={this.handleBack} fullWidth size="large" variant="contained" color="primary">Na početak</Button>
-                  : <Button type="submit" fullWidth size="large" variant="contained" color="primary">{activeStep === 2 ? 'Završi' : 'Dalje'}</Button>
+        {/* <Grid justify="center" container> */}
+        {/* style={!isMobile ? { justifyContent: 'space-around', flex: 2 } : null} */}
+        {/* <Grid item xs={12} sm={8} md={6} lg={8} xl={6}> */}
+        {/* style={{ marginLeft: '13%' }} */}
+        <Paper className="paper" elevation={8}>
+          <div className="heading">
+            <Typography className="headingTypography" variant="headline">Kalkulator bodova za upis na fakultet</Typography>
+            <img className="icon" src={logo} alt="calculator-icon" height="85" width="85" />
+          </div>
+          <ValidatorForm noValidate onSubmit={this.handleClick}>
+            {dialogContent}
+            <Stepper activeStep={activeStep} />
+            { activeStep === 3
+              ? <Button onClick={this.handleBack} fullWidth size="large" variant="contained" color="primary">Na početak</Button>
+              : <Button type="submit" fullWidth size="large" variant="contained" color="primary">{activeStep === 2 ? 'Završi' : 'Dalje'}</Button>
                 }
-              </ValidatorForm>
-            </Paper>
-          </Grid>
-        </Grid>
+          </ValidatorForm>
+        </Paper>
+        {/* </Grid> */}
+        {/* </Grid> */}
         {/* {!isMobile ? (
           <Grid style={{ flex: 1 }} item xs={2}>
             <img alt="reklama" src="https://lh4.ggpht.com/ike-jviZQ32RHuhkwLcAt_9vdpBX1oWKU00NX7QRe5GPl7-5sapzZ0u91_ssg_-Ednak2Hj-Hg=w162" className="commercial" />
