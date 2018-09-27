@@ -283,8 +283,8 @@ class App extends Component {
               <Divider light classes={{ root: classes.divider }} />
               <Typography className="typography" variant="title">Izborni dio državne mature</Typography>
               <Typography className="mobileTooltip" variant="caption" style={{ marginBottom: '0 !important' }}>
-            Ovdje upišite postotak od ukupnog broja bodova koji vam određeni
-                {isMobile ? null : <br />}
+              Ovdje upišite postotak od ukupnog broja bodova koji vam određeni
+                {isMobile ? ' ' : <br />}
               fakultet pridaje za izborni dio državne mature
               </Typography>
               <Grid container justify="center">
@@ -336,7 +336,7 @@ class App extends Component {
               <Typography className="typography" variant="title">Dodatne provjere i posebna postignuća</Typography>
               <Typography className="mobileTooltip" variant="caption" style={{ marginBottom: '0 !important' }}>
             Ovdje upišite postotak od ukupnog broja bodova koji vam određeni
-                {isMobile ? null : <br />}
+                {isMobile ? ' ' : <br />}
               fakultet pridaje za dodatne provjere i posebna postignuća
               </Typography>
               <Grid style={{ marginTop: '10px' }} container justify="center">
@@ -438,8 +438,8 @@ class App extends Component {
       dialogContent = (
         <React.Fragment>
           <Divider light classes={{ root: classes.dividerMarginBottom }} />
-          <Typography className="typography" variant="title">Rezultati mature</Typography>
-          <Typography className="mobileTooltip" variant="caption">Ovdje upišite rezultate koje ste postigli na {isMobile ? null : <br />} ispitima državne mature</Typography>
+          <Typography className="typography" variant="title">Rezultati mature {evaluationExtraField1 ? 'i dodatnih provjera' : null}</Typography>
+          <Typography className="mobileTooltip" variant="caption">Ovdje upišite rezultate koje ste postigli na {isMobile ? null : <br />} ispitima državne mature {evaluationExtraField1 ? 'i dodatnim provjerama' : null}</Typography>
           <Grid container justify="center">
             <Grid item xs={12} lg={3}>
               <Input
@@ -472,7 +472,7 @@ class App extends Component {
               />
             </Grid>
           </Grid>
-          <br />
+          {evaluationMaturaElective1 ? <br /> : null}
           <Grid container justify="center">
             { evaluationMaturaElective1 !== ''
               ? (
@@ -517,7 +517,7 @@ class App extends Component {
               ) : null
             }
           </Grid>
-          <br />
+          {evaluationExtraField1 ? <br /> : null}
           <Grid container justify="center">
             { evaluationExtraField1 !== ''
               ? (
@@ -603,26 +603,26 @@ class App extends Component {
     return (
       <div className="App">
         {/* <div style={{ display: 'flex', flex: 3 }}> */}
-        {/* <Grid justify="center" container> */}
-        {/* style={!isMobile ? { justifyContent: 'space-around', flex: 2 } : null} */}
-        {/* <Grid item xs={12} sm={8} md={6} lg={8} xl={6}> */}
-        {/* style={{ marginLeft: '13%' }} */}
-        <Paper className="paper" elevation={8}>
-          <div className="heading">
-            <Typography className="headingTypography" variant="headline">Kalkulator bodova za upis na fakultet</Typography>
-            <img className="icon" src={logo} alt="calculator-icon" height="85" width="85" />
-          </div>
-          <ValidatorForm noValidate onSubmit={this.handleClick}>
-            {dialogContent}
-            <Stepper activeStep={activeStep} />
-            { activeStep === 3
-              ? <Button onClick={this.handleBack} fullWidth size="large" variant="contained" color="primary">Na početak</Button>
-              : <Button type="submit" fullWidth size="large" variant="contained" color="primary">{activeStep === 2 ? 'Završi' : 'Dalje'}</Button>
+        <Grid justify="center" container>
+          {/* style={!isMobile ? { justifyContent: 'space-around', flex: 2 } : null} */}
+          <Grid item xs={12} sm={8} md={6} lg={8} xl={6}>
+            {/* style={{ marginLeft: '13%' }} */}
+            <Paper className="paper" elevation={8}>
+              <div className="heading">
+                <Typography className="headingTypography" variant="headline">Kalkulator bodova za upis na fakultet</Typography>
+                <img className="icon" src={logo} alt="calculator-icon" height="85" width="85" />
+              </div>
+              <ValidatorForm noValidate onSubmit={this.handleClick}>
+                {dialogContent}
+                <Stepper activeStep={activeStep} />
+                { activeStep === 3
+                  ? <Button onClick={this.handleBack} fullWidth size="large" variant="contained" color="primary">Na početak</Button>
+                  : <Button type="submit" fullWidth size="large" variant="contained" color="primary">{activeStep === 2 ? 'Završi' : 'Dalje'}</Button>
                 }
-          </ValidatorForm>
-        </Paper>
-        {/* </Grid> */}
-        {/* </Grid> */}
+              </ValidatorForm>
+            </Paper>
+          </Grid>
+        </Grid>
         {/* {!isMobile ? (
           <Grid style={{ flex: 1 }} item xs={2}>
             <img alt="reklama" src="https://lh4.ggpht.com/ike-jviZQ32RHuhkwLcAt_9vdpBX1oWKU00NX7QRe5GPl7-5sapzZ0u91_ssg_-Ednak2Hj-Hg=w162" className="commercial" />
