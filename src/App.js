@@ -283,9 +283,7 @@ class App extends Component {
               <Divider light classes={{ root: classes.divider }} />
               <Typography className="typography" variant="title">Izborni dio državne mature</Typography>
               <Typography className="mobileTooltip" variant="caption" style={{ marginBottom: '0 !important' }}>
-              Ovdje upišite postotak od ukupnog broja bodova koji vam određeni
-                {isMobile ? ' ' : <br />}
-              fakultet pridaje za izborni dio državne mature
+                Ovdje upišite postotak od ukupnog broja bodova koji vam određeni {isMobile ? null : <br />} fakultet pridaje za izborni dio državne mature
               </Typography>
               <Grid container justify="center">
                 { evaluationMaturaElectiveInputs
@@ -335,9 +333,7 @@ class App extends Component {
               <Divider light classes={{ root: classes.divider }} />
               <Typography className="typography" variant="title">Dodatne provjere i posebna postignuća</Typography>
               <Typography className="mobileTooltip" variant="caption" style={{ marginBottom: '0 !important' }}>
-            Ovdje upišite postotak od ukupnog broja bodova koji vam određeni
-                {isMobile ? ' ' : <br />}
-              fakultet pridaje za dodatne provjere i posebna postignuća
+                Ovdje upišite postotak od ukupnog broja bodova koji vam određeni {isMobile ? ' ' : <br />} fakultet pridaje za dodatne provjere i posebna postignuća
               </Typography>
               <Grid style={{ marginTop: '10px' }} container justify="center">
                 { evaluationExtraFields
@@ -620,6 +616,10 @@ class App extends Component {
                   : <Button type="submit" fullWidth size="large" variant="contained" color="primary">{activeStep === 2 ? 'Završi' : 'Dalje'}</Button>
                 }
               </ValidatorForm>
+              <br />
+              <Typography className="copyright" variant="caption">
+                © 2018 <a className="link" href="https://www.linkedin.com/in/adrian-hajdin">Adrian Hajdin</a> All Rights Reserved
+              </Typography>
             </Paper>
           </Grid>
         </Grid>

@@ -75,6 +75,15 @@ body {
   font-size: 0.85rem !important;
 }
 
+.copyright {
+  font-size: 0.85rem !important;
+}
+
+.link {
+  text-decoration: none;
+}
+
+
 #noMargin {
   margin-bottom: 0 !important;
 }
