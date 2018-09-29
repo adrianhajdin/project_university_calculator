@@ -239,7 +239,7 @@ class App extends Component {
                 <option value="B">B</option>
               </NativeSelect>
             </Grid>
-            <Grid item xs={12} lg={4}>
+            <Grid className="marginTopMobile" item xs={12} lg={4}>
               <Input
                 label="Matematika"
                 name="evaluationMaturaMathematics"
@@ -258,7 +258,7 @@ class App extends Component {
                 <option value="B">B</option>
               </NativeSelect>
             </Grid>
-            <Grid item xs={12} lg={4}>
+            <Grid className="marginTopMobile" item xs={12} lg={4}>
               <Input
                 label="Engleski jezik"
                 name="evaluationMaturaEnglish"
@@ -284,6 +284,7 @@ class App extends Component {
               <Typography className="typography" variant="title">Izborni dio državne mature</Typography>
               <Typography className="mobileTooltip" variant="caption" style={{ marginBottom: '0 !important' }}>
                 Ovdje upišite postotak od ukupnog broja bodova koji vam određeni {isMobile ? null : <br />} fakultet pridaje za izborni dio državne mature
+                <br />
                 { !evaluationMaturaElectiveInputs3
                   ? (
                     <Button onClick={this.addeEvaluationMaturaElective} color="primary">Dodaj izborni predmet</Button>)
@@ -305,7 +306,7 @@ class App extends Component {
                   ) : null }
                 { evaluationMaturaElectiveInputs2
                   ? (
-                    <Grid style={{ marginTop: '10px' }} key={2} item xs={12}>
+                    <Grid className="marginTop" key={2} item xs={12}>
                       <Input
                         name="evaluationMaturaElective2"
                         label="2. Izborni predmet"
@@ -317,7 +318,7 @@ class App extends Component {
                   ) : null }
                 { evaluationMaturaElectiveInputs3
                   ? (
-                    <Grid style={{ marginTop: '10px' }} key={3} item xs={12}>
+                    <Grid className="marginTop" key={3} item xs={12}>
                       <Input
                         name="evaluationMaturaElective3"
                         label="3. Izborni predmet"
@@ -334,13 +335,14 @@ class App extends Component {
               <Typography className="typography" variant="title">Dodatne provjere i posebna postignuća</Typography>
               <Typography className="mobileTooltip" variant="caption" style={{ marginBottom: '0 !important' }}>
                 Ovdje upišite postotak od ukupnog broja bodova koji vam određeni {isMobile ? ' ' : <br />} fakultet pridaje za dodatne provjere i posebna postignuća
+                <br />
                 { !evaluationExtraFields3
                   ? (
                     <Button onClick={this.addEvaluationExtraField} color="primary">Dodaj dodatnu provjeru</Button>)
                   : null
                   }
               </Typography>
-              <Grid style={{ marginTop: '10px' }} container justify="center">
+              <Grid className="marginTop" container justify="center">
                 { evaluationExtraFields
                   ? (
                     <Grid key={1} item xs={12}>
@@ -355,7 +357,7 @@ class App extends Component {
                   ) : null }
                 { evaluationExtraFields2
                   ? (
-                    <Grid style={{ marginTop: '10px' }} key={2} item xs={12}>
+                    <Grid className="marginTop" key={2} item xs={12}>
                       <Input
                         name="evaluationExtraField2"
                         label="2. Dodatno polje"
@@ -367,7 +369,7 @@ class App extends Component {
                   ) : null }
                 { evaluationExtraFields3
                   ? (
-                    <Grid style={{ marginTop: '10px' }} key={3} item xs={12}>
+                    <Grid className="marginTop" key={3} item xs={12}>
                       <Input
                         name="evaluationExtraField3"
                         label="3. Dodatno polje"
@@ -390,7 +392,7 @@ class App extends Component {
           <Typography className="typography" variant="title">Prosjeci ocjena srednje škole</Typography>
           <Typography className="mobileTooltip" variant="caption">Ovdje upišite prosjeke ocjena koje ste postigli tijekom {isMobile ? null : <br />} četiri razreda srednje škole</Typography>
           <Grid container justify="center">
-            <Grid item xs={12} lg={3}>
+            <Grid className="marginTopMobile" item xs={12} lg={3}>
               <Input
                 label="1. razred"
                 name="percentageFirstGrade"
@@ -399,7 +401,7 @@ class App extends Component {
                 value={percentageFirstGrade}
               />
             </Grid>
-            <Grid item xs={12} lg={3}>
+            <Grid className="marginTopMobile" item xs={12} lg={3}>
               <Input
                 label="2. razred"
                 name="percentageSecondGrade"
@@ -408,7 +410,7 @@ class App extends Component {
                 value={percentageSecondGrade}
               />
             </Grid>
-            <Grid item xs={12} lg={3}>
+            <Grid className="marginTopMobile" item xs={12} lg={3}>
               <Input
                 label="3. razred"
                 name="percentageThirdGrade"
@@ -417,7 +419,7 @@ class App extends Component {
                 value={percentageThirdGrade}
               />
             </Grid>
-            <Grid item xs={12} lg={3}>
+            <Grid className="marginTopMobile" item xs={12} lg={3}>
               <Input
                 label="4. razred"
                 name="percentageFourthGrade"
@@ -447,7 +449,7 @@ class App extends Component {
                 value={percentageMaturaCroatian}
               />
             </Grid>
-            <Grid item xs={12} lg={3}>
+            <Grid className="marginTopMobile" item xs={12} lg={3}>
               <Input
                 label="Matematika"
                 name="percentageMaturaMathematics"
@@ -457,7 +459,7 @@ class App extends Component {
                 value={percentageMaturaMathematics}
               />
             </Grid>
-            <Grid item xs={12} lg={3}>
+            <Grid className="marginTopMobile" item xs={12} lg={3}>
               <Input
                 label="Engleski jezik"
                 name="percentageMaturaEnglish"
@@ -486,7 +488,7 @@ class App extends Component {
             }
             { evaluationMaturaElective2 !== ''
               ? (
-                <Grid item xs={12} lg={3}>
+                <Grid className="marginTopMobile" item xs={12} lg={3}>
                   <Input
                     label="2. Izborni predmet"
                     name="percentageMaturaElective2"
@@ -500,7 +502,7 @@ class App extends Component {
             }
             { evaluationMaturaElective3 !== ''
               ? (
-                <Grid item xs={12} lg={3}>
+                <Grid className="marginTopMobile" item xs={12} lg={3}>
                   <Input
                     label="3. Izborni predmet"
                     name="percentageMaturaElective3"
@@ -531,7 +533,7 @@ class App extends Component {
             }
             { evaluationExtraField2 !== ''
               ? (
-                <Grid item xs={12} lg={3}>
+                <Grid className="marginTopMobile" item xs={12} lg={3}>
                   <Input
                     label="2. Dodatno polje"
                     name="percentageExtraField2"
@@ -545,7 +547,7 @@ class App extends Component {
             }
             { evaluationExtraField3 !== ''
               ? (
-                <Grid item xs={12} lg={3}>
+                <Grid className="marginTopMobile" item xs={12} lg={3}>
                   <Input
                     label="3. Dodatno polje"
                     name="percentageExtraField3"
@@ -589,7 +591,8 @@ class App extends Component {
             evaluationExtraField2,
             evaluationExtraField3 }}
           />
-          <Typography justify="center" className="result" variant="title">Ukupan broj bodova: {totalMaturaPoints + totalGradePoints}</Typography>
+          {isMobile ? <Divider light classes={{ root: classes.divider }} /> : null}
+          <Typography justify="center" className={!isMobile ? 'result' : null} variant="title">Ukupan broj bodova: {totalMaturaPoints + totalGradePoints}</Typography>
           <BarChart height="100px" max={1000} data={[['Broj bodova', totalMaturaPoints + totalGradePoints]]} />
           <Divider light classes={{ root: classes.divider }} />
         </React.Fragment>

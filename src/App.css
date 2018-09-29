@@ -98,6 +98,10 @@ body {
   margin-left: 10px;
 }
 
+.marginTop{
+  margin-top: 5px !important;
+}
+
 @media only screen and (max-width: 600px) {
   .paper {
     height: 100vh;
@@ -116,5 +120,9 @@ body {
 
   .mobileTooltip {
     font-size: 0.75rem;
+  }
+
+  .marginTopMobile {
+    margin-top: 5px !important;
   }
 }
