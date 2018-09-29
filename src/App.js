@@ -591,8 +591,6 @@ class App extends Component {
             evaluationExtraField2,
             evaluationExtraField3 }}
           />
-          {isMobile ? <Divider light classes={{ root: classes.divider }} /> : null}
-          <Typography justify="center" className={!isMobile ? 'result' : null} variant="title">Ukupan broj bodova: {totalMaturaPoints + totalGradePoints}</Typography>
           <BarChart height="100px" max={1000} data={[['Broj bodova', totalMaturaPoints + totalGradePoints]]} />
           <Divider light classes={{ root: classes.divider }} />
         </React.Fragment>
