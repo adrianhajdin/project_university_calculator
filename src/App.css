@@ -7,6 +7,7 @@ body, html, .App {
   display: flex;
   justify-content: center;
   align-items: center;
+  height: 100vh;
 }
 
 .adSense {
@@ -64,10 +65,10 @@ body {
   padding-top: 0;
 }
 
-/* .icon {
+.icon {
   height: 64px;
   width: 64px;
-} */
+}
 
 .mobileTooltip {
   margin-bottom: 10px !important;

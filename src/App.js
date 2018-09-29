@@ -597,7 +597,7 @@ class App extends Component {
     }
 
     return (
-      <div className="App" style={activeStep === 0 || activeStep === 3 ? { height: 'auto' } : { height: '100vh' }}>
+      <div className="App">
         {/* <div style={{ display: 'flex', flex: 3 }}> */}
         <Grid justify="center" container>
           {/* style={!isMobile ? { justifyContent: 'space-around', flex: 2 } : null} */}
