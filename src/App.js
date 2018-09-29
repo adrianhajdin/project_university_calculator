@@ -284,6 +284,11 @@ class App extends Component {
               <Typography className="typography" variant="title">Izborni dio državne mature</Typography>
               <Typography className="mobileTooltip" variant="caption" style={{ marginBottom: '0 !important' }}>
                 Ovdje upišite postotak od ukupnog broja bodova koji vam određeni {isMobile ? null : <br />} fakultet pridaje za izborni dio državne mature
+                { !evaluationMaturaElectiveInputs3
+                  ? (
+                    <Button onClick={this.addeEvaluationMaturaElective} color="primary">Dodaj izborni predmet</Button>)
+                  : null
+                  }
               </Typography>
               <Grid container justify="center">
                 { evaluationMaturaElectiveInputs
@@ -323,17 +328,17 @@ class App extends Component {
                     </Grid>
                   ) : null }
               </Grid>
-              { !evaluationMaturaElectiveInputs3
-                ? (
-                  <Button onClick={this.addeEvaluationMaturaElective} color="primary">Dodaj izborni predmet</Button>)
-                : null
-                  }
             </Grid>
             <Grid item xs={12} lg={6}>
               <Divider light classes={{ root: classes.divider }} />
               <Typography className="typography" variant="title">Dodatne provjere i posebna postignuća</Typography>
               <Typography className="mobileTooltip" variant="caption" style={{ marginBottom: '0 !important' }}>
                 Ovdje upišite postotak od ukupnog broja bodova koji vam određeni {isMobile ? ' ' : <br />} fakultet pridaje za dodatne provjere i posebna postignuća
+                { !evaluationExtraFields3
+                  ? (
+                    <Button onClick={this.addEvaluationExtraField} color="primary">Dodaj dodatnu provjeru</Button>)
+                  : null
+                  }
               </Typography>
               <Grid style={{ marginTop: '10px' }} container justify="center">
                 { evaluationExtraFields
@@ -373,11 +378,6 @@ class App extends Component {
                     </Grid>
                   ) : null }
               </Grid>
-              { !evaluationExtraFields3
-                ? (
-                  <Button onClick={this.addEvaluationExtraField} color="primary">Dodaj dodatnu provjeru</Button>)
-                : null
-                  }
             </Grid>
           </Grid>
           <Divider light classes={{ root: classes.divider }} />
@@ -597,7 +597,7 @@ class App extends Component {
     }
 
     return (
-      <div className="App">
+      <div className="App" style={activeStep === 0 || activeStep === 3 ? { height: 'auto' } : { height: '100vh' }}>
         {/* <div style={{ display: 'flex', flex: 3 }}> */}
         <Grid justify="center" container>
           {/* style={!isMobile ? { justifyContent: 'space-around', flex: 2 } : null} */}
@@ -618,7 +618,7 @@ class App extends Component {
               </ValidatorForm>
               <br />
               <Typography className="copyright" variant="caption">
-                © 2018 <a className="link" href="https://www.linkedin.com/in/adrian-hajdin">Adrian Hajdin</a> All Rights Reserved
+              Copyright 2018 © <a className="link" href="https://www.linkedin.com/in/adrian-hajdin">Adrian Hajdin.</a> All Rights Reserved.
               </Typography>
             </Paper>
           </Grid>

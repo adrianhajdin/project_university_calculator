@@ -1,7 +1,6 @@
 body, html, .App {
   margin: 0;
   padding: 0;
-  height: 100vh;
 }
 
 .App {
@@ -65,10 +64,10 @@ body {
   padding-top: 0;
 }
 
-.icon {
+/* .icon {
   height: 64px;
   width: 64px;
-}
+} */
 
 .mobileTooltip {
   margin-bottom: 10px !important;
@@ -81,6 +80,7 @@ body {
 
 .link {
   text-decoration: none;
+  color: #303F9F;
 }
 
 
