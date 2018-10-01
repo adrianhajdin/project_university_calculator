@@ -591,6 +591,7 @@ class App extends Component {
             evaluationExtraField2,
             evaluationExtraField3 }}
           />
+          <Typography justify="center" className="result" variant="title">Ukupan broj bodova: {totalMaturaPoints + totalGradePoints}</Typography>
           <BarChart height="100px" max={1000} data={[['Broj bodova', totalMaturaPoints + totalGradePoints]]} />
           <Divider light classes={{ root: classes.divider }} />
         </React.Fragment>
@@ -602,7 +603,7 @@ class App extends Component {
         {/* <div style={{ display: 'flex', flex: 3 }}> */}
         <Grid justify="center" container>
           {/* style={!isMobile ? { justifyContent: 'space-around', flex: 2 } : null} */}
-          <Grid item xs={12} sm={8} md={6} lg={8} xl={6}>
+          <Grid item xs={12} sm={12} md={6} lg={8} xl={6}>
             {/* style={{ marginLeft: '13%' }} */}
             <Paper className="paper" elevation={8}>
               <div className="heading">

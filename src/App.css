@@ -1,29 +1,15 @@
-body, html, .App {
-  margin: 0;
-  padding: 0;
-}
-
-.App {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-}
-
-.adSense {
-  display: flex;
-  flex: 1;
-  background-color: blueviolet;
-}
-
-.commercial {
+html {
   height: 100%;
-  background-color: blueviolet;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 body {
   background-color: lightgray;
   font-family: 'Roboto', sans-serif;
+  overflow: auto;
+  margin: 0;
 }
 
 .result {
@@ -32,7 +18,7 @@ body {
 
 .paper {
   text-align: center;
-  overflow: auto !important;
+  overflow: auto;
   justify-content: space-between;
   padding: 0 24px 24px 24px;
 }
@@ -50,8 +36,6 @@ body {
 }
 
 .typography {
-  display: flex  !important;
-  justify-content: center !important;
   margin-bottom: 10px !important;
 }
 
@@ -105,7 +89,6 @@ body {
 @media only screen and (max-width: 600px) {
   .paper {
     height: 100vh;
-    padding-top: 24px;
   }
 
   .icon {
@@ -126,3 +109,14 @@ body {
     margin-top: 5px !important;
   }
 }
+
+/* .adSense {
+  display: flex;
+  flex: 1;
+  background-color: blueviolet;
+}
+
+.commercial {
+  height: 100%;
+  background-color: blueviolet;
+} */
