@@ -21,14 +21,20 @@ class App extends Component {
     super(props);
     this.state = {
       activeStep: 0,
+      evaluationExtraField1: '',
+      evaluationExtraField2: '',
+      evaluationExtraField3: '',
+      evaluationExtraFields2: false,
+      evaluationExtraFields3: false,
+      evaluationExtraFields: false,
       evaluationMaturaCroatian: '',
       evaluationMaturaCroatianLevel: 'A',
       evaluationMaturaElective1: '',
       evaluationMaturaElective2: '',
       evaluationMaturaElective3: '',
-      evaluationExtraField1: '',
-      evaluationExtraField2: '',
-      evaluationExtraField3: '',
+      evaluationMaturaElectiveInputs2: false,
+      evaluationMaturaElectiveInputs3: false,
+      evaluationMaturaElectiveInputs: false,
       evaluationMaturaEnglish: '',
       evaluationMaturaEnglishLevel: 'A',
       evaluationMaturaMathematics: '',
@@ -36,6 +42,9 @@ class App extends Component {
       evaluationSchoolGrades: '',
       percentageFirstGrade: '',
       percentageFourthGrade: '',
+      percentageExtraField1: '',
+      percentageExtraField2: '',
+      percentageExtraField3: '',
       percentageMaturaCroatian: '',
       percentageMaturaElective1: '',
       percentageMaturaElective2: '',
@@ -51,12 +60,6 @@ class App extends Component {
       pointsMaturaElective3: '',
       pointsMaturaEnglish: '',
       pointsMaturaMathematics: '',
-      evaluationMaturaElectiveInputs: false,
-      evaluationMaturaElectiveInputs2: false,
-      evaluationMaturaElectiveInputs3: false,
-      evaluationExtraFields: false,
-      evaluationExtraFields2: false,
-      evaluationExtraFields3: false,
     };
   }
 
@@ -64,9 +67,7 @@ class App extends Component {
 
   handleSelectChange = ({ target: { value, name } }) => this.setState({ [name]: value });
 
-  handleBack = () => {
-    window.location.reload();
-  }
+  handleBack = () => window.location.reload()
 
   addeEvaluationMaturaElective = () => {
     const { evaluationMaturaElectiveInputs, evaluationMaturaElectiveInputs2 } = this.state;
@@ -95,27 +96,27 @@ class App extends Component {
   handleClick = () => {
     const {
       activeStep,
+      evaluationExtraField1,
+      evaluationExtraField2,
+      evaluationExtraField3,
       evaluationMaturaCroatian,
       evaluationMaturaCroatianLevel,
       evaluationMaturaElective1,
       evaluationMaturaElective2,
       evaluationMaturaElective3,
-      evaluationExtraField1,
-      evaluationExtraField2,
-      evaluationExtraField3,
       evaluationMaturaEnglish,
       evaluationMaturaEnglishLevel,
       evaluationMaturaMathematics,
       evaluationMaturaMathematicsLevel,
+      percentageExtraField1,
+      percentageExtraField2,
+      percentageExtraField3,
       percentageFirstGrade,
       percentageFourthGrade,
       percentageMaturaCroatian,
       percentageMaturaElective1,
       percentageMaturaElective2,
       percentageMaturaElective3,
-      percentageExtraField1,
-      percentageExtraField2,
-      percentageExtraField3,
       percentageMaturaEnglish,
       percentageMaturaMathematics,
       percentageSecondGrade,
@@ -132,13 +133,13 @@ class App extends Component {
     } else if (activeStep === 2) {
       this.setState({
         activeStep: activeStep + 1,
+        pointsExtraField1: Math.round(percentageExtraField1 * evaluationExtraField1 / 10),
+        pointsExtraField2: Math.round(percentageExtraField2 * evaluationExtraField2 / 10),
+        pointsExtraField3: Math.round(percentageExtraField3 * evaluationExtraField3 / 10),
         pointsMaturaCroatian: Math.round((percentageMaturaCroatian * (evaluationMaturaCroatianLevel === 'A' ? 1.6 : 1) / 160) * evaluationMaturaCroatian * 10),
         pointsMaturaElective1: Math.round(percentageMaturaElective1 * evaluationMaturaElective1 / 10),
         pointsMaturaElective2: Math.round(percentageMaturaElective2 * evaluationMaturaElective2 / 10),
         pointsMaturaElective3: Math.round(percentageMaturaElective3 * evaluationMaturaElective3 / 10),
-        pointsExtraField1: Math.round(percentageExtraField1 * evaluationExtraField1 / 10),
-        pointsExtraField2: Math.round(percentageExtraField2 * evaluationExtraField2 / 10),
-        pointsExtraField3: Math.round(percentageExtraField3 * evaluationExtraField3 / 10),
         pointsMaturaEnglish: Math.round((percentageMaturaEnglish * (evaluationMaturaEnglishLevel === 'A' ? 1.6 : 1) / 160) * evaluationMaturaEnglish * 10),
         pointsMaturaMathematics: Math.round((percentageMaturaMathematics * (evaluationMaturaMathematicsLevel === 'A' ? 1.6 : 1) / 160) * evaluationMaturaMathematics * 10),
       });
@@ -150,19 +151,28 @@ class App extends Component {
   render() {
     const {
       activeStep,
+      evaluationExtraField1,
+      evaluationExtraField2,
+      evaluationExtraField3,
+      evaluationExtraFields,
+      evaluationExtraFields2,
+      evaluationExtraFields3,
       evaluationMaturaCroatian,
       evaluationMaturaCroatianLevel,
       evaluationMaturaElective1,
       evaluationMaturaElective2,
       evaluationMaturaElective3,
-      evaluationExtraField1,
-      evaluationExtraField2,
-      evaluationExtraField3,
+      evaluationMaturaElectiveInputs,
+      evaluationMaturaElectiveInputs2,
+      evaluationMaturaElectiveInputs3,
       evaluationMaturaEnglish,
       evaluationMaturaEnglishLevel,
       evaluationMaturaMathematics,
       evaluationMaturaMathematicsLevel,
       evaluationSchoolGrades,
+      percentageExtraField1,
+      percentageExtraField2,
+      percentageExtraField3,
       percentageFirstGrade,
       percentageFourthGrade,
       percentageMaturaCroatian,
@@ -173,25 +183,16 @@ class App extends Component {
       percentageMaturaMathematics,
       percentageSecondGrade,
       percentageThirdGrade,
-      percentageExtraField1,
-      percentageExtraField2,
-      percentageExtraField3,
       percentagesTotal,
+      pointsExtraField1,
+      pointsExtraField2,
+      pointsExtraField3,
       pointsMaturaCroatian,
       pointsMaturaElective1,
       pointsMaturaElective2,
       pointsMaturaElective3,
-      pointsExtraField1,
-      pointsExtraField2,
-      pointsExtraField3,
       pointsMaturaEnglish,
       pointsMaturaMathematics,
-      evaluationMaturaElectiveInputs,
-      evaluationMaturaElectiveInputs2,
-      evaluationMaturaElectiveInputs3,
-      evaluationExtraFields,
-      evaluationExtraFields2,
-      evaluationExtraFields3,
     } = this.state;
     const { classes } = this.props;
 
@@ -200,13 +201,14 @@ class App extends Component {
     if (activeStep === 0) {
       dialogContent = (
         <React.Fragment>
-          <Divider light classes={{ root: classes.dividerMarginBottom }} style={!isMobile ? { marginBottom: '10px' } : null} />
-          <Typography className="mobileTooltip" style={{ marginBottom: 0 }} variant="caption">
-            Ukoliko niste sigurni koliko vaš fakultet pridaje bodova određenim predmetima, posjetite:<Button className="button" target="_blank" href="https://www.postani-student.hr/Ucilista/Nositelji.aspx" color="primary">Postani Student</Button>
+          <Divider light classes={{ root: classes.dividerMarginBottom }} />
+          <Typography classes={{ root: classes.caption }} variant="caption">
+            Ukoliko niste sigurni koliko vaš fakultet pridaje bodova određenim predmetima, posjetite:
+            <Button classes={{ root: classes.button }} target="_blank" href="https://www.postani-student.hr/Ucilista/Nositelji.aspx" color="primary">Postani Student</Button>
           </Typography>
           <Divider light classes={{ root: classes.dividerMarginBottom }} />
-          <Typography className="typography" variant="title">Ocjene iz srednje škole</Typography>
-          <Typography className="mobileTooltip" variant="caption">Ovdje upišite postotak od ukupnog broja bodova koji vam {isMobile ? null : <br />} određeni fakultet pridaje za prosjek ocjena srednje škole</Typography>
+          <Typography classes={{ root: classes.marginBottom10 }} variant="title">Ocjene iz srednje škole</Typography>
+          <Typography classes={{ root: classes.caption }} variant="caption">Ovdje upišite postotak od ukupnog broja bodova koji vam {isMobile ? null : <br />} određeni fakultet pridaje za prosjek ocjena srednje škole</Typography>
           <Input
             autoFocus
             label="Prosjek svih ocjena"
@@ -217,8 +219,8 @@ class App extends Component {
             value={evaluationSchoolGrades}
           />
           <Divider light classes={{ root: classes.divider }} />
-          <Typography className="typography" variant="title">Obvezni dio državne mature</Typography>
-          <Typography className="mobileTooltip" variant="caption">Ovdje upišite postotak od ukupnog broja bodova koji vam {isMobile ? null : <br />} određeni fakultet pridaje za obvezni dio državne mature</Typography>
+          <Typography classes={{ root: classes.marginBottom10 }} variant="title">Obvezni dio državne mature</Typography>
+          <Typography classes={{ root: classes.caption }} variant="caption">Ovdje upišite postotak od ukupnog broja bodova koji vam {isMobile ? null : <br />} određeni fakultet pridaje za obvezni dio državne mature</Typography>
           <Grid container justify="center">
             <Grid item xs={12} lg={4}>
               <Input
@@ -231,7 +233,7 @@ class App extends Component {
               />
               <NativeSelect
                 name="evaluationMaturaCroatianLevel"
-                className="marginLeft10"
+                classes={{ root: classes.marginLeft10 }}
                 value={evaluationMaturaCroatianLevel}
                 onChange={this.handleSelectChange}
               >
@@ -239,7 +241,7 @@ class App extends Component {
                 <option value="B">B</option>
               </NativeSelect>
             </Grid>
-            <Grid className="marginTopMobile" item xs={12} lg={4}>
+            <Grid className={classes.marginTopMobile} item xs={12} lg={4}>
               <Input
                 label="Matematika"
                 name="evaluationMaturaMathematics"
@@ -250,7 +252,7 @@ class App extends Component {
               />
               <NativeSelect
                 name="evaluationMaturaMathematicsLevel"
-                className="marginLeft10"
+                classes={{ root: classes.marginLeft10 }}
                 value={evaluationMaturaMathematicsLevel}
                 onChange={this.handleSelectChange}
               >
@@ -258,7 +260,7 @@ class App extends Component {
                 <option value="B">B</option>
               </NativeSelect>
             </Grid>
-            <Grid className="marginTopMobile" item xs={12} lg={4}>
+            <Grid className={classes.marginTopMobile} item xs={12} lg={4}>
               <Input
                 label="Engleski jezik"
                 name="evaluationMaturaEnglish"
@@ -269,7 +271,7 @@ class App extends Component {
               />
               <NativeSelect
                 name="evaluationMaturaEnglishLevel"
-                className="marginLeft10"
+                classes={{ root: classes.marginLeft10 }}
                 value={evaluationMaturaEnglishLevel}
                 onChange={this.handleNativeSelectChange}
               >
@@ -281,8 +283,8 @@ class App extends Component {
           <Grid container justify="center">
             <Grid item xs={12} lg={6}>
               <Divider light classes={{ root: classes.divider }} />
-              <Typography className="typography" variant="title">Izborni dio državne mature</Typography>
-              <Typography className="mobileTooltip" variant="caption" style={{ marginBottom: '0 !important' }}>
+              <Typography classes={{ root: classes.marginBottom10 }} variant="title">Izborni dio državne mature</Typography>
+              <Typography classes={{ root: classes.caption }} variant="caption" style={{ marginBottom: '0 !important' }}>
                 Ovdje upišite postotak od ukupnog broja bodova koji vam određeni {isMobile ? null : <br />} fakultet pridaje za izborni dio državne mature
                 <br />
                 { !evaluationMaturaElectiveInputs3
@@ -306,7 +308,7 @@ class App extends Component {
                   ) : null }
                 { evaluationMaturaElectiveInputs2
                   ? (
-                    <Grid className="marginTop" key={2} item xs={12}>
+                    <Grid className={classes.marginTop5} key={2} item xs={12}>
                       <Input
                         name="evaluationMaturaElective2"
                         label="2. Izborni predmet"
@@ -318,7 +320,7 @@ class App extends Component {
                   ) : null }
                 { evaluationMaturaElectiveInputs3
                   ? (
-                    <Grid className="marginTop" key={3} item xs={12}>
+                    <Grid className={classes.marginTop5} key={3} item xs={12}>
                       <Input
                         name="evaluationMaturaElective3"
                         label="3. Izborni predmet"
@@ -332,9 +334,9 @@ class App extends Component {
             </Grid>
             <Grid item xs={12} lg={6}>
               <Divider light classes={{ root: classes.divider }} />
-              <Typography className="typography" variant="title">Dodatne provjere i posebna postignuća</Typography>
-              <Typography className="mobileTooltip" variant="caption" style={{ marginBottom: '0 !important' }}>
-                Ovdje upišite postotak od ukupnog broja bodova koji vam određeni {isMobile ? ' ' : <br />} fakultet pridaje za dodatne provjere i posebna postignuća
+              <Typography classes={{ root: classes.marginBottom10 }} variant="title">Dodatne provjere i posebna postignuća</Typography>
+              <Typography classes={{ root: classes.caption }} variant="caption" style={{ marginBottom: '0 !important' }}>
+                Ovdje upišite postotak od ukupnog broja bodova koji vam određeni {isMobile ? null : <br />} fakultet pridaje za dodatne provjere i posebna postignuća
                 <br />
                 { !evaluationExtraFields3
                   ? (
@@ -342,7 +344,7 @@ class App extends Component {
                   : null
                   }
               </Typography>
-              <Grid className="marginTop" container justify="center">
+              <Grid className={classes.marginTop5} container justify="center">
                 { evaluationExtraFields
                   ? (
                     <Grid key={1} item xs={12}>
@@ -357,7 +359,7 @@ class App extends Component {
                   ) : null }
                 { evaluationExtraFields2
                   ? (
-                    <Grid className="marginTop" key={2} item xs={12}>
+                    <Grid className={classes.marginTop5} key={2} item xs={12}>
                       <Input
                         name="evaluationExtraField2"
                         label="2. Dodatno polje"
@@ -369,7 +371,7 @@ class App extends Component {
                   ) : null }
                 { evaluationExtraFields3
                   ? (
-                    <Grid className="marginTop" key={3} item xs={12}>
+                    <Grid className={classes.marginTop5} key={3} item xs={12}>
                       <Input
                         name="evaluationExtraField3"
                         label="3. Dodatno polje"
@@ -389,10 +391,10 @@ class App extends Component {
       dialogContent = (
         <React.Fragment>
           <Divider light classes={{ root: classes.dividerMarginBottom }} />
-          <Typography className="typography" variant="title">Prosjeci ocjena srednje škole</Typography>
-          <Typography className="mobileTooltip" variant="caption">Ovdje upišite prosjeke ocjena koje ste postigli tijekom {isMobile ? null : <br />} četiri razreda srednje škole</Typography>
+          <Typography classes={{ root: classes.marginBottom10 }} variant="title">Prosjeci ocjena srednje škole</Typography>
+          <Typography classes={{ root: classes.caption }} variant="caption">Ovdje upišite prosjeke ocjena koje ste postigli tijekom {isMobile ? null : <br />} četiri razreda srednje škole</Typography>
           <Grid container justify="center">
-            <Grid className="marginTopMobile" item xs={12} lg={3}>
+            <Grid className={classes.marginTopMobile} item xs={12} lg={3}>
               <Input
                 label="1. razred"
                 name="percentageFirstGrade"
@@ -401,7 +403,7 @@ class App extends Component {
                 value={percentageFirstGrade}
               />
             </Grid>
-            <Grid className="marginTopMobile" item xs={12} lg={3}>
+            <Grid className={classes.marginTopMobile} item xs={12} lg={3}>
               <Input
                 label="2. razred"
                 name="percentageSecondGrade"
@@ -410,7 +412,7 @@ class App extends Component {
                 value={percentageSecondGrade}
               />
             </Grid>
-            <Grid className="marginTopMobile" item xs={12} lg={3}>
+            <Grid className={classes.marginTopMobile} item xs={12} lg={3}>
               <Input
                 label="3. razred"
                 name="percentageThirdGrade"
@@ -419,7 +421,7 @@ class App extends Component {
                 value={percentageThirdGrade}
               />
             </Grid>
-            <Grid className="marginTopMobile" item xs={12} lg={3}>
+            <Grid className={classes.marginTopMobile} item xs={12} lg={3}>
               <Input
                 label="4. razred"
                 name="percentageFourthGrade"
@@ -436,8 +438,8 @@ class App extends Component {
       dialogContent = (
         <React.Fragment>
           <Divider light classes={{ root: classes.dividerMarginBottom }} />
-          <Typography className="typography" variant="title">Rezultati mature {evaluationExtraField1 ? 'i dodatnih provjera' : null}</Typography>
-          <Typography className="mobileTooltip" variant="caption">Ovdje upišite rezultate koje ste postigli na {isMobile ? null : <br />} ispitima državne mature {evaluationExtraField1 ? 'i dodatnim provjerama' : null}</Typography>
+          <Typography classes={{ root: classes.marginBottom10 }} variant="title">Rezultati mature {evaluationExtraField1 ? 'i dodatnih provjera' : null}</Typography>
+          <Typography classes={{ root: classes.caption }} variant="caption">Ovdje upišite rezultate koje ste postigli na {isMobile ? null : <br />} ispitima državne mature {evaluationExtraField1 ? 'i dodatnim provjerama' : null}</Typography>
           <Grid container justify="center">
             <Grid item xs={12} lg={3}>
               <Input
@@ -449,7 +451,7 @@ class App extends Component {
                 value={percentageMaturaCroatian}
               />
             </Grid>
-            <Grid className="marginTopMobile" item xs={12} lg={3}>
+            <Grid className={classes.marginTopMobile} item xs={12} lg={3}>
               <Input
                 label="Matematika"
                 name="percentageMaturaMathematics"
@@ -459,7 +461,7 @@ class App extends Component {
                 value={percentageMaturaMathematics}
               />
             </Grid>
-            <Grid className="marginTopMobile" item xs={12} lg={3}>
+            <Grid className={classes.marginTopMobile} item xs={12} lg={3}>
               <Input
                 label="Engleski jezik"
                 name="percentageMaturaEnglish"
@@ -488,7 +490,7 @@ class App extends Component {
             }
             { evaluationMaturaElective2 !== ''
               ? (
-                <Grid className="marginTopMobile" item xs={12} lg={3}>
+                <Grid className={classes.marginTopMobile} item xs={12} lg={3}>
                   <Input
                     label="2. Izborni predmet"
                     name="percentageMaturaElective2"
@@ -502,7 +504,7 @@ class App extends Component {
             }
             { evaluationMaturaElective3 !== ''
               ? (
-                <Grid className="marginTopMobile" item xs={12} lg={3}>
+                <Grid className={classes.marginTopMobile} item xs={12} lg={3}>
                   <Input
                     label="3. Izborni predmet"
                     name="percentageMaturaElective3"
@@ -533,7 +535,7 @@ class App extends Component {
             }
             { evaluationExtraField2 !== ''
               ? (
-                <Grid className="marginTopMobile" item xs={12} lg={3}>
+                <Grid className={classes.marginTopMobile} item xs={12} lg={3}>
                   <Input
                     label="2. Dodatno polje"
                     name="percentageExtraField2"
@@ -547,7 +549,7 @@ class App extends Component {
             }
             { evaluationExtraField3 !== ''
               ? (
-                <Grid className="marginTopMobile" item xs={12} lg={3}>
+                <Grid className={classes.marginTopMobile} item xs={12} lg={3}>
                   <Input
                     label="3. Dodatno polje"
                     name="percentageExtraField3"
@@ -565,33 +567,34 @@ class App extends Component {
       );
     } else if (activeStep === 3) {
       const totalGradePoints = Math.round((percentagesTotal / 4).toFixed(2) / 5 * evaluationSchoolGrades * 10);
-      const totalMaturaPoints = pointsMaturaEnglish + pointsMaturaCroatian + pointsMaturaElective1 + pointsMaturaElective2 + pointsMaturaElective3 + pointsMaturaMathematics;
+      const totalMaturaPoints = pointsMaturaEnglish + pointsMaturaCroatian + pointsMaturaElective1 + pointsMaturaElective2 + pointsMaturaElective3 + pointsMaturaMathematics + pointsExtraField1 + pointsExtraField2 + pointsExtraField3;
 
       dialogContent = (
         <React.Fragment>
           <Divider light classes={{ root: classes.dividerMarginBottom }} />
-          <Typography className="typography" variant="title">Rezultati:</Typography>
+          <Typography classes={{ root: classes.marginBottom10 }} variant="title">Rezultati:</Typography>
           <Divider light classes={{ root: classes.divider }} />
           <Table props={{
+            evaluationExtraField1,
+            evaluationExtraField2,
+            evaluationExtraField3,
             evaluationMaturaElective1,
             evaluationMaturaElective2,
             evaluationMaturaElective3,
             percentagesTotal,
-            totalGradePoints,
-            pointsMaturaCroatian,
-            pointsMaturaMathematics,
-            pointsMaturaEnglish,
-            pointsMaturaElective1,
-            pointsMaturaElective2,
-            pointsMaturaElective3,
             pointsExtraField1,
             pointsExtraField2,
             pointsExtraField3,
-            evaluationExtraField1,
-            evaluationExtraField2,
-            evaluationExtraField3 }}
+            pointsMaturaCroatian,
+            pointsMaturaElective1,
+            pointsMaturaElective2,
+            pointsMaturaElective3,
+            pointsMaturaEnglish,
+            pointsMaturaMathematics,
+            totalGradePoints,
+          }}
           />
-          <Typography justify="center" className="result" variant="title">Ukupan broj bodova: {totalMaturaPoints + totalGradePoints}</Typography>
+          <Typography justify="center" classes={{ root: classes.marginTop20 }} variant="title">Ukupan broj bodova: {totalMaturaPoints + totalGradePoints}</Typography>
           <BarChart height="100px" max={1000} data={[['Broj bodova', totalMaturaPoints + totalGradePoints]]} />
           <Divider light classes={{ root: classes.divider }} />
         </React.Fragment>
@@ -599,16 +602,16 @@ class App extends Component {
     }
 
     return (
-      <div className="App">
+      <React.Fragment>
         {/* <div style={{ display: 'flex', flex: 3 }}> */}
         <Grid justify="center" container>
           {/* style={!isMobile ? { justifyContent: 'space-around', flex: 2 } : null} */}
           <Grid item xs={12} sm={12} md={6} lg={8} xl={6}>
             {/* style={{ marginLeft: '13%' }} */}
-            <Paper className="paper" elevation={8}>
-              <div className="heading">
-                <Typography className="headingTypography" variant="headline">Kalkulator bodova za upis na fakultet</Typography>
-                <img className="icon" src={logo} alt="calculator-icon" height="85" width="85" />
+            <Paper className={classes.paper} elevation={8}>
+              <div className={classes.heading}>
+                <Typography classes={{ root: classes.headingTypography }} variant="headline">Kalkulator bodova za upis na fakultet</Typography>
+                <img src={logo} className={classes.icon} alt="calculator-icon" />
               </div>
               <ValidatorForm noValidate onSubmit={this.handleClick}>
                 {dialogContent}
@@ -619,8 +622,8 @@ class App extends Component {
                 }
               </ValidatorForm>
               <br />
-              <Typography className="copyright" variant="caption">
-              Copyright 2018 © <a className="link" href="https://www.linkedin.com/in/adrian-hajdin">Adrian Hajdin.</a> All Rights Reserved.
+              <Typography className={classes.copyright} variant="caption">
+              Copyright 2018 © <a className={classes.anchor} href="https://www.linkedin.com/in/adrian-hajdin">Adrian Hajdin.</a> All Rights Reserved.
               </Typography>
             </Paper>
           </Grid>
@@ -630,7 +633,7 @@ class App extends Component {
             <img alt="reklama" src="https://lh4.ggpht.com/ike-jviZQ32RHuhkwLcAt_9vdpBX1oWKU00NX7QRe5GPl7-5sapzZ0u91_ssg_-Ednak2Hj-Hg=w162" className="commercial" />
           </Grid>
         ) : null} */}
-      </div>
+      </React.Fragment>
     // </div>
     );
   }
