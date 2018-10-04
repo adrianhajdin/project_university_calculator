@@ -606,7 +606,7 @@ class App extends Component {
         {/* <div style={{ display: 'flex', flex: 3 }}> */}
         <Grid justify="center" container>
           {/* style={!isMobile ? { justifyContent: 'space-around', flex: 2 } : null} */}
-          <Grid item xs={12} sm={12} md={6} lg={8} xl={6}>
+          <Grid item xs={12} sm={9} md={6} lg={8} xl={6}>
             {/* style={{ marginLeft: '13%' }} */}
             <Paper className={classes.paper} elevation={8}>
               <div className={classes.heading}>

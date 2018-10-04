@@ -64,6 +64,7 @@ export default {
     display: 'flex',
     lineHeight: '1.5em;',
     padding: '0 10px;',
+    flex: isMobile ? '1' : null,
   },
 
   marginTop20: {
