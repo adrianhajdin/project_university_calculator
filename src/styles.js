@@ -50,8 +50,13 @@ export default {
     marginTop: isMobile ? '5px' : null,
   },
 
-  dividerMarginBottom: {
-    marginBottom: isMobile ? '20px' : '10px',
+  dividerMarginBottom10: {
+    marginBottom: '10px',
+    backgroundColor: 'rgba(127, 76, 178, 0.4)',
+  },
+
+  dividerMarginBottom20: {
+    marginBottom: '20px',
     backgroundColor: 'rgba(127, 76, 178, 0.4)',
   },
 

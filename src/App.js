@@ -201,12 +201,12 @@ class App extends Component {
     if (activeStep === 0) {
       dialogContent = (
         <React.Fragment>
-          <Divider light classes={{ root: classes.dividerMarginBottom }} />
+          <Divider light classes={{ root: classes.dividerMarginBottom10 }} />
           <Typography classes={{ root: classes.caption }} variant="caption">
             Ukoliko niste sigurni koliko vaš fakultet pridaje bodova određenim predmetima, posjetite:
             <Button classes={{ root: classes.button }} target="_blank" href="https://www.postani-student.hr/Ucilista/Nositelji.aspx" color="primary">Postani Student</Button>
           </Typography>
-          <Divider light classes={{ root: classes.dividerMarginBottom }} />
+          <Divider light classes={{ root: classes.dividerMarginBottom20 }} />
           <Typography classes={{ root: classes.marginBottom10 }} variant="title">Ocjene iz srednje škole</Typography>
           <Typography classes={{ root: classes.caption }} variant="caption">Ovdje upišite postotak od ukupnog broja bodova koji vam {isMobile ? null : <br />} određeni fakultet pridaje za prosjek ocjena srednje škole</Typography>
           <Input
@@ -390,7 +390,7 @@ class App extends Component {
     } else if (activeStep === 1) {
       dialogContent = (
         <React.Fragment>
-          <Divider light classes={{ root: classes.dividerMarginBottom }} />
+          <Divider light classes={{ root: classes.dividerMarginBottom20 }} />
           <Typography classes={{ root: classes.marginBottom10 }} variant="title">Prosjeci ocjena srednje škole</Typography>
           <Typography classes={{ root: classes.caption }} variant="caption">Ovdje upišite prosjeke ocjena koje ste postigli tijekom {isMobile ? null : <br />} četiri razreda srednje škole</Typography>
           <Grid container justify="center">
@@ -437,7 +437,7 @@ class App extends Component {
     } else if (activeStep === 2) {
       dialogContent = (
         <React.Fragment>
-          <Divider light classes={{ root: classes.dividerMarginBottom }} />
+          <Divider light classes={{ root: classes.dividerMarginBottom20 }} />
           <Typography classes={{ root: classes.marginBottom10 }} variant="title">Rezultati mature {evaluationExtraField1 ? 'i dodatnih provjera' : null}</Typography>
           <Typography classes={{ root: classes.caption }} variant="caption">Ovdje upišite rezultate koje ste postigli na {isMobile ? null : <br />} ispitima državne mature {evaluationExtraField1 ? 'i dodatnim provjerama' : null}</Typography>
           <Grid container justify="center">
@@ -571,7 +571,7 @@ class App extends Component {
 
       dialogContent = (
         <React.Fragment>
-          <Divider light classes={{ root: classes.dividerMarginBottom }} />
+          <Divider light classes={{ root: classes.dividerMarginBottom20 }} />
           <Typography classes={{ root: classes.marginBottom10 }} variant="title">Rezultati:</Typography>
           <Divider light classes={{ root: classes.divider }} />
           <Table props={{
