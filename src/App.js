@@ -202,7 +202,7 @@ class App extends Component {
       dialogContent = (
         <React.Fragment>
           <Divider light classes={{ root: classes.dividerMarginBottom10 }} />
-          <Typography classes={{ root: classes.caption }} variant="caption">
+          <Typography classes={{ root: classes.marginBottomMobile }} variant="caption">
             Ukoliko niste sigurni koliko vaš fakultet pridaje bodova određenim predmetima, posjetite:
             <Button classes={{ root: classes.button }} target="_blank" href="https://www.postani-student.hr/Ucilista/Nositelji.aspx" color="primary">Postani Student</Button>
           </Typography>

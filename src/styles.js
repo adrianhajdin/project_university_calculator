@@ -80,6 +80,11 @@ export default {
     marginBottom: '10px',
   },
 
+  marginBottomMobile: {
+    marginBottom: isMobile ? '1px' : '10px',
+    fontSize: '0.85rem',
+  },
+
   marginLeft10: {
     marginLeft: '10px',
   },
