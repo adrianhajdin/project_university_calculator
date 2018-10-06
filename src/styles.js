@@ -81,7 +81,7 @@ export default {
   },
 
   marginBottomMobile: {
-    marginBottom: isMobile ? '1px' : '10px',
+    marginBottom: isMobile ? null : '10px',
     fontSize: '0.85rem',
   },
 
