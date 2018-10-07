@@ -54,6 +54,7 @@ class App extends Component {
 
   handleClick = () => {
     const { activeStep, evaluationExtraField1, evaluationExtraField2, evaluationExtraField3, evaluationMaturaCroatian, evaluationMaturaCroatianLevel, evaluationMaturaElective1, evaluationMaturaElective2, evaluationMaturaElective3, evaluationMaturaEnglish, evaluationMaturaEnglishLevel, evaluationMaturaMathematics, evaluationMaturaMathematicsLevel, percentageExtraField1, percentageExtraField2, percentageExtraField3, percentageFirstGrade, percentageFourthGrade, percentageMaturaCroatian, percentageMaturaElective1, percentageMaturaElective2, percentageMaturaElective3, percentageMaturaEnglish, percentageMaturaMathematics, percentageSecondGrade, percentageThirdGrade } = this.state;
+    const round = equation => Math.round(equation);
 
     if (activeStep === 0) {
       this.setState({ activeStep: activeStep + 1 });
@@ -65,15 +66,15 @@ class App extends Component {
     } else if (activeStep === 2) {
       this.setState({
         activeStep: activeStep + 1,
-        pointsExtraField1: Math.round(percentageExtraField1 * evaluationExtraField1 / 10),
-        pointsExtraField2: Math.round(percentageExtraField2 * evaluationExtraField2 / 10),
-        pointsExtraField3: Math.round(percentageExtraField3 * evaluationExtraField3 / 10),
-        pointsMaturaCroatian: Math.round((percentageMaturaCroatian * (evaluationMaturaCroatianLevel === 'A' ? 1.6 : 1) / 160) * evaluationMaturaCroatian * 10),
-        pointsMaturaElective1: Math.round(percentageMaturaElective1 * evaluationMaturaElective1 / 10),
-        pointsMaturaElective2: Math.round(percentageMaturaElective2 * evaluationMaturaElective2 / 10),
-        pointsMaturaElective3: Math.round(percentageMaturaElective3 * evaluationMaturaElective3 / 10),
-        pointsMaturaEnglish: Math.round((percentageMaturaEnglish * (evaluationMaturaEnglishLevel === 'A' ? 1.6 : 1) / 160) * evaluationMaturaEnglish * 10),
-        pointsMaturaMathematics: Math.round((percentageMaturaMathematics * (evaluationMaturaMathematicsLevel === 'A' ? 1.6 : 1) / 160) * evaluationMaturaMathematics * 10),
+        pointsExtraField1: round(percentageExtraField1 * evaluationExtraField1 / 10),
+        pointsExtraField2: round(percentageExtraField2 * evaluationExtraField2 / 10),
+        pointsExtraField3: round(percentageExtraField3 * evaluationExtraField3 / 10),
+        pointsMaturaCroatian: round((percentageMaturaCroatian * (evaluationMaturaCroatianLevel === 'A' ? 1.6 : 1) / 160) * evaluationMaturaCroatian * 10),
+        pointsMaturaElective1: round(percentageMaturaElective1 * evaluationMaturaElective1 / 10),
+        pointsMaturaElective2: round(percentageMaturaElective2 * evaluationMaturaElective2 / 10),
+        pointsMaturaElective3: round(percentageMaturaElective3 * evaluationMaturaElective3 / 10),
+        pointsMaturaEnglish: round((percentageMaturaEnglish * (evaluationMaturaEnglishLevel === 'A' ? 1.6 : 1) / 160) * evaluationMaturaEnglish * 10),
+        pointsMaturaMathematics: round((percentageMaturaMathematics * (evaluationMaturaMathematicsLevel === 'A' ? 1.6 : 1) / 160) * evaluationMaturaMathematics * 10),
       });
     }
 
@@ -94,15 +95,7 @@ class App extends Component {
           <Divider light classes={{ root: classes.dividerMarginBottom20 }} />
           <Typography classes={{ root: classes.marginBottom10 }} variant="title">Ocjene iz srednje škole</Typography>
           <Typography classes={{ root: classes.caption }} variant="caption">Ovdje upišite postotak od ukupnog broja bodova koji vam {isMobile ? null : <br />} određeni fakultet pridaje za prosjek ocjena srednje škole</Typography>
-          <Input
-            autoFocus
-            label="Prosjek svih ocjena"
-            name="evaluationSchoolGrades"
-            onChange={this.handleChange}
-            percentage
-            required
-            value={evaluationSchoolGrades}
-          />
+          <Input autoFocus label="Prosjek svih ocjena" name="evaluationSchoolGrades" onChange={this.handleChange} percentage required value={evaluationSchoolGrades} />
           <Divider light classes={{ root: classes.divider }} />
           <Typography classes={{ root: classes.marginBottom10 }} variant="title">Obvezni dio državne mature</Typography>
           <Typography classes={{ root: classes.caption }} variant="caption">Ovdje upišite postotak od ukupnog broja bodova koji vam {isMobile ? null : <br />} određeni fakultet pridaje za obvezni dio državne mature</Typography>
@@ -137,10 +130,9 @@ class App extends Component {
                 Ovdje upišite postotak od ukupnog broja bodova koji vam određeni {isMobile ? null : <br />} fakultet pridaje za izborni dio državne mature
                 <br />
                 { !evaluationMaturaElectiveInputs3
-                  ? (
-                    <Button onClick={this.addeEvaluationMaturaElective} color="primary">Dodaj izborni predmet</Button>)
+                  ? <Button onClick={this.addeEvaluationMaturaElective} color="primary">Dodaj izborni predmet</Button>
                   : null
-                  }
+                }
               </Typography>
               <Grid container justify="center">
                 { evaluationMaturaElectiveInputs
@@ -148,19 +140,22 @@ class App extends Component {
                     <Grid key={1} item xs={12}>
                       <Input name="evaluationMaturaElective1" label="1. Izborni predmet" value={evaluationMaturaElective1} onChange={this.handleChange} percentage />
                     </Grid>
-                  ) : null }
+                  ) : null
+                }
                 { evaluationMaturaElectiveInputs2
                   ? (
                     <Grid className={classes.marginTop5} key={2} item xs={12}>
                       <Input name="evaluationMaturaElective2" label="2. Izborni predmet" value={evaluationMaturaElective2} onChange={this.handleChange} percentage />
                     </Grid>
-                  ) : null }
+                  ) : null
+                }
                 { evaluationMaturaElectiveInputs3
                   ? (
                     <Grid className={classes.marginTop5} key={3} item xs={12}>
                       <Input name="evaluationMaturaElective3" label="3. Izborni predmet" value={evaluationMaturaElective3} onChange={this.handleChange} percentage />
                     </Grid>
-                  ) : null }
+                  ) : null
+                }
               </Grid>
             </Grid>
             <Grid item xs={12} lg={6}>
@@ -170,10 +165,9 @@ class App extends Component {
                 Ovdje upišite postotak od ukupnog broja bodova koji vam određeni {isMobile ? null : <br />} fakultet pridaje za dodatne provjere i posebna postignuća
                 <br />
                 { !evaluationExtraFields3
-                  ? (
-                    <Button onClick={this.addEvaluationExtraField} color="primary">Dodaj dodatnu provjeru</Button>)
+                  ? <Button onClick={this.addEvaluationExtraField} color="primary">Dodaj dodatnu provjeru</Button>
                   : null
-                  }
+                }
               </Typography>
               <Grid className={classes.marginTop5} container justify="center">
                 { evaluationExtraFields
@@ -181,19 +175,22 @@ class App extends Component {
                     <Grid key={1} item xs={12}>
                       <Input name="evaluationExtraField1" label="1. Dodatno polje" value={evaluationExtraField1} onChange={this.handleChange} percentage />
                     </Grid>
-                  ) : null }
+                  ) : null
+                }
                 { evaluationExtraFields2
                   ? (
                     <Grid className={classes.marginTop5} key={2} item xs={12}>
                       <Input name="evaluationExtraField2" label="2. Dodatno polje" value={evaluationExtraField2} onChange={this.handleChange} percentage />
                     </Grid>
-                  ) : null }
+                  ) : null
+                }
                 { evaluationExtraFields3
                   ? (
                     <Grid className={classes.marginTop5} key={3} item xs={12}>
                       <Input name="evaluationExtraField3" label="3. Dodatno polje" value={evaluationExtraField3} onChange={this.handleChange} percentage />
                     </Grid>
-                  ) : null }
+                  ) : null
+                }
               </Grid>
             </Grid>
           </Grid>
