@@ -11,8 +11,8 @@ import { withStyles } from '@material-ui/core/styles';
 import { Input, Stepper, Table } from './components';
 import './App.css';
 
-import styles from './styles';
 import logo from './public/calculator-icon.png';
+import styles from './styles';
 
 ReactChartkick.addAdapter(Chart);
 
