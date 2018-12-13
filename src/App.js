@@ -6,7 +6,6 @@ import ReactChartkick, { BarChart } from 'react-chartkick';
 import { Button, Divider, Grid, Typography, Paper, NativeSelect } from '@material-ui/core';
 import { ValidatorForm } from 'react-material-ui-form-validator';
 import { isMobile } from 'react-device-detect';
-
 import { withStyles } from '@material-ui/core/styles';
 import { Input, Stepper, Table } from './components';
 import './App.css';
@@ -26,7 +25,13 @@ class App extends Component {
 
   handleSelectChange = ({ target: { value, name } }) => this.setState({ [name]: value });
 
-  handleBack = () => window.location.reload()
+  handleRefresh = () => window.location.reload()
+
+  handleBack = () => {
+    const { activeStep } = this.state;
+
+    this.setState({ activeStep: activeStep - 1 });
+  }
 
   addeEvaluationMaturaElective = () => {
     const { evaluationMaturaElectiveInputs, evaluationMaturaElectiveInputs2 } = this.state;
@@ -86,6 +91,7 @@ class App extends Component {
     const { classes } = this.props;
 
     let dialogContent;
+    let buttons;
 
     if (activeStep === 0) {
       dialogContent = (
@@ -197,6 +203,8 @@ class App extends Component {
           <Divider light classes={{ root: classes.divider }} />
         </React.Fragment>
       );
+
+      buttons = <Button type="submit" fullWidth size="large" variant="contained" color="primary">Dalje</Button>;
     } else if (activeStep === 1) {
       dialogContent = (
         <React.Fragment>
@@ -219,6 +227,13 @@ class App extends Component {
           </Grid>
           <Divider light classes={{ root: classes.divider }} />
         </React.Fragment>
+      );
+
+      buttons = (
+        <div style={{ display: 'flex' }}>
+          <Button style={{ flex: 1 }} onClick={this.handleBack} fullWidth size="large" variant="contained">Natrag</Button>
+          <Button style={{ flex: 4 }} type="submit" fullWidth size="large" variant="contained" color="primary">Dalje</Button>
+        </div>
       );
     } else if (activeStep === 2) {
       dialogContent = (
@@ -288,6 +303,13 @@ class App extends Component {
           <Divider light classes={{ root: classes.divider }} />
         </React.Fragment>
       );
+
+      buttons = (
+        <div style={{ display: 'flex' }}>
+          <Button style={{ flex: 1 }} onClick={this.handleBack} fullWidth size="large" variant="contained">Natrag</Button>
+          <Button style={{ flex: 4 }} type="submit" fullWidth size="large" variant="contained" color="primary">Završi</Button>
+        </div>
+      );
     } else if (activeStep === 3) {
       const totalGradePoints = Math.round((percentagesTotal / 4).toFixed(2) / 5 * evaluationSchoolGrades * 10);
       const totalMaturaPoints = pointsMaturaEnglish + pointsMaturaCroatian + pointsMaturaElective1 + pointsMaturaElective2 + pointsMaturaElective3 + pointsMaturaMathematics + pointsExtraField1 + pointsExtraField2 + pointsExtraField3;
@@ -303,15 +325,14 @@ class App extends Component {
           <Divider light classes={{ root: classes.divider }} />
         </React.Fragment>
       );
+
+      buttons = <Button onClick={this.handleRefresh} fullWidth size="large" variant="contained" color="primary">Na početak</Button>;
     }
 
     return (
       <React.Fragment>
-        {/* <div style={{ display: 'flex', flex: 3 }}> */}
         <Grid justify="center" container>
-          {/* style={!isMobile ? { justifyContent: 'space-around', flex: 2 } : null} */}
           <Grid item xs={12} sm={9} md={6} lg={8} xl={6}>
-            {/* style={{ marginLeft: '13%' }} */}
             <Paper className={classes.paper} elevation={8}>
               <div className={classes.heading}>
                 <Typography classes={{ root: classes.headingTypography }} variant="headline">Kalkulator bodova za upis na fakultet</Typography>
@@ -320,10 +341,7 @@ class App extends Component {
               <ValidatorForm noValidate onSubmit={this.handleClick}>
                 {dialogContent}
                 <Stepper activeStep={activeStep} />
-                { activeStep === 3
-                  ? <Button onClick={this.handleBack} fullWidth size="large" variant="contained" color="primary">Na početak</Button>
-                  : <Button type="submit" fullWidth size="large" variant="contained" color="primary">{activeStep === 2 ? 'Završi' : 'Dalje'}</Button>
-                }
+                {buttons}
               </ValidatorForm>
               <br />
               <Typography className={classes.copyright} variant="caption">
@@ -332,13 +350,7 @@ class App extends Component {
             </Paper>
           </Grid>
         </Grid>
-        {/* {!isMobile ? (
-          <Grid style={{ flex: 1 }} item xs={2}>
-            <img alt="reklama" src="https://lh4.ggpht.com/ike-jviZQ32RHuhkwLcAt_9vdpBX1oWKU00NX7QRe5GPl7-5sapzZ0u91_ssg_-Ednak2Hj-Hg=w162" className="commercial" />
-          </Grid>
-        ) : null} */}
       </React.Fragment>
-    // </div>
     );
   }
 }
