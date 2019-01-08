@@ -1,85 +1,86 @@
 import React, { Component } from 'react';
-
-import Chart from 'chart.js';
 import PropTypes from 'prop-types';
-import ReactChartkick, { BarChart } from 'react-chartkick';
+
 import { Button, Divider, Grid, Typography, Paper, NativeSelect } from '@material-ui/core';
 import { ValidatorForm } from 'react-material-ui-form-validator';
-import { isMobile } from 'react-device-detect';
+import ReactChartkick, { BarChart } from 'react-chartkick';
 import { withStyles } from '@material-ui/core/styles';
-import { Input, Stepper, Table } from './components';
-import './App.css';
+import { isMobile } from 'react-device-detect';
+import Chart from 'chart.js';
 
+import { Input, Stepper, Table } from './components';
 import logo from './public/calculator-icon.png';
 import styles from './styles';
+import './App.css';
+
+import {
+  initialState,
+  calculatePoints,
+  calculateMaturaPoints,
+  calculatePercentages,
+  calculateTotalGradePoints,
+  calculateTotalMaturaPoints,
+} from './util/util';
 
 ReactChartkick.addAdapter(Chart);
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { activeStep: 0, evaluationExtraField1: '', evaluationExtraField2: '', evaluationExtraField3: '', evaluationExtraFields2: false, evaluationExtraFields3: false, evaluationExtraFields: false, evaluationMaturaCroatian: '', evaluationMaturaCroatianLevel: 'A', evaluationMaturaElective1: '', evaluationMaturaElective2: '', evaluationMaturaElective3: '', evaluationMaturaElectiveInputs2: false, evaluationMaturaElectiveInputs3: false, evaluationMaturaElectiveInputs: false, evaluationMaturaEnglish: '', evaluationMaturaEnglishLevel: 'A', evaluationMaturaMathematics: '', evaluationMaturaMathematicsLevel: 'A', evaluationSchoolGrades: '', percentageFirstGrade: '', percentageFourthGrade: '', percentageExtraField1: '', percentageExtraField2: '', percentageExtraField3: '', percentageMaturaCroatian: '', percentageMaturaElective1: '', percentageMaturaElective2: '', percentageMaturaElective3: '', percentageMaturaEnglish: '', percentageMaturaMathematics: '', percentageSecondGrade: '', percentageThirdGrade: '', percentagesTotal: '', pointsMaturaCroatian: '', pointsMaturaElective1: '', pointsMaturaElective2: '', pointsMaturaElective3: '', pointsMaturaEnglish: '', pointsMaturaMathematics: '' };
-  }
+  state = initialState;
 
   handleChange = ({ target: { value, name } }) => this.setState({ [name]: value });
 
   handleSelectChange = ({ target: { value, name } }) => this.setState({ [name]: value });
 
-  handleRefresh = () => window.location.reload()
+  handleRefresh = () => window.location.reload();
 
-  handleBack = () => {
-    const { activeStep } = this.state;
+  handleBack = activeStep => this.setState({ activeStep: activeStep - 1 });
 
-    this.setState({ activeStep: activeStep - 1 });
-  }
+  addInputs = (field) => {
+    if (field === 'evaluationMaturaElective') {
+      const { evaluationMaturaElectiveInputs, evaluationMaturaElectiveInputs2 } = this.state;
 
-  addeEvaluationMaturaElective = () => {
-    const { evaluationMaturaElectiveInputs, evaluationMaturaElectiveInputs2 } = this.state;
+      this.setState({ evaluationMaturaElectiveInputs: true });
 
-    this.setState({ evaluationMaturaElectiveInputs: true });
+      if (evaluationMaturaElectiveInputs) {
+        this.setState({ evaluationMaturaElectiveInputs2: true });
+      } if (evaluationMaturaElectiveInputs2) {
+        this.setState({ evaluationMaturaElectiveInputs3: true });
+      }
+    } else {
+      const { evaluationExtraFields, evaluationExtraFields2 } = this.state;
 
-    if (evaluationMaturaElectiveInputs) {
-      this.setState({ evaluationMaturaElectiveInputs2: true });
-    } if (evaluationMaturaElectiveInputs2) {
-      this.setState({ evaluationMaturaElectiveInputs3: true });
+      this.setState({ evaluationExtraFields: true });
+
+      if (evaluationExtraFields) {
+        this.setState({ evaluationExtraFields2: true });
+      } if (evaluationExtraFields2) {
+        this.setState({ evaluationExtraFields3: true });
+      }
     }
-  }
-
-  addEvaluationExtraField = () => {
-    const { evaluationExtraFields, evaluationExtraFields2 } = this.state;
-
-    this.setState({ evaluationExtraFields: true });
-
-    if (evaluationExtraFields) {
-      this.setState({ evaluationExtraFields2: true });
-    } if (evaluationExtraFields2) {
-      this.setState({ evaluationExtraFields3: true });
-    }
-  }
+  };
 
   handleClick = () => {
     const { activeStep, evaluationExtraField1, evaluationExtraField2, evaluationExtraField3, evaluationMaturaCroatian, evaluationMaturaCroatianLevel, evaluationMaturaElective1, evaluationMaturaElective2, evaluationMaturaElective3, evaluationMaturaEnglish, evaluationMaturaEnglishLevel, evaluationMaturaMathematics, evaluationMaturaMathematicsLevel, percentageExtraField1, percentageExtraField2, percentageExtraField3, percentageFirstGrade, percentageFourthGrade, percentageMaturaCroatian, percentageMaturaElective1, percentageMaturaElective2, percentageMaturaElective3, percentageMaturaEnglish, percentageMaturaMathematics, percentageSecondGrade, percentageThirdGrade } = this.state;
-    const round = equation => Math.round(equation);
 
     if (activeStep === 0) {
       this.setState({ activeStep: activeStep + 1 });
     } else if (activeStep === 1) {
       this.setState({
         activeStep: activeStep + 1,
-        percentagesTotal: parseFloat(percentageFirstGrade, 10) + parseFloat(percentageSecondGrade, 10) + parseFloat(percentageThirdGrade, 10) + parseFloat(percentageFourthGrade, 10),
+        percentagesTotal: calculatePercentages(percentageFirstGrade, percentageSecondGrade, percentageThirdGrade, percentageFourthGrade),
       });
     } else if (activeStep === 2) {
       this.setState({
         activeStep: activeStep + 1,
-        pointsExtraField1: round(percentageExtraField1 * evaluationExtraField1 / 10),
-        pointsExtraField2: round(percentageExtraField2 * evaluationExtraField2 / 10),
-        pointsExtraField3: round(percentageExtraField3 * evaluationExtraField3 / 10),
-        pointsMaturaCroatian: round((percentageMaturaCroatian * (evaluationMaturaCroatianLevel === 'A' ? 1.6 : 1) / 160) * evaluationMaturaCroatian * 10),
-        pointsMaturaElective1: round(percentageMaturaElective1 * evaluationMaturaElective1 / 10),
-        pointsMaturaElective2: round(percentageMaturaElective2 * evaluationMaturaElective2 / 10),
-        pointsMaturaElective3: round(percentageMaturaElective3 * evaluationMaturaElective3 / 10),
-        pointsMaturaEnglish: round((percentageMaturaEnglish * (evaluationMaturaEnglishLevel === 'A' ? 1.6 : 1) / 160) * evaluationMaturaEnglish * 10),
-        pointsMaturaMathematics: round((percentageMaturaMathematics * (evaluationMaturaMathematicsLevel === 'A' ? 1.6 : 1) / 160) * evaluationMaturaMathematics * 10),
+        pointsExtraField1: calculatePoints(percentageExtraField1, evaluationExtraField1),
+        pointsExtraField2: calculatePoints(percentageExtraField2, evaluationExtraField2),
+        pointsExtraField3: calculatePoints(percentageExtraField3, evaluationExtraField3),
+        pointsMaturaElective1: calculatePoints(percentageMaturaElective1, evaluationMaturaElective1),
+        pointsMaturaElective2: calculatePoints(percentageMaturaElective2, evaluationMaturaElective2),
+        pointsMaturaElective3: calculatePoints(percentageMaturaElective3, evaluationMaturaElective3),
+        pointsMaturaEnglish: calculateMaturaPoints(percentageMaturaEnglish, evaluationMaturaEnglish, evaluationMaturaEnglishLevel),
+        pointsMaturaCroatian: calculateMaturaPoints(percentageMaturaCroatian, evaluationMaturaCroatian, evaluationMaturaCroatianLevel),
+        pointsMaturaMathematics: calculateMaturaPoints(percentageMaturaMathematics, evaluationMaturaMathematics, evaluationMaturaMathematicsLevel),
       });
     }
 
@@ -136,7 +137,7 @@ class App extends Component {
                 Ovdje upišite postotak od ukupnog broja bodova koji vam određeni {isMobile ? null : <br />} fakultet pridaje za izborni dio državne mature
                 <br />
                 { !evaluationMaturaElectiveInputs3
-                  ? <Button onClick={this.addeEvaluationMaturaElective} color="primary">Dodaj izborni predmet</Button>
+                  ? <Button onClick={() => this.addInputs('evaluationMaturaElective')} color="primary">Dodaj izborni predmet</Button>
                   : null
                 }
               </Typography>
@@ -171,7 +172,7 @@ class App extends Component {
                 Ovdje upišite postotak od ukupnog broja bodova koji vam određeni {isMobile ? null : <br />} fakultet pridaje za dodatne provjere i posebna postignuća
                 <br />
                 { !evaluationExtraFields3
-                  ? <Button onClick={this.addEvaluationExtraField} color="primary">Dodaj dodatnu provjeru</Button>
+                  ? <Button onClick={this.addInputs} color="primary">Dodaj dodatnu provjeru</Button>
                   : null
                 }
               </Typography>
@@ -231,7 +232,7 @@ class App extends Component {
 
       buttons = (
         <div style={{ display: 'flex' }}>
-          <Button style={{ flex: 1 }} onClick={this.handleBack} fullWidth size="large" variant="contained">Natrag</Button>
+          <Button style={{ flex: 1 }} onClick={() => this.handleBack(activeStep)} fullWidth size="large" variant="contained">Natrag</Button>
           <Button style={{ flex: 4 }} type="submit" fullWidth size="large" variant="contained" color="primary">Dalje</Button>
         </div>
       );
@@ -311,15 +312,15 @@ class App extends Component {
         </div>
       );
     } else if (activeStep === 3) {
-      const totalGradePoints = Math.round((percentagesTotal / 4).toFixed(2) / 5 * evaluationSchoolGrades * 10);
-      const totalMaturaPoints = pointsMaturaEnglish + pointsMaturaCroatian + pointsMaturaElective1 + pointsMaturaElective2 + pointsMaturaElective3 + pointsMaturaMathematics + pointsExtraField1 + pointsExtraField2 + pointsExtraField3;
+      const totalGradePoints = calculateTotalGradePoints(percentagesTotal, evaluationSchoolGrades);
+      const totalMaturaPoints = calculateTotalMaturaPoints(pointsMaturaEnglish, pointsMaturaCroatian, pointsMaturaElective1, pointsMaturaElective2, pointsMaturaElective3, pointsMaturaMathematics, pointsExtraField1, pointsExtraField2, pointsExtraField3);
 
       dialogContent = (
         <React.Fragment>
           <Divider light classes={{ root: classes.dividerMarginBottom20 }} />
           <Typography classes={{ root: classes.marginBottom10 }} variant="title">Rezultati:</Typography>
           <Divider light classes={{ root: classes.divider }} />
-          <Table props={{ evaluationExtraField1, evaluationExtraField2, evaluationExtraField3, evaluationMaturaElective1, evaluationMaturaElective2, evaluationMaturaElective3, percentagesTotal, pointsExtraField1, pointsExtraField2, pointsExtraField3, pointsMaturaCroatian, pointsMaturaElective1, pointsMaturaElective2, pointsMaturaElective3, pointsMaturaEnglish, pointsMaturaMathematics, totalGradePoints }} />
+          <Table props={{ ...this.state, totalGradePoints }} />
           <Typography justify="center" classes={{ root: classes.marginTop20 }} variant="title">Ukupan broj bodova: {totalMaturaPoints + totalGradePoints}</Typography>
           <BarChart height="100px" max={1000} data={[['Broj bodova', totalMaturaPoints + totalGradePoints]]} />
           <Divider light classes={{ root: classes.divider }} />
@@ -345,7 +346,7 @@ class App extends Component {
               </ValidatorForm>
               <br />
               <Typography className={classes.copyright} variant="caption">
-              Copyright 2018 © <a className={classes.anchor} href="https://www.linkedin.com/in/adrian-hajdin">Adrian Hajdin.</a> All Rights Reserved.
+                Copyright 2018 © <a className={classes.anchor} href="https://www.linkedin.com/in/adrian-hajdin">Adrian Hajdin.</a> All Rights Reserved.
               </Typography>
             </Paper>
           </Grid>
