@@ -13,8 +13,9 @@ import logo from './public/calculator-icon.png';
 import styles from './styles';
 import './App.css';
 
+import initialState from './util/constants';
+
 import {
-  initialState,
   calculatePoints,
   calculateMaturaPoints,
   calculatePercentages,
