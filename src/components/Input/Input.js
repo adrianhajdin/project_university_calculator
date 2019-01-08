@@ -3,9 +3,7 @@ import React from 'react';
 import { TextValidator } from 'react-material-ui-form-validator';
 import { InputAdornment } from '@material-ui/core';
 
-const Input = (props) => {
-  const { percentage, name, label, value, onChange, helperText, autoFocus, required } = props;
-
+const Input = ({ percentage, name, label, value, onChange, helperText, autoFocus, required }) => {
   let percentageSign;
   let validation;
 
