@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "homepage": "https://adrianhajdin.github.io/university-calculator",
+  "proxy": "http://localhost:5000/",
   "dependencies": {
     "@material-ui/core": "^3.0.2",
     "axios": "^0.18.0",

@@ -7,6 +7,7 @@ import ReactChartkick, { BarChart } from 'react-chartkick';
 import { withStyles } from '@material-ui/core/styles';
 import { isMobile } from 'react-device-detect';
 import Chart from 'chart.js';
+import axios from 'axios';
 
 import { Input, Stepper, Table } from './components';
 import logo from './public/calculator-icon.png';
@@ -27,6 +28,11 @@ ReactChartkick.addAdapter(Chart);
 
 class App extends Component {
   state = initialState;
+
+  componentDidMount() {
+    console.log(this.state);
+    axios.post('/print-pdf', JSON.stringify(this.state));
+  }
 
   handleChange = ({ target: { value, name } }) => this.setState({ [name]: value });
 
