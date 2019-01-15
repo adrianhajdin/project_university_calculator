@@ -75,7 +75,7 @@ const table = ({ props: {
       {evaluationExtraField2
         ? (
           <TableRow>
-            <TableCell>Broj bodova od dodatnih provjera 2..</TableCell>
+            <TableCell>Broj bodova od dodatnih provjera 2.</TableCell>
             <TableCell>{pointsExtraField2}</TableCell>
           </TableRow>
         ) : null}

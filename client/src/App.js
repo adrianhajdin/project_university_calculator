@@ -29,9 +29,13 @@ ReactChartkick.addAdapter(Chart);
 class App extends Component {
   state = initialState;
 
-  componentDidMount() {
-    console.log(this.state);
-    axios.post('/print-pdf', JSON.stringify(this.state));
+  createPdf = () => {
+    const { percentagesTotal, evaluationSchoolGrades, pointsMaturaEnglish, pointsMaturaCroatian, pointsMaturaElective1, pointsMaturaElective2, pointsMaturaElective3, pointsMaturaMathematics, pointsExtraField1, pointsExtraField2, pointsExtraField3 } = this.state;
+
+    this.setState({
+      totalGradePoints: calculateTotalGradePoints(percentagesTotal, evaluationSchoolGrades),
+      totalMaturaPoints: calculateTotalMaturaPoints(pointsMaturaEnglish, pointsMaturaCroatian, pointsMaturaElective1, pointsMaturaElective2, pointsMaturaElective3, pointsMaturaMathematics, pointsExtraField1, pointsExtraField2, pointsExtraField3),
+    }, () => axios.post('/print-pdf', this.state));
   }
 
   handleChange = ({ target: { value, name } }) => this.setState({ [name]: value });
@@ -334,7 +338,12 @@ class App extends Component {
         </React.Fragment>
       );
 
-      buttons = <Button onClick={this.handleRefresh} fullWidth size="large" variant="contained" color="primary">Na početak</Button>;
+      buttons = (
+        <div style={{ display: 'flex' }}>
+          <Button onClick={this.handleRefresh} fullWidth size="large" variant="contained" color="primary">Na početak</Button>
+          <Button onClick={this.createPdf} style={{ flex: 4 }} fullWidth size="large" variant="contained" color="primary">Isprintaj rezultate</Button>
+        </div>
+      );
     }
 
     return (
