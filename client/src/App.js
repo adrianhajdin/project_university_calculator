@@ -6,6 +6,7 @@ import { ValidatorForm } from 'react-material-ui-form-validator';
 import ReactChartkick, { BarChart } from 'react-chartkick';
 import { withStyles } from '@material-ui/core/styles';
 import { isMobile } from 'react-device-detect';
+import { saveAs } from 'file-saver';
 import Chart from 'chart.js';
 import axios from 'axios';
 
@@ -35,7 +36,14 @@ class App extends Component {
     this.setState({
       totalGradePoints: calculateTotalGradePoints(percentagesTotal, evaluationSchoolGrades),
       totalMaturaPoints: calculateTotalMaturaPoints(pointsMaturaEnglish, pointsMaturaCroatian, pointsMaturaElective1, pointsMaturaElective2, pointsMaturaElective3, pointsMaturaMathematics, pointsExtraField1, pointsExtraField2, pointsExtraField3),
-    }, () => axios.post('/print-pdf', this.state));
+    }, () => axios.post('/create-pdf', this.state));
+
+    axios.get('fetch-pdf', { responseType: 'blob' })
+      .then((res) => {
+        const blob = new Blob([res.data], { type: 'application/pdf' });
+
+        saveAs(blob, 'rezultati.pdf');
+      });
   }
 
   handleChange = ({ target: { value, name } }) => this.setState({ [name]: value });

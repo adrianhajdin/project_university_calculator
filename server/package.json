@@ -11,7 +11,9 @@
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.18.3",
+    "cors": "^2.8.5",
     "express": "^4.16.4",
+    "file-saver": "^2.0.0",
     "html-pdf": "^2.2.0"
   }
 }
