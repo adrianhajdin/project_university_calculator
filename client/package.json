@@ -22,7 +22,9 @@
     "react-device-detect": "^1.5.9",
     "react-dom": "^16.4.2",
     "react-material-ui-form-validator": "^2.0.1",
-    "react-scripts": "1.1.5"
+    "react-redux": "^6.0.0",
+    "react-scripts": "1.1.5",
+    "redux": "^4.0.1"
   },
   "scripts": {
     "start": "react-scripts start",

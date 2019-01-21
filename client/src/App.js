@@ -10,6 +10,11 @@ import { saveAs } from 'file-saver';
 import Chart from 'chart.js';
 import axios from 'axios';
 
+import { connect } from 'react-redux';
+import actionTypes from './constants';
+
+import getGrades from './store/reducers';
+
 import { Input, Stepper, Table } from './components';
 import logo from './public/calculator-icon.png';
 import styles from './styles';
@@ -29,6 +34,10 @@ ReactChartkick.addAdapter(Chart);
 
 class App extends Component {
   state = initialState;
+
+  componentDidMount() {
+    console.log(this.props);
+  }
 
   createPdf = () => {
     const { percentagesTotal, evaluationSchoolGrades, pointsMaturaEnglish, pointsMaturaCroatian, pointsMaturaElective1, pointsMaturaElective2, pointsMaturaElective3, pointsMaturaMathematics, pointsExtraField1, pointsExtraField2, pointsExtraField3 } = this.state;
@@ -80,7 +89,7 @@ class App extends Component {
 
   handleClick = () => {
     const { activeStep, evaluationExtraField1, evaluationExtraField2, evaluationExtraField3, evaluationMaturaCroatian, evaluationMaturaCroatianLevel, evaluationMaturaElective1, evaluationMaturaElective2, evaluationMaturaElective3, evaluationMaturaEnglish, evaluationMaturaEnglishLevel, evaluationMaturaMathematics, evaluationMaturaMathematicsLevel, percentageExtraField1, percentageExtraField2, percentageExtraField3, percentageFirstGrade, percentageFourthGrade, percentageMaturaCroatian, percentageMaturaElective1, percentageMaturaElective2, percentageMaturaElective3, percentageMaturaEnglish, percentageMaturaMathematics, percentageSecondGrade, percentageThirdGrade } = this.state;
-
+    const { handleClick } = this.props;
     if (activeStep === 0) {
       this.setState({ activeStep: activeStep + 1 });
     } else if (activeStep === 1) {
@@ -142,7 +151,7 @@ class App extends Component {
             </Grid>
             <Grid className={classes.marginTopMobile} item xs={12} lg={4}>
               <Input label="Engleski jezik" name="evaluationMaturaEnglish" onChange={this.handleChange} percentage required value={evaluationMaturaEnglish} />
-              <NativeSelect name="evaluationMaturaEnglishLevel" classes={{ root: classes.marginLeft10 }} value={evaluationMaturaEnglishLevel} onChange={this.handleNativeSelectChange}>
+              <NativeSelect name="evaluationMaturaEnglishLevel" classes={{ root: classes.marginLeft10 }} value={evaluationMaturaEnglishLevel} onChange={this.handleSelectChange}>
                 <option value="A">A</option>
                 <option value="B">B</option>
               </NativeSelect>
@@ -384,4 +393,12 @@ App.propTypes = {
   classes: PropTypes.shape({}).isRequired,
 };
 
-export default withStyles(styles)(App);
+const mapStateToProps = state => ({
+  grades: getGrades(state, 'test'),
+});
+
+const mapDispatchToProps = dispatch => ({
+  handleChange: () => dispatch({ type: actionTypes.HANDLE_CHANGE }),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(App));
