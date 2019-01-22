@@ -25,13 +25,15 @@ import {
   calculateTotalMaturaPoints,
 } from './util/util';
 
+const printIcon = require('./public/printerColorIcon.png');
+
 ReactChartkick.addAdapter(Chart);
 
 class App extends Component {
   state = initialState;
 
   createPdf = () => {
-    const { percentagesTotal, evaluationSchoolGrades, pointsMaturaEnglish, pointsMaturaCroatian, pointsMaturaElective1, pointsMaturaElective2, pointsMaturaElective3, pointsMaturaMathematics, pointsExtraField1, pointsExtraField2, pointsExtraField3 } = this.state;
+    const { percentagesTotal, universityName, evaluationSchoolGrades, pointsMaturaEnglish, pointsMaturaCroatian, pointsMaturaElective1, pointsMaturaElective2, pointsMaturaElective3, pointsMaturaMathematics, pointsExtraField1, pointsExtraField2, pointsExtraField3 } = this.state;
 
     this.setState({
       totalGradePoints: calculateTotalGradePoints(percentagesTotal, evaluationSchoolGrades),
@@ -42,7 +44,7 @@ class App extends Component {
       .then((res) => {
         const blob = new Blob([res.data], { type: 'application/pdf' });
 
-        saveAs(blob, 'rezultati.pdf');
+        saveAs(blob, `${universityName}.pdf`);
       });
   }
 
@@ -89,6 +91,8 @@ class App extends Component {
         percentagesTotal: calculatePercentages(percentageFirstGrade, percentageSecondGrade, percentageThirdGrade, percentageFourthGrade),
       });
     } else if (activeStep === 2) {
+      setTimeout(() => this.setState({ isButtonDisabled: false }), 5000);
+
       this.setState({
         activeStep: activeStep + 1,
         pointsExtraField1: calculatePoints(percentageExtraField1, evaluationExtraField1),
@@ -107,7 +111,7 @@ class App extends Component {
   }
 
   render() {
-    const { activeStep, evaluationExtraField1, evaluationExtraField2, evaluationExtraField3, evaluationExtraFields, evaluationExtraFields2, evaluationExtraFields3, evaluationMaturaCroatian, evaluationMaturaCroatianLevel, evaluationMaturaElective1, evaluationMaturaElective2, evaluationMaturaElective3, evaluationMaturaElectiveInputs, evaluationMaturaElectiveInputs2, evaluationMaturaElectiveInputs3, evaluationMaturaEnglish, evaluationMaturaEnglishLevel, evaluationMaturaMathematics, evaluationMaturaMathematicsLevel, evaluationSchoolGrades, percentageExtraField1, percentageExtraField2, percentageExtraField3, percentageFirstGrade, percentageFourthGrade, percentageMaturaCroatian, percentageMaturaElective1, percentageMaturaElective2, percentageMaturaElective3, percentageMaturaEnglish, percentageMaturaMathematics, percentageSecondGrade, percentageThirdGrade, percentagesTotal, pointsExtraField1, pointsExtraField2, pointsExtraField3, pointsMaturaCroatian, pointsMaturaElective1, pointsMaturaElective2, pointsMaturaElective3, pointsMaturaEnglish, pointsMaturaMathematics } = this.state;
+    const { activeStep, isButtonDisabled, universityName, evaluationExtraField1, evaluationExtraField2, evaluationExtraField3, evaluationExtraFields, evaluationExtraFields2, evaluationExtraFields3, evaluationMaturaCroatian, evaluationMaturaCroatianLevel, evaluationMaturaElective1, evaluationMaturaElective2, evaluationMaturaElective3, evaluationMaturaElectiveInputs, evaluationMaturaElectiveInputs2, evaluationMaturaElectiveInputs3, evaluationMaturaEnglish, evaluationMaturaEnglishLevel, evaluationMaturaMathematics, evaluationMaturaMathematicsLevel, evaluationSchoolGrades, percentageExtraField1, percentageExtraField2, percentageExtraField3, percentageFirstGrade, percentageFourthGrade, percentageMaturaCroatian, percentageMaturaElective1, percentageMaturaElective2, percentageMaturaElective3, percentageMaturaEnglish, percentageMaturaMathematics, percentageSecondGrade, percentageThirdGrade, percentagesTotal, pointsExtraField1, pointsExtraField2, pointsExtraField3, pointsMaturaCroatian, pointsMaturaElective1, pointsMaturaElective2, pointsMaturaElective3, pointsMaturaEnglish, pointsMaturaMathematics } = this.state;
     const { classes } = this.props;
 
     let dialogContent;
@@ -119,9 +123,12 @@ class App extends Component {
           <Divider light classes={{ root: classes.dividerMarginBottom10 }} />
           <Typography classes={{ root: classes.marginBottomMobile }} variant="caption"> Ukoliko niste sigurni koliko vaš fakultet pridaje bodova određenim predmetima, posjetite: <Button classes={{ root: classes.button }} target="_blank" href="https://www.postani-student.hr/Ucilista/Nositelji.aspx" color="primary">Postani Student</Button></Typography>
           <Divider light classes={{ root: classes.dividerMarginBottom20 }} />
+          <Typography variant="title">Podaci o fakultetu</Typography>
+          <Input type="text" autoFocus label="Ime fakulteta" name="universityName" onChange={this.handleChange} value={universityName} />
+          <Divider light classes={{ root: classes.divider }} />
           <Typography classes={{ root: classes.marginBottom10 }} variant="title">Ocjene iz srednje škole</Typography>
           <Typography classes={{ root: classes.caption }} variant="caption">Ovdje upišite postotak od ukupnog broja bodova koji vam {isMobile ? null : <br />} određeni fakultet pridaje za prosjek ocjena srednje škole</Typography>
-          <Input autoFocus label="Prosjek svih ocjena" name="evaluationSchoolGrades" onChange={this.handleChange} percentage required value={evaluationSchoolGrades} />
+          <Input label="Prosjek svih ocjena" name="evaluationSchoolGrades" onChange={this.handleChange} percentage required value={evaluationSchoolGrades} />
           <Divider light classes={{ root: classes.divider }} />
           <Typography classes={{ root: classes.marginBottom10 }} variant="title">Obvezni dio državne mature</Typography>
           <Typography classes={{ root: classes.caption }} variant="caption">Ovdje upišite postotak od ukupnog broja bodova koji vam {isMobile ? null : <br />} određeni fakultet pridaje za obvezni dio državne mature</Typography>
@@ -348,8 +355,8 @@ class App extends Component {
 
       buttons = (
         <div style={{ display: 'flex' }}>
-          <Button onClick={this.handleRefresh} fullWidth size="large" variant="contained" color="primary">Na početak</Button>
-          <Button onClick={this.createPdf} style={{ flex: 4 }} fullWidth size="large" variant="contained" color="primary">Isprintaj rezultate</Button>
+          <Button style={{ flex: 5 }} onClick={this.handleRefresh} fullWidth size="large" variant="contained" color="primary">Na početak</Button>
+          <Button onClick={this.createPdf} style={{ flex: 2 }} fullWidth size="large" variant="contained" color="primary" disabled={isButtonDisabled}>{isButtonDisabled ? 'Stvarnje rezultata' : 'Preuzmi rezultate' } <img style={{ paddingLeft: '10px' }} height="30" width="30" src={printIcon} /></Button>
         </div>
       );
     }

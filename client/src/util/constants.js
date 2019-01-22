@@ -39,4 +39,6 @@ export const initialState = {
   pointsMaturaElective3: '',
   pointsMaturaEnglish: '',
   pointsMaturaMathematics: '',
+  universityName: '',
+  isButtonDisabled: true,
 };

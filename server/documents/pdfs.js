@@ -17,6 +17,7 @@ module.exports = ({
     evaluationExtraField2,
     evaluationExtraField3,
     totalMaturaPoints,
+    universityName,
 }) => {
     const today = new Date();
     return `
@@ -141,7 +142,7 @@ module.exports = ({
                             </td>
                             <td>
                                 Fakultet koji ste odabrali:
-                                <br> _______________________
+                                <br>${universityName}
                             </td>
                         </tr>
                     </table>
