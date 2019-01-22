@@ -20,9 +20,8 @@ import { initialState } from './util/constants';
 import {
   calculatePoints,
   calculateMaturaPoints,
-  calculatePercentages,
+  calculatePercentagesAndMaturaPoints,
   calculateTotalGradePoints,
-  calculateTotalMaturaPoints,
 } from './util/util';
 
 const printIcon = require('./public/printerColorIcon.png');
@@ -32,13 +31,8 @@ ReactChartkick.addAdapter(Chart);
 class App extends Component {
   state = initialState;
 
-  createPdf = () => {
-    const { percentagesTotal, universityName, evaluationSchoolGrades, pointsMaturaEnglish, pointsMaturaCroatian, pointsMaturaElective1, pointsMaturaElective2, pointsMaturaElective3, pointsMaturaMathematics, pointsExtraField1, pointsExtraField2, pointsExtraField3 } = this.state;
-
-    this.setState({
-      totalGradePoints: calculateTotalGradePoints(percentagesTotal, evaluationSchoolGrades),
-      totalMaturaPoints: calculateTotalMaturaPoints(pointsMaturaEnglish, pointsMaturaCroatian, pointsMaturaElective1, pointsMaturaElective2, pointsMaturaElective3, pointsMaturaMathematics, pointsExtraField1, pointsExtraField2, pointsExtraField3),
-    }, () => axios.post('/create-pdf', this.state));
+  fetchPdf = () => {
+    const { universityName } = this.state;
 
     axios.get('fetch-pdf', { responseType: 'blob' })
       .then((res) => {
@@ -81,18 +75,16 @@ class App extends Component {
   };
 
   handleClick = () => {
-    const { activeStep, evaluationExtraField1, evaluationExtraField2, evaluationExtraField3, evaluationMaturaCroatian, evaluationMaturaCroatianLevel, evaluationMaturaElective1, evaluationMaturaElective2, evaluationMaturaElective3, evaluationMaturaEnglish, evaluationMaturaEnglishLevel, evaluationMaturaMathematics, evaluationMaturaMathematicsLevel, percentageExtraField1, percentageExtraField2, percentageExtraField3, percentageFirstGrade, percentageFourthGrade, percentageMaturaCroatian, percentageMaturaElective1, percentageMaturaElective2, percentageMaturaElective3, percentageMaturaEnglish, percentageMaturaMathematics, percentageSecondGrade, percentageThirdGrade } = this.state;
+    const { percentagesTotal, evaluationSchoolGrades, pointsMaturaEnglish, pointsMaturaCroatian, pointsMaturaElective1, pointsMaturaElective2, pointsMaturaElective3, pointsMaturaMathematics, pointsExtraField1, pointsExtraField2, pointsExtraField3, activeStep, evaluationExtraField1, evaluationExtraField2, evaluationExtraField3, evaluationMaturaCroatian, evaluationMaturaCroatianLevel, evaluationMaturaElective1, evaluationMaturaElective2, evaluationMaturaElective3, evaluationMaturaEnglish, evaluationMaturaEnglishLevel, evaluationMaturaMathematics, evaluationMaturaMathematicsLevel, percentageExtraField1, percentageExtraField2, percentageExtraField3, percentageFirstGrade, percentageFourthGrade, percentageMaturaCroatian, percentageMaturaElective1, percentageMaturaElective2, percentageMaturaElective3, percentageMaturaEnglish, percentageMaturaMathematics, percentageSecondGrade, percentageThirdGrade } = this.state;
 
     if (activeStep === 0) {
       this.setState({ activeStep: activeStep + 1 });
     } else if (activeStep === 1) {
       this.setState({
         activeStep: activeStep + 1,
-        percentagesTotal: calculatePercentages(percentageFirstGrade, percentageSecondGrade, percentageThirdGrade, percentageFourthGrade),
+        percentagesTotal: calculatePercentagesAndMaturaPoints(percentageFirstGrade, percentageSecondGrade, percentageThirdGrade, percentageFourthGrade),
       });
     } else if (activeStep === 2) {
-      setTimeout(() => this.setState({ isButtonDisabled: false }), 5000);
-
       this.setState({
         activeStep: activeStep + 1,
         pointsExtraField1: calculatePoints(percentageExtraField1, evaluationExtraField1),
@@ -105,13 +97,20 @@ class App extends Component {
         pointsMaturaCroatian: calculateMaturaPoints(percentageMaturaCroatian, evaluationMaturaCroatian, evaluationMaturaCroatianLevel),
         pointsMaturaMathematics: calculateMaturaPoints(percentageMaturaMathematics, evaluationMaturaMathematics, evaluationMaturaMathematicsLevel),
       });
+
+      this.setState({
+        totalGradePoints: calculateTotalGradePoints(percentagesTotal, evaluationSchoolGrades),
+        totalMaturaPoints: calculatePercentagesAndMaturaPoints(pointsMaturaEnglish, pointsMaturaCroatian, pointsMaturaElective1, pointsMaturaElective2, pointsMaturaElective3, pointsMaturaMathematics, pointsExtraField1, pointsExtraField2, pointsExtraField3),
+      }, () => axios.post('/create-pdf', this.state));
+
+      setTimeout(() => this.setState({ isButtonDisabled: false }), 2000);
     }
 
     window.scrollTo(0, 0);
   }
 
   render() {
-    const { activeStep, isButtonDisabled, universityName, evaluationExtraField1, evaluationExtraField2, evaluationExtraField3, evaluationExtraFields, evaluationExtraFields2, evaluationExtraFields3, evaluationMaturaCroatian, evaluationMaturaCroatianLevel, evaluationMaturaElective1, evaluationMaturaElective2, evaluationMaturaElective3, evaluationMaturaElectiveInputs, evaluationMaturaElectiveInputs2, evaluationMaturaElectiveInputs3, evaluationMaturaEnglish, evaluationMaturaEnglishLevel, evaluationMaturaMathematics, evaluationMaturaMathematicsLevel, evaluationSchoolGrades, percentageExtraField1, percentageExtraField2, percentageExtraField3, percentageFirstGrade, percentageFourthGrade, percentageMaturaCroatian, percentageMaturaElective1, percentageMaturaElective2, percentageMaturaElective3, percentageMaturaEnglish, percentageMaturaMathematics, percentageSecondGrade, percentageThirdGrade, percentagesTotal, pointsExtraField1, pointsExtraField2, pointsExtraField3, pointsMaturaCroatian, pointsMaturaElective1, pointsMaturaElective2, pointsMaturaElective3, pointsMaturaEnglish, pointsMaturaMathematics } = this.state;
+    const { activeStep, totalGradePoints, totalMaturaPoints, isButtonDisabled, universityName, evaluationExtraField1, evaluationExtraField2, evaluationExtraField3, evaluationExtraFields, evaluationExtraFields2, evaluationExtraFields3, evaluationMaturaCroatian, evaluationMaturaCroatianLevel, evaluationMaturaElective1, evaluationMaturaElective2, evaluationMaturaElective3, evaluationMaturaElectiveInputs, evaluationMaturaElectiveInputs2, evaluationMaturaElectiveInputs3, evaluationMaturaEnglish, evaluationMaturaEnglishLevel, evaluationMaturaMathematics, evaluationMaturaMathematicsLevel, evaluationSchoolGrades, percentageExtraField1, percentageExtraField2, percentageExtraField3, percentageFirstGrade, percentageFourthGrade, percentageMaturaCroatian, percentageMaturaElective1, percentageMaturaElective2, percentageMaturaElective3, percentageMaturaEnglish, percentageMaturaMathematics, percentageSecondGrade, percentageThirdGrade } = this.state;
     const { classes } = this.props;
 
     let dialogContent;
@@ -338,9 +337,6 @@ class App extends Component {
         </div>
       );
     } else if (activeStep === 3) {
-      const totalGradePoints = calculateTotalGradePoints(percentagesTotal, evaluationSchoolGrades);
-      const totalMaturaPoints = calculateTotalMaturaPoints(pointsMaturaEnglish, pointsMaturaCroatian, pointsMaturaElective1, pointsMaturaElective2, pointsMaturaElective3, pointsMaturaMathematics, pointsExtraField1, pointsExtraField2, pointsExtraField3);
-
       dialogContent = (
         <React.Fragment>
           <Divider light classes={{ root: classes.dividerMarginBottom20 }} />
@@ -356,7 +352,7 @@ class App extends Component {
       buttons = (
         <div style={{ display: 'flex' }}>
           <Button style={{ flex: 5 }} onClick={this.handleRefresh} fullWidth size="large" variant="contained" color="primary">Na početak</Button>
-          <Button onClick={this.createPdf} style={{ flex: 2 }} fullWidth size="large" variant="contained" color="primary" disabled={isButtonDisabled}>{isButtonDisabled ? 'Stvarnje rezultata' : 'Preuzmi rezultate' } <img style={{ paddingLeft: '10px' }} height="30" width="30" src={printIcon} /></Button>
+          <Button onClick={this.fetchPdf} style={{ flex: 2 }} fullWidth size="large" variant="contained" color="primary" disabled={isButtonDisabled}>{isButtonDisabled ? 'Preuzmi rezultate' : 'Stvarnje rezultata' } <img style={{ paddingLeft: '10px' }} height="30" width="30" alt="printIcon" src={printIcon} /></Button>
         </div>
       );
     }
