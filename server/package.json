@@ -5,7 +5,6 @@
   "main": "server.js",
   "scripts": {
     "heroku-postbuild": "cd client && npm install && npm install --only=dev --no-shrinkwrap && npm run build",
-    "start": "node server.js"
   },
   "author": "",
   "license": "ISC",

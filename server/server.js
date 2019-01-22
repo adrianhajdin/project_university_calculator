@@ -21,8 +21,6 @@ app.post('/create-pdf', (req, res) => {
 
       return res;
     })
-
-    universityName = req.body.universityName;
 });
 
 app.get('/fetch-pdf', (req, res) => {
