@@ -123,7 +123,7 @@ module.exports = ({
                 <td colspan="2">
                     <table>
                         <tr>
-                            <td class="title"><img src="https://img.icons8.com/nolan/512/000000/calculator.png"
+                            <td class="title"><img src="https://i.imgur.com/8rR1ydy.jpg"
                                     style="width:100%; max-width:156px;"></td>
                             <td>
                                 Datum: ${`${today.getDate()}. ${today.getMonth() + 1}. ${today.getFullYear()}.`}
