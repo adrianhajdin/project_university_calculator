@@ -1,9 +1,10 @@
 
 import React from 'react';
-import PropTypes from 'prop-types';
+
 import { Stepper, Step, StepLabel, MobileStepper } from '@material-ui/core';
-import { isMobile } from 'react-device-detect';
 import { withStyles } from '@material-ui/core/styles';
+import { isMobile } from 'react-device-detect';
+import PropTypes from 'prop-types';
 
 import styles from './styles/styles';
 

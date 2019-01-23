@@ -40,5 +40,6 @@ export const initialState = {
   pointsMaturaEnglish: '',
   pointsMaturaMathematics: '',
   universityName: '',
-  isButtonDisabled: true,
+  isButtonDisabled: false,
+  isResultReady: false,
 };

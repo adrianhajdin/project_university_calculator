@@ -1,26 +1,26 @@
 module.exports = ({
-    evaluationMaturaElective1,
-    evaluationMaturaElective2,
-    evaluationMaturaElective3,
-    percentagesTotal,
-    totalGradePoints,
-    pointsMaturaCroatian,
-    pointsMaturaMathematics,
-    pointsMaturaEnglish,
-    pointsMaturaElective1,
-    pointsMaturaElective2,
-    pointsMaturaElective3,
-    pointsExtraField1,
-    pointsExtraField2,
-    pointsExtraField3,
-    evaluationExtraField1,
-    evaluationExtraField2,
-    evaluationExtraField3,
-    totalMaturaPoints,
-    universityName,
+  evaluationMaturaElective1,
+  evaluationMaturaElective2,
+  evaluationMaturaElective3,
+  percentagesTotal,
+  totalGradePoints,
+  pointsMaturaCroatian,
+  pointsMaturaMathematics,
+  pointsMaturaEnglish,
+  pointsMaturaElective1,
+  pointsMaturaElective2,
+  pointsMaturaElective3,
+  pointsExtraField1,
+  pointsExtraField2,
+  pointsExtraField3,
+  evaluationExtraField1,
+  evaluationExtraField2,
+  evaluationExtraField3,
+  totalMaturaPoints,
+  universityName,
 }) => {
-    const today = new Date();
-    return `
+  const today = new Date();
+  return `
     <!doctype html>
 <html>
 
@@ -126,7 +126,7 @@ module.exports = ({
                             <td class="title"><img src="http://icons.iconarchive.com/icons/dtafalonso/android-lollipop/256/Calculator-icon.png"
                                     style="width:100%; max-width:156px;"></td>
                             <td>
-                                Datum: ${today.getDate() + '. ' + (today.getMonth() + 1) + '. ' + today.getFullYear() + '.'}
+                                Datum: ${`${today.getDate()}. ${today.getMonth() + 1}. ${today.getFullYear()}.`}
                             </td>
                         </tr>
                     </table>
@@ -177,41 +177,41 @@ module.exports = ({
                 <td>${pointsMaturaEnglish}</td>
             </tr>
             ${evaluationMaturaElective1 ? (
-                `<tr class="item">
+    `<tr class="item">
                   <td>Broj bodova od mature iz 1. izbornog predmeta:</td>
                   <td>${pointsMaturaElective1}</td>
                 </tr>`
-              ) : '<span/>'}
+  ) : '<span/>'}
             ${evaluationMaturaElective2 ? (
-                `<tr class="item">
+    `<tr class="item">
                   <td>Broj bodova od mature iz 2. izbornog predmeta:</td>
                   <td>${pointsMaturaElective2}</td>
                 </tr>`
-              ) : '<span/>'}
+  ) : '<span/>'}
             ${evaluationMaturaElective3 ? (
-                `<tr class="item">
+    `<tr class="item">
                   <td>Broj bodova od mature iz 3. izbornog predmeta:</td>
                   <td>${pointsMaturaElective3}</td>
                 </tr>`
-              ) : '<span/>'}
+  ) : '<span/>'}
             ${evaluationExtraField1 ? (
-                  `<tr class="item">
+    `<tr class="item">
                     <td>Broj bodova od 1. dodatne provjere</td>
                     <td>${pointsExtraField1}</td>
                   </tr>`
-                ) : '<span/>'}
+  ) : '<span/>'}
             ${evaluationExtraField2 ? (
-                    `<tr class="item">
+    `<tr class="item">
                         <td>Broj bodova od 2. dodatne provjere: </td>
                         <td>${pointsExtraField2}</td>
                     </tr>`
-                ) : '<span/>'}
+  ) : '<span/>'}
             ${evaluationExtraField3 ? (
-                    `<tr class="item">
+    `<tr class="item">
                         <td>Broj bodova od 3. dodatne provjere:</td>
                         <td>${pointsExtraField3}</td>
                     </tr>`
-                ) : '<span/>'}
+  ) : '<span/>'}
         </table>
         <br />
         <hr class="margin-top" />
@@ -220,4 +220,4 @@ module.exports = ({
 </body>
 
 </html>`;
-}
+};

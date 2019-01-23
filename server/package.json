@@ -4,15 +4,19 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "heroku-postbuild": "cd client && npm install && npm install --only=dev --no-shrinkwrap && npm run build",
+    "start": "nodemon server.js"
   },
-  "author": "",
+  "author": "Adrian Hajdin",
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.18.3",
     "cors": "^2.8.5",
     "express": "^4.16.4",
-    "file-saver": "^2.0.0",
     "html-pdf": "^2.2.0"
+  },
+  "devDependencies": {
+    "eslint": "^5.12.1",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.15.0"
   }
 }
