@@ -41,5 +41,4 @@ export const initialState = {
   pointsMaturaMathematics: '',
   universityName: '',
   isButtonDisabled: false,
-  isResultReady: false,
 };

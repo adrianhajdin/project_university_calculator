@@ -25,27 +25,26 @@ class App extends Component {
   state = initialState;
 
   createPdf = () => {
-    const { isResultReady, universityName, percentagesTotal, evaluationSchoolGrades, pointsMaturaEnglish, pointsMaturaCroatian, pointsMaturaElective1, pointsMaturaElective2, pointsMaturaElective3, pointsMaturaMathematics, pointsExtraField1, pointsExtraField2, pointsExtraField3 } = this.state;
+    const { universityName, percentagesTotal, evaluationSchoolGrades, pointsMaturaEnglish, pointsMaturaCroatian, pointsMaturaElective1, pointsMaturaElective2, pointsMaturaElective3, pointsMaturaMathematics, pointsExtraField1, pointsExtraField2, pointsExtraField3 } = this.state;
 
-    if (!isResultReady) {
-      this.setState({
-        totalGradePoints: calculateTotalGradePoints(percentagesTotal, evaluationSchoolGrades),
-        totalMaturaPoints: calculateTotalMaturaPoints(pointsMaturaEnglish, pointsMaturaCroatian, pointsMaturaElective1, pointsMaturaElective2, pointsMaturaElective3, pointsMaturaMathematics, pointsExtraField1, pointsExtraField2, pointsExtraField3),
-        isResultReady: !isResultReady,
-        isButtonDisabled: true,
-      }, () => {
-        axios.post('/create-pdf', this.state);
-      });
+    this.setState({
+      totalGradePoints: calculateTotalGradePoints(percentagesTotal, evaluationSchoolGrades),
+      totalMaturaPoints: calculateTotalMaturaPoints(pointsMaturaEnglish, pointsMaturaCroatian, pointsMaturaElective1, pointsMaturaElective2, pointsMaturaElective3, pointsMaturaMathematics, pointsExtraField1, pointsExtraField2, pointsExtraField3),
+      isButtonDisabled: true,
+    }, () => {
+      axios.post('/create-pdf', this.state);
+    });
 
-      setTimeout(() => this.setState({ isButtonDisabled: false }), 3000);
-    } else {
+    setTimeout(() => {
       axios.get('fetch-pdf', { responseType: 'blob' })
         .then((res) => {
           const blob = new Blob([res.data], { type: 'application/pdf' });
 
           saveAs(blob, `${universityName}.pdf`);
         });
-    }
+
+      this.setState({ isButtonDisabled: false });
+    }, 3000);
   }
 
   handleChange = ({ target: { value, name } }) => this.setState({ [name]: value });

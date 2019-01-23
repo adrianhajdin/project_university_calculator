@@ -123,7 +123,7 @@ module.exports = ({
                 <td colspan="2">
                     <table>
                         <tr>
-                            <td class="title"><img src="http://icons.iconarchive.com/icons/dtafalonso/android-lollipop/256/Calculator-icon.png"
+                            <td class="title"><img src="https://img.icons8.com/nolan/512/000000/calculator.png"
                                     style="width:100%; max-width:156px;"></td>
                             <td>
                                 Datum: ${`${today.getDate()}. ${today.getMonth() + 1}. ${today.getFullYear()}.`}
