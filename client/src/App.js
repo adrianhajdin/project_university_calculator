@@ -32,19 +32,18 @@ class App extends Component {
       totalMaturaPoints: calculateTotalMaturaPoints(pointsMaturaEnglish, pointsMaturaCroatian, pointsMaturaElective1, pointsMaturaElective2, pointsMaturaElective3, pointsMaturaMathematics, pointsExtraField1, pointsExtraField2, pointsExtraField3),
       isButtonDisabled: true,
     }, () => {
-      axios.post('/create-pdf', this.state);
-    });
+      axios.post('/create-pdf', this.state)
+        .then(() => {
+          axios.get('fetch-pdf', { responseType: 'blob' })
+            .then((res) => {
+              const blob = new Blob([res.data], { type: 'application/pdf' });
 
-    setTimeout(() => {
-      axios.get('fetch-pdf', { responseType: 'blob' })
-        .then((res) => {
-          const blob = new Blob([res.data], { type: 'application/pdf' });
+              this.setState({ isButtonDisabled: false });
 
-          saveAs(blob, `${universityName}.pdf`);
+              saveAs(blob, `${universityName}.pdf`);
+            });
         });
-
-      this.setState({ isButtonDisabled: false });
-    }, 3000);
+    });
   }
 
   handleChange = ({ target: { value, name } }) => this.setState({ [name]: value });
