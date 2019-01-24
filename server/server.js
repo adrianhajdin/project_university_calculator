@@ -14,15 +14,9 @@ app.use(bodyParser.json());
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
 
-app.post('/create-pdf', (req) => {
-  pdf.create(data(req.body), {}).toFile('rezultati.pdf', (err, res) => {
-    if (err) {
-      console.log(err);
-    }
-
-    return res;
-  });
-});
+app.post('/create-pdf', (req, res) => {
+  pdf.create(data(req.body), {}).toFile('rezultati.pdf', () => res.send(Promise.resolve()));
+})
 
 app.get('/fetch-pdf', (req, res) => {
   res.sendFile(`${__dirname}/rezultati.pdf`);
