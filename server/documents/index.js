@@ -1,26 +1,29 @@
 module.exports = ({
-  evaluationMaturaElective1,
-  evaluationMaturaElective2,
-  evaluationMaturaElective3,
-  percentagesTotal,
-  totalGradePoints,
-  pointsMaturaCroatian,
-  pointsMaturaMathematics,
-  pointsMaturaEnglish,
-  pointsMaturaElective1,
-  pointsMaturaElective2,
-  pointsMaturaElective3,
-  pointsExtraField1,
-  pointsExtraField2,
-  pointsExtraField3,
-  evaluationExtraField1,
-  evaluationExtraField2,
-  evaluationExtraField3,
-  totalMaturaPoints,
-  universityName,
+    evaluationMaturaElective1,
+    evaluationMaturaElective2,
+    evaluationMaturaElective3,
+    percentagesTotal,
+    totalGradePoints,
+    pointsMaturaCroatian,
+    pointsMaturaMathematics,
+    pointsMaturaEnglish,
+    pointsMaturaElective1,
+    pointsMaturaElective2,
+    pointsMaturaElective3,
+    pointsExtraField1,
+    pointsExtraField2,
+    pointsExtraField3,
+    evaluationExtraField1,
+    evaluationExtraField2,
+    evaluationExtraField3,
+    totalMaturaPoints,
+    universityName,
+    evaluationMaturaElective1Name,
+    evaluationMaturaElective2Name,
+    evaluationMaturaElective3Name,
 }) => {
-  const today = new Date();
-  return `
+    const today = new Date();
+    return `
     <!doctype html>
 <html>
 
@@ -160,6 +163,7 @@ module.exports = ({
                 <td>Broj bodova od prosjeka ocjena: </td>
                 <td>${totalGradePoints}</td>
             </tr>
+            <br />
             <tr class="heading">
                 <td>Rezultati državne mature</td>
                 <td>Broj bodova</td>
@@ -177,45 +181,44 @@ module.exports = ({
                 <td>${pointsMaturaEnglish}</td>
             </tr>
             ${evaluationMaturaElective1 ? (
-    `<tr class="item">
-                  <td>Broj bodova od mature iz 1. izbornog predmeta:</td>
-                  <td>${pointsMaturaElective1}</td>
+                `<tr class="item">
+                    <td>Broj bodova od mature - ${evaluationMaturaElective1Name}:</td>
+                    <td>${pointsMaturaElective1}</td>
                 </tr>`
-  ) : '<span/>'}
+                ) : '<span />'}
             ${evaluationMaturaElective2 ? (
-    `<tr class="item">
-                  <td>Broj bodova od mature iz 2. izbornog predmeta:</td>
-                  <td>${pointsMaturaElective2}</td>
+                `<tr class="item">
+                    <td>Broj bodova od mature - ${evaluationMaturaElective2Name}:</td>
+                    <td>${pointsMaturaElective2}</td>
                 </tr>`
-  ) : '<span/>'}
+            ) : '<span />'}
             ${evaluationMaturaElective3 ? (
-    `<tr class="item">
-                  <td>Broj bodova od mature iz 3. izbornog predmeta:</td>
-                  <td>${pointsMaturaElective3}</td>
+                `<tr class="item">
+                    <td>Broj bodova od mature - ${evaluationMaturaElective3Name}:</td>
+                    <td>${pointsMaturaElective3}</td>
                 </tr>`
-  ) : '<span/>'}
+            ) : '<span />'}
             ${evaluationExtraField1 ? (
-    `<tr class="item">
-                    <td>Broj bodova od 1. dodatne provjere</td>
-                    <td>${pointsExtraField1}</td>
-                  </tr>`
-  ) : '<span/>'}
+                `<tr class="item">
+                                <td>Broj bodova od 1. dodatne provjere</td>
+                                <td>${pointsExtraField1}</td>
+                            </tr>`
+            ) : '<span />'}
             ${evaluationExtraField2 ? (
-    `<tr class="item">
-                        <td>Broj bodova od 2. dodatne provjere: </td>
-                        <td>${pointsExtraField2}</td>
-                    </tr>`
-  ) : '<span/>'}
+                `<tr class="item">
+                                    <td>Broj bodova od 2. dodatne provjere: </td>
+                                    <td>${pointsExtraField2}</td>
+                                </tr>`
+            ) : '<span />'}
             ${evaluationExtraField3 ? (
-    `<tr class="item">
-                        <td>Broj bodova od 3. dodatne provjere:</td>
-                        <td>${pointsExtraField3}</td>
-                    </tr>`
-  ) : '<span/>'}
+                `<tr class="item">
+                                    <td>Broj bodova od 3. dodatne provjere:</td>
+                                    <td>${pointsExtraField3}</td>
+                                </tr>`
+            ) : '<span />'}
         </table>
-        <br />
         <hr class="margin-top" />
-        <h1 class="justify-center">Ukupan broj bodova: ${totalMaturaPoints + totalGradePoints}</h1>
+        <h1 class="justify-center">Ukupan broj bodova: ${totalMaturaPoints + totalGradePoints}/1000</h1>
     </div>
 </body>
 

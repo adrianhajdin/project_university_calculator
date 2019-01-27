@@ -22,6 +22,9 @@ const table = ({ props: {
   evaluationExtraField1,
   evaluationExtraField2,
   evaluationExtraField3,
+  evaluationMaturaElective1Name,
+  evaluationMaturaElective2Name,
+  evaluationMaturaElective3Name,
 } }) => (
   <Table>
     <TableBody>
@@ -48,21 +51,21 @@ const table = ({ props: {
       {evaluationMaturaElective1
         ? (
           <TableRow>
-            <TableCell>Broj bodova od mature iz 1. Izbornog predmeta:</TableCell>
+            <TableCell>Broj bodova od mature - {evaluationMaturaElective1Name}:</TableCell>
             <TableCell>{pointsMaturaElective1}</TableCell>
           </TableRow>
         ) : null}
       {evaluationMaturaElective2
         ? (
           <TableRow>
-            <TableCell>Broj bodova od mature iz 2. Izbornog predmeta:</TableCell>
+            <TableCell>Broj bodova od mature - {evaluationMaturaElective2Name}:</TableCell>
             <TableCell>{pointsMaturaElective2}</TableCell>
           </TableRow>
         ) : null}
       {evaluationMaturaElective3
         ? (
           <TableRow>
-            <TableCell>Broj bodova od mature iz 3. Izbornog predmeta:</TableCell>
+            <TableCell>Broj bodova od mature - {evaluationMaturaElective3Name}:</TableCell>
             <TableCell>{pointsMaturaElective3}</TableCell>
           </TableRow>
         ) : null}

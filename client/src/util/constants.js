@@ -42,3 +42,5 @@ export const initialState = {
   universityName: '',
   isButtonDisabled: false,
 };
+
+export const maturaElectiveOptionNames = ['-', 'Etika', 'Filozofija', 'Geografija', 'Glazbena umjetnost', 'Likovna umjetnost', 'Logika', 'Politika i gospodarstvo', 'Psihologija', 'Sociologija', 'Vjeronauk', 'Biologija', 'Fizika', 'Informatika', 'Kemija', 'Povijest'];
