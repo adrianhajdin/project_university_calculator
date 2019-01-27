@@ -153,36 +153,36 @@ class App extends Component {
                 { evaluationMaturaElectiveInputs
                   ? (
                     <Grid item xs={12}>
-                      <FormControl style={{ marginRight: '25px', marginTop: '10px' }}>
+                      <FormControl style={{ marginRight: isMobile ? 0 : '25px', marginTop: isMobile ? 0 : '10px' }}>
                         <NativeSelect value={evaluationMaturaElective1Name} onChange={this.handleChange} input={<Input name="evaluationMaturaElective1Name" />}>
                           {maturaElectiveOptionNames.map((option, i) => <option key={i} value={option}>{option}</option>)}
                         </NativeSelect>
                       </FormControl>
-                      <CustomInput name="evaluationMaturaElective1" label={evaluationMaturaElective1Name} value={evaluationMaturaElective1} onChange={this.handleChange} percentage />
+                      <CustomInput name="evaluationMaturaElective1" value={evaluationMaturaElective1} onChange={this.handleChange} percentage />
                     </Grid>
                   ) : null
                 }
                 { evaluationMaturaElectiveInputs2
                   ? (
                     <Grid item xs={12}>
-                      <FormControl style={{ marginRight: '25px', marginTop: '10px' }}>
+                      <FormControl style={{ marginRight: isMobile ? 0 : '25px', marginTop: isMobile ? '15px' : '10px' }}>
                         <NativeSelect value={evaluationMaturaElective2Name} onChange={this.handleChange} input={<Input name="evaluationMaturaElective2Name" />}>
                           {maturaElectiveOptionNames.map((option, i) => <option key={i} value={option}>{option}</option>)}
                         </NativeSelect>
                       </FormControl>
-                      <CustomInput name="evaluationMaturaElective2" label={evaluationMaturaElective2Name} value={evaluationMaturaElective2} onChange={this.handleChange} percentage />
+                      <CustomInput name="evaluationMaturaElective2" value={evaluationMaturaElective2} onChange={this.handleChange} percentage />
                     </Grid>
                   ) : null
                 }
                 { evaluationMaturaElectiveInputs3
                   ? (
                     <Grid item xs={12}>
-                      <FormControl style={{ marginRight: '25px', marginTop: '10px' }}>
+                      <FormControl style={{ marginRight: isMobile ? 0 : '25px', marginTop: isMobile ? '15px' : '10px' }}>
                         <NativeSelect value={evaluationMaturaElective3Name} onChange={this.handleChange} input={<Input name="evaluationMaturaElective3Name" />}>
                           {maturaElectiveOptionNames.map((option, i) => <option key={i} value={option}>{option}</option>)}
                         </NativeSelect>
                       </FormControl>
-                      <CustomInput name="evaluationMaturaElective3" label={evaluationMaturaElective3Name} value={evaluationMaturaElective3} onChange={this.handleChange} percentage />
+                      <CustomInput name="evaluationMaturaElective3" value={evaluationMaturaElective3} onChange={this.handleChange} percentage />
                     </Grid>
                   ) : null
                 }

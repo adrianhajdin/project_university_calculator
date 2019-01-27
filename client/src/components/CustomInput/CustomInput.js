@@ -2,6 +2,7 @@ import React from 'react';
 
 import { TextValidator } from 'react-material-ui-form-validator';
 import { InputAdornment } from '@material-ui/core';
+import { isMobile } from 'react-device-detect';
 
 const Input = ({ percentage, name, label, value, onChange, helperText, autoFocus, required, type }) => {
   let percentageSign;
@@ -29,6 +30,7 @@ const Input = ({ percentage, name, label, value, onChange, helperText, autoFocus
 
   return (
     <TextValidator
+      style={{ width: isMobile ? '60%' : 'initial' }}
       name={name}
       label={label}
       type={type ? 'text' : 'number'}
