@@ -153,7 +153,7 @@ class App extends Component {
                 { evaluationMaturaElectiveInputs
                   ? (
                     <Grid item xs={12}>
-                      <FormControl style={{ marginRight: isMobile ? 0 : '25px', marginTop: isMobile ? 0 : '10px' }}>
+                      <FormControl classes={{ root: classes.formControl }}>
                         <NativeSelect value={evaluationMaturaElective1Name} onChange={this.handleChange} input={<Input name="evaluationMaturaElective1Name" />}>
                           {maturaElectiveOptionNames.map((option, i) => <option key={i} value={option}>{option}</option>)}
                         </NativeSelect>
@@ -165,7 +165,7 @@ class App extends Component {
                 { evaluationMaturaElectiveInputs2
                   ? (
                     <Grid item xs={12}>
-                      <FormControl style={{ marginRight: isMobile ? 0 : '25px', marginTop: isMobile ? '15px' : '10px' }}>
+                      <FormControl classes={{ root: classes.formControl }}>
                         <NativeSelect value={evaluationMaturaElective2Name} onChange={this.handleChange} input={<Input name="evaluationMaturaElective2Name" />}>
                           {maturaElectiveOptionNames.map((option, i) => <option key={i} value={option}>{option}</option>)}
                         </NativeSelect>
@@ -177,7 +177,7 @@ class App extends Component {
                 { evaluationMaturaElectiveInputs3
                   ? (
                     <Grid item xs={12}>
-                      <FormControl style={{ marginRight: isMobile ? 0 : '25px', marginTop: isMobile ? '15px' : '10px' }}>
+                      <FormControl classes={{ root: classes.formControl }}>
                         <NativeSelect value={evaluationMaturaElective3Name} onChange={this.handleChange} input={<Input name="evaluationMaturaElective3Name" />}>
                           {maturaElectiveOptionNames.map((option, i) => <option key={i} value={option}>{option}</option>)}
                         </NativeSelect>
