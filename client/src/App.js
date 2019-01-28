@@ -117,7 +117,8 @@ class App extends Component {
           <Divider light classes={{ root: classes.dividerMarginBottom10 }} />
           <Typography classes={{ root: classes.marginBottomMobile }} variant="caption"> Ukoliko niste sigurni koliko vaš fakultet pridaje bodova određenim predmetima, posjetite: <Button classes={{ root: classes.button }} target="_blank" href="https://www.postani-student.hr/Ucilista/Nositelji.aspx" color="primary">Postani Student</Button></Typography>
           <Divider light classes={{ root: classes.dividerMarginBottom20 }} />
-          <Typography variant="title">Podaci o fakultetu</Typography>
+          <Typography classes={{ root: classes.marginBottom10 }} variant="title">Podaci o fakultetu</Typography>
+          <Typography classes={{ root: classes.caption }} variant="caption">Ovdje upišite ime smjera i fakulteta koji planirate upisati</Typography>
           <CustomInput type="text" autoFocus label="Ime fakulteta" name="universityName" onChange={this.handleChange} value={universityName} />
           <Divider light classes={{ root: classes.divider }} />
           <Typography classes={{ root: classes.marginBottom10 }} variant="title">Ocjene iz srednje škole</Typography>
