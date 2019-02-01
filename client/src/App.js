@@ -118,8 +118,8 @@ class App extends Component {
           <Typography classes={{ root: classes.marginBottomMobile }} variant="caption"> Ukoliko niste sigurni koliko vaš fakultet pridaje bodova određenim predmetima, posjetite: <Button classes={{ root: classes.button }} target="_blank" href="https://www.postani-student.hr/Ucilista/Nositelji.aspx" color="primary">Postani Student</Button></Typography>
           <Divider light classes={{ root: classes.dividerMarginBottom20 }} />
           <Typography classes={{ root: classes.marginBottom10 }} variant="title">Podaci o fakultetu</Typography>
-          <Typography classes={{ root: classes.caption }} variant="caption">Ovdje upišite ime smjera i fakulteta koji planirate upisati</Typography>
-          <CustomInput type="text" autoFocus label="Ime fakulteta" name="universityName" onChange={this.handleChange} value={universityName} />
+          <Typography classes={{ root: classes.caption }} variant="caption">Ovdje upišite naziv smjera i fakulteta koji planirate upisati</Typography>
+          <CustomInput type="text" autoFocus label="Naziv fakulteta" name="universityName" onChange={this.handleChange} value={universityName} />
           <Divider light classes={{ root: classes.divider }} />
           <Typography classes={{ root: classes.marginBottom10 }} variant="title">Ocjene iz srednje škole</Typography>
           <Typography classes={{ root: classes.caption }} variant="caption">Ovdje upišite postotak od ukupnog broja bodova koji vam {isMobile ? null : <br />} određeni fakultet pridaje za prosjek ocjena srednje škole</Typography>
@@ -283,7 +283,7 @@ class App extends Component {
             </Grid>
             <Grid className={classes.marginTopMobile} item xs={12} lg={4}>
               <CustomInput label="Engleski jezik" name="percentageMaturaEnglish" onChange={this.handleChange} percentage required value={percentageMaturaEnglish} />
-              <NativeSelect name="evaluationMaturaEnglishLevel" classes={{ root: classes.marginLeft10 }} value={evaluationMaturaEnglishLevel} onChange={this.handleNativeSelectChange}>
+              <NativeSelect name="evaluationMaturaEnglishLevel" classes={{ root: classes.marginLeft10 }} value={evaluationMaturaEnglishLevel} onChange={this.handleChange}>
                 <option value="A">A</option>
                 <option value="B">B</option>
               </NativeSelect>
