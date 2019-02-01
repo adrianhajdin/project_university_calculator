@@ -40,6 +40,7 @@ class App extends Component {
 
   // Generiranje PDF-a
   createPdf = () => {
+    // Destrukturiranje varijabli iz this.state kako bih ih mogao pozivati samo sa imenom varijable, a ne this.state.imeVarijable
     const { universityName, percentagesTotal, evaluationSchoolGrades, pointsMaturaEnglish, pointsMaturaCroatian, pointsMaturaElective1, pointsMaturaElective2, pointsMaturaElective3, pointsMaturaMathematics, pointsExtraField1, pointsExtraField2, pointsExtraField3 } = this.state;
 
     // Postavlja state završnog stanja kako bi se sve moglo proslijediti serveru
@@ -135,7 +136,8 @@ class App extends Component {
 
     let dialogContent;
     let buttons;
-    // Postavljanje novog sadržaja na dialogContent nakon promjene koraka
+
+    // Postavljanje novog sadržaja na dialogContent i buttons nakon promjene koraka
     if (activeStep === 0) {
       dialogContent = (
         <React.Fragment>
