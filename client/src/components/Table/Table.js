@@ -26,6 +26,7 @@ const table = ({ props: {
   evaluationMaturaElective2Name,
   evaluationMaturaElective3Name,
 } }) => (
+  // Tablica završnih rezultata
   <Table>
     <TableBody>
       <TableRow>

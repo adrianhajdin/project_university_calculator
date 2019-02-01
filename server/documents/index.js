@@ -1,3 +1,4 @@
+// HTML predložak po kojemu se generira dinamični PDF
 module.exports = ({
     evaluationMaturaElective1,
     evaluationMaturaElective2,

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 
+// Import vanjskih modula
 import { Button, Divider, Grid, Typography, Paper, NativeSelect, FormControl, Input } from '@material-ui/core';
 import { ValidatorForm } from 'react-material-ui-form-validator';
 import ReactChartkick, { BarChart } from 'react-chartkick';
@@ -10,48 +11,71 @@ import PropTypes from 'prop-types';
 import Chart from 'chart.js';
 import axios from 'axios';
 
+// Import komponenti, slika i stilova
 import { CustomInput, Stepper, Table } from './components';
 import printIcon from './public/printIcon.png';
 import logo from './public/calculatorIcon.png';
 import styles from './styles';
 import './App.css';
 
-import { calculatePoints, calculateMaturaPoints, calculatePercentages, calculateTotalMaturaPoints, calculateTotalGradePoints } from './util/helperFunctions';
-import { initialState, maturaElectiveOptionNames } from './util/constants';
+// Import pomoćnih funkcija
+import {
+  calculatePoints,
+  calculateMaturaPoints,
+  calculatePercentagesAndTotalMaturaPoints,
+  calculateTotalGradePoints,
+} from './util/helperFunctions';
 
+// Import konstanti
+import {
+  initialState,
+  maturaElectiveOptionNames,
+} from './util/constants';
+
+// Postavljanje grafa za ukupan broj bodova
 ReactChartkick.addAdapter(Chart);
 
 class App extends Component {
   state = initialState;
 
+  // Generiranje PDF-a
   createPdf = () => {
     const { universityName, percentagesTotal, evaluationSchoolGrades, pointsMaturaEnglish, pointsMaturaCroatian, pointsMaturaElective1, pointsMaturaElective2, pointsMaturaElective3, pointsMaturaMathematics, pointsExtraField1, pointsExtraField2, pointsExtraField3 } = this.state;
 
+    // Postavlja state završnog stanja kako bi se sve moglo proslijediti serveru
     this.setState({
       totalGradePoints: calculateTotalGradePoints(percentagesTotal, evaluationSchoolGrades),
-      totalMaturaPoints: calculateTotalMaturaPoints(pointsMaturaEnglish, pointsMaturaCroatian, pointsMaturaElective1, pointsMaturaElective2, pointsMaturaElective3, pointsMaturaMathematics, pointsExtraField1, pointsExtraField2, pointsExtraField3),
+      totalMaturaPoints: calculatePercentagesAndTotalMaturaPoints(pointsMaturaEnglish, pointsMaturaCroatian, pointsMaturaElective1, pointsMaturaElective2, pointsMaturaElective3, pointsMaturaMathematics, pointsExtraField1, pointsExtraField2, pointsExtraField3),
       isButtonDisabled: true,
     }, () => {
+      // Šalje post request zajedno sa trenutnim stanjem
       axios.post('/create-pdf', this.state)
         .then(() => {
+          // Nakon što se post request izvrši šalje get request
           axios.get('fetch-pdf', { responseType: 'blob' })
             .then((res) => {
+              // Stvara blob o podataka koji su stigli sa servera (PDF datoteka)
               const blob = new Blob([res.data], { type: 'application/pdf' });
 
               this.setState({ isButtonDisabled: false });
 
+              // Sprema PDF datoteku
               saveAs(blob, `${universityName}.pdf`);
             });
         });
     });
   }
 
+  // Metoda koja mijenja stanje nakon promjene na inputu
   handleChange = ({ target: { value, name } }) => this.setState({ [name]: value });
 
+  // Metoda koja vraća modal za jedan korak natrag
   handleBack = activeStep => this.setState({ activeStep: activeStep - 1 });
 
+  // Metoda koja osvježi cijelu stranicu
   handleRefresh = () => window.location.reload();
 
+  // Metoda koja dodaje dodatna polja
   addInputs = (field) => {
     if (field === 'evaluationMaturaElective') {
       const { evaluationMaturaElectiveInputs, evaluationMaturaElectiveInputs2 } = this.state;
@@ -76,6 +100,7 @@ class App extends Component {
     }
   };
 
+  // Metoda koja postavlja novo stanje na svakom idućem koraku
   handleClick = () => {
     const { activeStep, evaluationExtraField1, evaluationExtraField2, evaluationExtraField3, evaluationMaturaCroatian, evaluationMaturaCroatianLevel, evaluationMaturaElective1, evaluationMaturaElective2, evaluationMaturaElective3, evaluationMaturaEnglish, evaluationMaturaEnglishLevel, evaluationMaturaMathematics, evaluationMaturaMathematicsLevel, percentageExtraField1, percentageExtraField2, percentageExtraField3, percentageFirstGrade, percentageFourthGrade, percentageMaturaCroatian, percentageMaturaElective1, percentageMaturaElective2, percentageMaturaElective3, percentageMaturaEnglish, percentageMaturaMathematics, percentageSecondGrade, percentageThirdGrade } = this.state;
 
@@ -84,7 +109,7 @@ class App extends Component {
     } else if (activeStep === 1) {
       this.setState({
         activeStep: activeStep + 1,
-        percentagesTotal: calculatePercentages(percentageFirstGrade, percentageSecondGrade, percentageThirdGrade, percentageFourthGrade),
+        percentagesTotal: calculatePercentagesAndTotalMaturaPoints(percentageFirstGrade, percentageSecondGrade, percentageThirdGrade, percentageFourthGrade),
       });
     } else if (activeStep === 2) {
       this.setState({
@@ -110,7 +135,7 @@ class App extends Component {
 
     let dialogContent;
     let buttons;
-
+    // Postavljanje novog sadržaja na dialogContent nakon promjene koraka
     if (activeStep === 0) {
       dialogContent = (
         <React.Fragment>
@@ -349,7 +374,7 @@ class App extends Component {
       );
     } else if (activeStep === 3) {
       const totalGradePoints = calculateTotalGradePoints(percentagesTotal, evaluationSchoolGrades);
-      const totalMaturaPoints = calculateTotalMaturaPoints(pointsMaturaEnglish, pointsMaturaCroatian, pointsMaturaElective1, pointsMaturaElective2, pointsMaturaElective3, pointsMaturaMathematics, pointsExtraField1, pointsExtraField2, pointsExtraField3);
+      const totalMaturaPoints = calculatePercentagesAndTotalMaturaPoints(pointsMaturaEnglish, pointsMaturaCroatian, pointsMaturaElective1, pointsMaturaElective2, pointsMaturaElective3, pointsMaturaMathematics, pointsExtraField1, pointsExtraField2, pointsExtraField3);
 
       dialogContent = (
         <React.Fragment>
@@ -371,6 +396,7 @@ class App extends Component {
       );
     }
 
+    // Krajnji output, ono što se rendera u browseru, zajedno sa svim vanjskim komponentama
     return (
       <React.Fragment>
         <Grid justify="center" container>

@@ -8,6 +8,7 @@ const Input = ({ percentage, name, label, value, onChange, helperText, autoFocus
   let percentageSign;
   let validation;
 
+  // Dodaje znak % na kraj ukoliko je percentage istinit
   if (percentage) {
     percentageSign = {
       InputProps: {
@@ -16,6 +17,7 @@ const Input = ({ percentage, name, label, value, onChange, helperText, autoFocus
     };
   }
 
+  // Validacija
   if (percentage && required) {
     validation = {
       validators: ['required', 'minNumber:0', 'maxNumber:100'],
@@ -36,11 +38,11 @@ const Input = ({ percentage, name, label, value, onChange, helperText, autoFocus
       type={type ? 'text' : 'number'}
       value={value}
       onChange={onChange}
-      {...percentageSign}
       helperText={helperText}
       autoFocus={autoFocus}
-      {...validation}
       required={required}
+      {...validation}
+      {...percentageSign}
     />
   );
 };

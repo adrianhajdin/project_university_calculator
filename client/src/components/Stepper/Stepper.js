@@ -8,11 +8,17 @@ import PropTypes from 'prop-types';
 
 import styles from './styles/styles';
 
-const steps = ['Raspodjela bodova za upis', 'Prosjek ocjena', 'Rezultati mature', 'Ukupan broj bodova'];
+const steps = [
+  'Raspodjela bodova za upis',
+  'Prosjek ocjena',
+  'Rezultati mature',
+  'Ukupan broj bodova',
+];
 
 const stepper = ({ activeStep, classes }) => (
   !isMobile
     ? (
+      // Koraci modala na većim ekranima
       <Stepper classes={{ root: classes.root }} activeStep={activeStep}>
         {steps.map((label, index) => (
           <Step key={index}>
@@ -22,6 +28,7 @@ const stepper = ({ activeStep, classes }) => (
       </Stepper>
     )
     : (
+      // Koraci modala na mobilnim uređajima
       <MobileStepper
         variant="dots"
         steps={4}

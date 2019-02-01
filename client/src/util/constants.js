@@ -1,3 +1,4 @@
+// Početni state
 export const initialState = {
   activeStep: 0,
   evaluationMaturaElectiveInputs2: false,
@@ -43,4 +44,22 @@ export const initialState = {
   isButtonDisabled: false,
 };
 
-export const maturaElectiveOptionNames = ['-', 'Etika', 'Filozofija', 'Geografija', 'Glazbena umjetnost', 'Likovna umjetnost', 'Logika', 'Politika i gospodarstvo', 'Psihologija', 'Sociologija', 'Vjeronauk', 'Biologija', 'Fizika', 'Informatika', 'Kemija', 'Povijest'];
+// Izborni predmeti državne mature
+export const maturaElectiveOptionNames = [
+  '-',
+  'Etika',
+  'Filozofija',
+  'Geografija',
+  'Glazbena umjetnost',
+  'Likovna umjetnost',
+  'Logika',
+  'Politika i gospodarstvo',
+  'Psihologija',
+  'Sociologija',
+  'Vjeronauk',
+  'Biologija',
+  'Fizika',
+  'Informatika',
+  'Kemija',
+  'Povijest',
+];
