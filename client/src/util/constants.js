@@ -7,6 +7,7 @@ export const initialState = {
   evaluationExtraFields2: false,
   evaluationExtraFields3: false,
   evaluationExtraFields: false,
+  isButtonDisabled: false,
   evaluationMaturaMathematicsLevel: 'A',
   evaluationMaturaCroatianLevel: 'A',
   evaluationMaturaEnglishLevel: 'A',
@@ -41,7 +42,6 @@ export const initialState = {
   pointsMaturaEnglish: '',
   pointsMaturaMathematics: '',
   universityName: '',
-  isButtonDisabled: false,
 };
 
 // Izborni predmeti državne mature

@@ -370,7 +370,7 @@ class App extends Component {
 
       buttons = (
         <div style={{ display: 'flex' }}>
-          <Button style={{ flex: 1 }} onClick={this.handleBack} fullWidth size="large" variant="contained">Natrag</Button>
+          <Button style={{ flex: 1 }} onClick={() => this.handleBack(activeStep)} fullWidth size="large" variant="contained">Natrag</Button>
           <Button style={{ flex: 4 }} type="submit" fullWidth size="large" variant="contained" color="primary">Završi</Button>
         </div>
       );
