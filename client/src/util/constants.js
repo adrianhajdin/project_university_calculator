@@ -47,6 +47,7 @@ export const initialState = {
 // Izborni predmeti državne mature
 export const maturaElectiveOptionNames = [
   '-',
+  'Drugi strani jezik',
   'Etika',
   'Filozofija',
   'Geografija',
