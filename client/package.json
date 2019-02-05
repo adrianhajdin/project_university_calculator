@@ -22,7 +22,8 @@
     "react-device-detect": "^1.5.9",
     "react-dom": "^16.4.2",
     "react-material-ui-form-validator": "^2.0.1",
-    "react-scripts": "1.1.5"
+    "react-scripts": "1.1.5",
+    "uuid": "^3.3.2"
   },
   "scripts": {
     "start": "react-scripts start",

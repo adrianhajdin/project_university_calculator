@@ -6,7 +6,7 @@ import { withStyles } from '@material-ui/core/styles';
 import { isMobile } from 'react-device-detect';
 import PropTypes from 'prop-types';
 
-import styles from './styles/styles';
+import styles from './styles';
 
 const steps = [
   'Raspodjela bodova za upis',

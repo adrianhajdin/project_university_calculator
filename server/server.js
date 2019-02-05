@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const pdf = require('html-pdf');
 const cors = require('cors');
 
+// HTML predložak po kojemu će biti stvorena PDF datoteka
 const data = require('./documents');
 
 const app = express();
@@ -14,12 +15,8 @@ app.use(bodyParser.json());
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
 
-// POST request - Kreira PDF i šalje resolved Promise natrag na client tako da se može lančano dodati .then()
-app.post('/create-pdf', (req, res) => {
-  pdf.create(data(req.body), {}).toFile('rezultati.pdf', () => res.send(Promise.resolve()));
-})
+// POST request - Generira PDF
+app.post('/create-pdf', (req, res) => pdf.create(data(req.body.state), {}).toFile(`${req.body.id}.pdf`, () => res.end()));
 
-// GET request - Šalje generirani PDF natrag na klijentsku stranu tako da se može koristiti tamo
-app.get('/fetch-pdf', (req, res) => {
-  res.sendFile(`${__dirname}/rezultati.pdf`);
-});
+// GET request - Šalje generirani PDF na frontend
+app.get('/fetch-pdf/:id', (req, res) => res.sendFile(`${__dirname}/${req.params.id}.pdf`));

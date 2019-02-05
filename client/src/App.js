@@ -1,18 +1,19 @@
 import React, { Component } from 'react';
 
 // Import vanjskih modula
-import { Button, Divider, Grid, Typography, Paper, NativeSelect, FormControl, Input } from '@material-ui/core';
+import { Button, Divider, Grid, Typography, Paper, NativeSelect } from '@material-ui/core';
 import { ValidatorForm } from 'react-material-ui-form-validator';
 import ReactChartkick, { BarChart } from 'react-chartkick';
 import { withStyles } from '@material-ui/core/styles';
 import { isMobile } from 'react-device-detect';
 import { saveAs } from 'file-saver';
 import PropTypes from 'prop-types';
+import uuidv1 from 'uuid/v1';
 import Chart from 'chart.js';
 import axios from 'axios';
 
 // Import komponenti, slika i stilova
-import { CustomInput, Stepper, Table } from './components';
+import { CustomInput, Stepper, Table, ElectiveInputs, ExtraFields, ChosenInputs } from './components';
 import printIcon from './public/printIcon.png';
 import logo from './public/calculatorIcon.png';
 import styles from './styles';
@@ -27,10 +28,7 @@ import {
 } from './util/helperFunctions';
 
 // Import konstanti
-import {
-  initialState,
-  maturaElectiveOptionNames,
-} from './util/constants';
+import { initialState } from './util/constants';
 
 // Postavljanje grafa za ukupan broj bodova
 ReactChartkick.addAdapter(Chart);
@@ -42,18 +40,19 @@ class App extends Component {
   createPdf = () => {
     // Destrukturiranje varijabli iz this.state kako bih ih mogao pozivati samo sa imenom varijable, a ne this.state.imeVarijable
     const { universityName, percentagesTotal, evaluationSchoolGrades, pointsMaturaEnglish, pointsMaturaCroatian, pointsMaturaElective1, pointsMaturaElective2, pointsMaturaElective3, pointsMaturaMathematics, pointsExtraField1, pointsExtraField2, pointsExtraField3 } = this.state;
-
+    // Stvaranje id-a za PDF datoteku
+    const id = uuidv1();
     // Postavlja state završnog stanja kako bi se sve moglo proslijediti serveru
     this.setState({
       totalGradePoints: calculateTotalGradePoints(percentagesTotal, evaluationSchoolGrades),
       totalMaturaPoints: calculatePercentagesAndTotalMaturaPoints(pointsMaturaEnglish, pointsMaturaCroatian, pointsMaturaElective1, pointsMaturaElective2, pointsMaturaElective3, pointsMaturaMathematics, pointsExtraField1, pointsExtraField2, pointsExtraField3),
       isButtonDisabled: true,
     }, () => {
-      // Šalje post request zajedno sa trenutnim stanjem
-      axios.post('/create-pdf', this.state)
+      // Šalje post request zajedno s trenutnim stanjem
+      axios.post('/create-pdf', { state: this.state, id })
         .then(() => {
-          // Nakon što se post request izvrši šalje get request
-          axios.get('/fetch-pdf', { responseType: 'blob' })
+          // Nakon što se post request izvrši šalje get request za specifičnim PDF-om
+          axios.get(`/fetch-pdf/${id}`, { responseType: 'blob' })
             .then((res) => {
               // Stvara blob o podataka koji su stigli sa servera (PDF datoteka)
               const blob = new Blob([res.data], { type: 'application/pdf' });
@@ -131,7 +130,7 @@ class App extends Component {
   }
 
   render() {
-    const { evaluationMaturaElective1Name, evaluationMaturaElective2Name, evaluationMaturaElective3Name, activeStep, percentagesTotal, pointsMaturaEnglish, pointsMaturaCroatian, pointsMaturaElective1, pointsMaturaElective2, pointsMaturaElective3, pointsMaturaMathematics, pointsExtraField1, pointsExtraField2, pointsExtraField3, isButtonDisabled, universityName, evaluationExtraField1, evaluationExtraField2, evaluationExtraField3, evaluationExtraFields, evaluationExtraFields2, evaluationExtraFields3, evaluationMaturaCroatian, evaluationMaturaCroatianLevel, evaluationMaturaElective1, evaluationMaturaElective2, evaluationMaturaElective3, evaluationMaturaElectiveInputs, evaluationMaturaElectiveInputs2, evaluationMaturaElectiveInputs3, evaluationMaturaEnglish, evaluationMaturaEnglishLevel, evaluationMaturaMathematics, evaluationMaturaMathematicsLevel, evaluationSchoolGrades, percentageExtraField1, percentageExtraField2, percentageExtraField3, percentageFirstGrade, percentageFourthGrade, percentageMaturaCroatian, percentageMaturaElective1, percentageMaturaElective2, percentageMaturaElective3, percentageMaturaEnglish, percentageMaturaMathematics, percentageSecondGrade, percentageThirdGrade } = this.state;
+    const { activeStep, percentagesTotal, pointsMaturaEnglish, pointsMaturaCroatian, pointsMaturaElective1, pointsMaturaElective2, pointsMaturaElective3, pointsMaturaMathematics, pointsExtraField1, pointsExtraField2, pointsExtraField3, isButtonDisabled, universityName, evaluationExtraField1, evaluationExtraFields3, evaluationMaturaCroatian, evaluationMaturaCroatianLevel, evaluationMaturaElectiveInputs3, evaluationMaturaEnglish, evaluationMaturaEnglishLevel, evaluationMaturaMathematics, evaluationMaturaMathematicsLevel, evaluationSchoolGrades, percentageFirstGrade, percentageFourthGrade, percentageMaturaCroatian, percentageMaturaEnglish, percentageMaturaMathematics, percentageSecondGrade, percentageThirdGrade } = this.state;
     const { classes } = this.props;
 
     let dialogContent;
@@ -177,44 +176,7 @@ class App extends Component {
                   : null
                 }
               </Typography>
-              <Grid container justify="center">
-                { evaluationMaturaElectiveInputs
-                  ? (
-                    <Grid item xs={12}>
-                      <FormControl classes={{ root: classes.formControl }}>
-                        <NativeSelect value={evaluationMaturaElective1Name} onChange={this.handleChange} input={<Input name="evaluationMaturaElective1Name" />}>
-                          {maturaElectiveOptionNames.map((option, i) => <option key={i} value={option}>{option}</option>)}
-                        </NativeSelect>
-                      </FormControl>
-                      <CustomInput name="evaluationMaturaElective1" value={evaluationMaturaElective1} onChange={this.handleChange} percentage />
-                    </Grid>
-                  ) : null
-                }
-                { evaluationMaturaElectiveInputs2
-                  ? (
-                    <Grid item xs={12}>
-                      <FormControl classes={{ root: classes.formControl }}>
-                        <NativeSelect value={evaluationMaturaElective2Name} onChange={this.handleChange} input={<Input name="evaluationMaturaElective2Name" />}>
-                          {maturaElectiveOptionNames.map((option, i) => <option key={i} value={option}>{option}</option>)}
-                        </NativeSelect>
-                      </FormControl>
-                      <CustomInput name="evaluationMaturaElective2" value={evaluationMaturaElective2} onChange={this.handleChange} percentage />
-                    </Grid>
-                  ) : null
-                }
-                { evaluationMaturaElectiveInputs3
-                  ? (
-                    <Grid item xs={12}>
-                      <FormControl classes={{ root: classes.formControl }}>
-                        <NativeSelect value={evaluationMaturaElective3Name} onChange={this.handleChange} input={<Input name="evaluationMaturaElective3Name" />}>
-                          {maturaElectiveOptionNames.map((option, i) => <option key={i} value={option}>{option}</option>)}
-                        </NativeSelect>
-                      </FormControl>
-                      <CustomInput name="evaluationMaturaElective3" value={evaluationMaturaElective3} onChange={this.handleChange} percentage />
-                    </Grid>
-                  ) : null
-                }
-              </Grid>
+              <ElectiveInputs props={this.state} handleChange={this.handleChange} />
             </Grid>
             <Grid item xs={12} lg={6}>
               <Divider light classes={{ root: classes.divider }} />
@@ -227,29 +189,7 @@ class App extends Component {
                   : null
                 }
               </Typography>
-              <Grid className={classes.marginTop5} container justify="center">
-                { evaluationExtraFields
-                  ? (
-                    <Grid key={1} item xs={12}>
-                      <CustomInput name="evaluationExtraField1" label="1. Dodatno polje" value={evaluationExtraField1} onChange={this.handleChange} percentage />
-                    </Grid>
-                  ) : null
-                }
-                { evaluationExtraFields2
-                  ? (
-                    <Grid className={classes.marginTop5} key={2} item xs={12}>
-                      <CustomInput name="evaluationExtraField2" label="2. Dodatno polje" value={evaluationExtraField2} onChange={this.handleChange} percentage />
-                    </Grid>
-                  ) : null
-                }
-                { evaluationExtraFields3
-                  ? (
-                    <Grid className={classes.marginTop5} key={3} item xs={12}>
-                      <CustomInput name="evaluationExtraField3" label="3. Dodatno polje" value={evaluationExtraField3} onChange={this.handleChange} percentage />
-                    </Grid>
-                  ) : null
-                }
-              </Grid>
+              <ExtraFields props={this.state} handleChange={this.handleChange} />
             </Grid>
           </Grid>
           <Divider light classes={{ root: classes.divider }} />
@@ -316,54 +256,7 @@ class App extends Component {
               </NativeSelect>
             </Grid>
           </Grid>
-          {evaluationMaturaElective1 ? <br /> : null}
-          <Grid container justify="center">
-            { evaluationMaturaElective1 !== ''
-              ? (
-                <Grid item xs={12} lg={3}>
-                  <CustomInput label={evaluationMaturaElective1Name} name="percentageMaturaElective1" onChange={this.handleChange} percentage required value={percentageMaturaElective1} />
-                </Grid>
-              ) : null
-            }
-            { evaluationMaturaElective2 !== ''
-              ? (
-                <Grid className={classes.marginTopMobile} item xs={12} lg={3}>
-                  <CustomInput label={evaluationMaturaElective2Name} name="percentageMaturaElective2" onChange={this.handleChange} percentage required value={percentageMaturaElective2} />
-                </Grid>
-              ) : null
-            }
-            { evaluationMaturaElective3 !== ''
-              ? (
-                <Grid className={classes.marginTopMobile} item xs={12} lg={3}>
-                  <CustomInput label={evaluationMaturaElective3Name} name="percentageMaturaElective3" onChange={this.handleChange} percentage required value={percentageMaturaElective3} />
-                </Grid>
-              ) : null
-            }
-          </Grid>
-          {evaluationExtraField1 ? <br /> : null}
-          <Grid container justify="center">
-            { evaluationExtraField1 !== ''
-              ? (
-                <Grid item xs={12} lg={3}>
-                  <CustomInput label="1. Dodatno polje" name="percentageExtraField1" onChange={this.handleChange} percentage required value={percentageExtraField1} />
-                </Grid>
-              ) : null
-            }
-            { evaluationExtraField2 !== ''
-              ? (
-                <Grid className={classes.marginTopMobile} item xs={12} lg={3}>
-                  <CustomInput label="2. Dodatno polje" name="percentageExtraField2" onChange={this.handleChange} percentage required value={percentageExtraField2} />
-                </Grid>
-              ) : null
-            }
-            { evaluationExtraField3 !== ''
-              ? (
-                <Grid className={classes.marginTopMobile} item xs={12} lg={3}>
-                  <CustomInput label="3. Dodatno polje" name="percentageExtraField3" onChange={this.handleChange} percentage required value={percentageExtraField3} />
-                </Grid>
-              ) : null
-            }
-          </Grid>
+          <ChosenInputs props={this.state} handleChange={this.handleChange} />
           <Divider light classes={{ root: classes.divider }} />
         </React.Fragment>
       );
