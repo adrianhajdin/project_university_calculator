@@ -53,7 +53,7 @@ class App extends Component {
       axios.post('/create-pdf', this.state)
         .then(() => {
           // Nakon što se post request izvrši šalje get request
-          axios.get('fetch-pdf', { responseType: 'blob' })
+          axios.get('/fetch-pdf', { responseType: 'blob' })
             .then((res) => {
               // Stvara blob o podataka koji su stigli sa servera (PDF datoteka)
               const blob = new Blob([res.data], { type: 'application/pdf' });
@@ -393,7 +393,9 @@ class App extends Component {
       buttons = (
         <div style={{ display: 'flex' }}>
           <Button style={{ flex: 5 }} onClick={this.handleRefresh} fullWidth size="large" variant="contained" color="primary">Na početak</Button>
-          <Button onClick={this.createPdf} style={{ flex: 2 }} fullWidth size="large" variant="contained" color="primary" disabled={isButtonDisabled}>{isButtonDisabled ? 'Stvaranje rezultata' : 'Preuzmi rezultate' } <img style={{ paddingLeft: '10px' }} height="30" width="30" alt="printIcon" src={printIcon} /></Button>
+          <Button onClick={this.createPdf} style={{ flex: 2 }} fullWidth size="large" variant="contained" color="primary" disabled={isButtonDisabled}>{isButtonDisabled ? 'Stvaranje rezultata' : 'Preuzmi rezultate' }
+            {isMobile ? null : <img style={{ paddingLeft: '10px' }} height="30" width="30" alt="printIcon" src={printIcon} />}
+          </Button>
         </div>
       );
     }
