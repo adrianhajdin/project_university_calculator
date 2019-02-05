@@ -310,7 +310,7 @@ class App extends Component {
               </ValidatorForm>
               <br />
               <Typography className={classes.copyright} variant="caption">
-                Copyright 2018 © <a className={classes.anchor} href="https://www.linkedin.com/in/adrian-hajdin">Adrian Hajdin.</a> All Rights Reserved.
+                Copyright 2019 © <a className={classes.anchor} href="https://www.linkedin.com/in/adrian-hajdin">Adrian Hajdin.</a> All Rights Reserved.
               </Typography>
             </Paper>
           </Grid>
