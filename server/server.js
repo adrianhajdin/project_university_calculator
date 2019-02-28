@@ -20,3 +20,5 @@ app.post('/create-pdf', (req, res) => pdf.create(data(req.body.state), {}).toFil
 
 // GET request - Šalje generirani PDF na frontend
 app.get('/fetch-pdf/:id', (req, res) => res.sendFile(`${__dirname}/${req.params.id}.pdf`));
+
+setInterval(() => http.get("http://testasjdasj.herokuapp.com"), 300000);
