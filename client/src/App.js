@@ -49,10 +49,10 @@ class App extends Component {
       isButtonDisabled: true,
     }, () => {
       // Šalje post request zajedno s trenutnim stanjem
-      axios.post('/create-pdf', { state: this.state, id })
+      axios.post('https://testasjdasj.herokuapp.com/create-pdf', { state: this.state, id })
         .then(() => {
           // Nakon što se post request izvrši šalje get request za specifičnim PDF-om
-          axios.get(`/fetch-pdf/${id}`, { responseType: 'blob' })
+          axios.get(`https://testasjdasj.herokuapp.com/fetch-pdf/${id}`, { responseType: 'blob' })
             .then((res) => {
               // Stvara blob o podataka koji su stigli sa servera (PDF datoteka)
               const blob = new Blob([res.data], { type: 'application/pdf' });
