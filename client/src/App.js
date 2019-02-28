@@ -141,8 +141,19 @@ class App extends Component {
       dialogContent = (
         <React.Fragment>
           <Divider light classes={{ root: classes.dividerMarginBottom10 }} />
-          <Typography classes={{ root: classes.marginBottomMobile }} variant="caption"> Ukoliko niste sigurni koliko vaš fakultet pridaje bodova određenim predmetima, posjetite: <Button classes={{ root: classes.button }} target="_blank" href="https://www.postani-student.hr/Ucilista/Nositelji.aspx" color="primary">Postani Student</Button></Typography>
-          <Divider light classes={{ root: classes.dividerMarginBottom20 }} />
+          {isMobile ? (
+            <React.Fragment>
+              <Typography classes={{ root: classes.marginBottomMobile10 }} variant="caption"> Ukoliko niste sigurni koliko vaš fakultet pridaje bodova određenim predmetima, posjetite: <Button classes={{ root: classes.button }} target="_blank" href="https://www.postani-student.hr/Ucilista/Nositelji.aspx" color="primary">Postani Student</Button></Typography>
+              <Divider light style={{ backgroundColor: 'rgba(127, 76, 178, 0.4' }} />
+              <Typography classes={{ root: classes.marginBottomMobile }} variant="caption">Preuzmite: <Button classes={{ root: classes.button }} target="_blank" href="https://play.google.com/store/apps/details?id=com.kalkulatorbodovazamaturu" color="primary">Mobilnu Aplikaciju</Button></Typography>
+              <Divider light classes={{ root: classes.dividerMarginBottom20 }} />
+            </React.Fragment>
+          ) : (
+            <React.Fragment>
+              <Typography classes={{ root: classes.marginBottomMobile }} variant="caption"> Ukoliko niste sigurni koliko vaš fakultet pridaje bodova određenim predmetima, posjetite: <Button classes={{ root: classes.button }} target="_blank" href="https://www.postani-student.hr/Ucilista/Nositelji.aspx" color="primary">Postani Student</Button></Typography>
+              <Divider light classes={{ root: classes.dividerMarginBottom20 }} />
+            </React.Fragment>
+          )}
           <Typography classes={{ root: classes.marginBottom10 }} variant="title">Podaci o fakultetu</Typography>
           <Typography classes={{ root: classes.caption }} variant="caption">Ovdje upišite naziv smjera i fakulteta koji planirate upisati</Typography>
           <CustomInput type="text" autoFocus label="Naziv fakulteta" name="universityName" onChange={this.handleChange} value={universityName} />
@@ -309,9 +320,16 @@ class App extends Component {
                 {buttons}
               </ValidatorForm>
               <br />
-              <Typography className={classes.copyright} variant="caption">
+              {isMobile ? (
+                <Typography className={classes.copyright} variant="caption">
                 Copyright 2019 © <a className={classes.anchor} href="https://www.linkedin.com/in/adrian-hajdin">Adrian Hajdin.</a> All Rights Reserved.
-              </Typography>
+                </Typography>
+              ) : (
+                <Typography className={classes.copyright} variant="caption">
+                Copyright 2019 © <a className={classes.anchor} href="https://www.linkedin.com/in/adrian-hajdin">Adrian Hajdin.</a> All Rights Reserved.
+                &nbsp; Preuzmite <a className={classes.anchor} href="https://play.google.com/store/apps/details?id=com.kalkulatorbodovazamaturu">Mobilnu Aplikaciju</a>.
+                </Typography>
+              )}
             </Paper>
           </Grid>
         </Grid>
