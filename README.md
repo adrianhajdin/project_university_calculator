@@ -1,4 +1,6 @@
-# Kalkulator bodova za fakultet
+# Kalkulator bodova za maturu
+
+![Kalkulator bodova za maturu](https://lh3.googleusercontent.com/Ff1t5J9RWJWcrrICDfONRWerp--SwtrYrHj3VHMcfRMaR0aFNUrkYsy1PtpzJ8uFCflG)
 
 Kalkulatora bodova za maturu jest mobilna i web aplikacija koja omogućuje jednostavno, brzo, i najbitnije, točno računanje bodova te maturantima znatno olakšava i ubrzava proces dolaska do njima bitnih i potrebnih informacija.
 
