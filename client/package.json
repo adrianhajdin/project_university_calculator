@@ -7,7 +7,7 @@
     "@material-ui/core": "^3.0.2",
     "axios": "^0.18.0",
     "babel-eslint": "^9.0.0",
-    "chart.js": "^2.7.2",
+    "chart.js": "^2.9.4",
     "eslint": "^5.5.0",
     "eslint-config-airbnb": "^17.1.0",
     "eslint-plugin-import": "^2.14.0",
